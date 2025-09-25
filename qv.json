@@ -1,0 +1,15 @@
+{
+	"id": "quillas",
+	"name": "Visionaries of Quilla", 
+	"author": ["Lily Felli"], 
+	"description": "high effort numberslop",
+	"prefix": "vq",
+	"main_file": "main.lua",
+	"priority": 99999, 
+	"badge_colour": "ff8c8c",
+	"version": "0.0.0", 
+	"dependencies": [ 
+		"Steamodded (>=1.0.0~BETA-0827)",
+        "Talisman",
+	]
+}
