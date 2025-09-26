@@ -1,9 +1,9 @@
 {
 	"id": "quillas",
-	"name": "Visionaries of Quilla", 
+	"name": "Aquillarri", 
 	"author": ["Lily Felli"], 
 	"description": "high effort numberslop",
-	"prefix": "vq",
+	"prefix": "aqu",
 	"main_file": "main.lua",
 	"priority": 99999, 
 	"badge_colour": "ff8c8c",
