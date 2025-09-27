@@ -11,6 +11,8 @@ aquill.calculate = function(self, context)
                 G.GAME.blind.chip_text = number_format(G.GAME.blind.chips)
                 G.HUD_blind:recalculate()
                 G.hand_text_area.blind_chips:juice_up()
+                G.GAME.blind.dollars = G.GAME.blind.dollars + 4
+                G.HUD_blind:get_UIE_by_ID("dollars_to_be_earned"):juice_up(7)
                 return true
             end
         }))

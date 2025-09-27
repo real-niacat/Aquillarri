@@ -1,9 +1,30 @@
 SMODS.Rarity {
     key = "dormant",
-    badge_colour = HEX("797979"),
+    badge_colour = HEX("CCCCCC"),
     get_weight = function(self, weight, object_type)
         G.GAME.dormant_rarity_exponent = G.GAME.dormant_rarity_exponent or 1
         return weight ^ (weight < 1 and (1 / G.GAME.dormant_exponent) or G.GAME.dormant_exponent)
     end,
-    default_weight = 0.07
+    default_weight = 0.07,
+    
+}
+
+SMODS.Rarity {
+    key = "hyper",
+    badge_colour = HEX("70FFC4"),
+}
+
+SMODS.Rarity {
+    key = "hyperplus",
+    badge_colour = HEX("49DBFF"),
+}
+
+SMODS.Rarity {
+    key = "hyperplusplus",
+    badge_colour = HEX("2344FF"),
+}
+
+SMODS.Rarity {
+    key = "extreme",
+    badge_colour = HEX("E523FF"),
 }
