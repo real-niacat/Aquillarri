@@ -9,7 +9,35 @@ return {
                     "Gains {C:chips}+#4#{} Chips per consecutive retrigger",
                     "{C:inactive}(Unmodifiable Probabilities){}",
                 }
-            }
+            },
+            j_aqu_particle_loop_scoring = {
+                name = "Particle Loop{s:1.5,C:tarot}+{}",
+                text = {
+                    "{C:chips}+#1#{} Chips",
+                    "{C:mult}+#1#{} Mult",
+                    "{C:green}#2# in #3#{} Chance to retrigger itself",
+                    "Gains {C:attention}+#4#{} Chips and Mult per consecutive retrigger",
+                    "{C:inactive}(Unmodifiable Probabilities){}",
+                }
+            },
+            j_aqu_particle_loop_economy = {
+                name = "Particle Loop{s:1.5,C:money}+{}",
+                text = {
+                    "Earn {C:money}$#1#{} ",
+                    "{C:green}#2# in #3#{} Chance to retrigger itself",
+                    "Gains {C:chips}+#4#{} Chips per consecutive retrigger",
+                    "{C:inactive}(Unmodifiable Probabilities){}",
+                }
+            },
+            j_aqu_particle_loop_utility = {
+                name = "Particle Loop{s:1.5,C:grey}+{}",
+                text = {
+                    "{C:chips}+#1#{} Chips",
+                    "{C:green}#2# in #3#{} Chance to retrigger itself",
+                    "Gains {C:chips}+#4#{} Chips per consecutive retrigger",
+                    "{C:inactive}(Unmodifiable Probabilities){}",
+                }
+            },
         },
 
     },
