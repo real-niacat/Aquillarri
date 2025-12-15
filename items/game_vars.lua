@@ -5,6 +5,7 @@ function Game:init_game_object()
 
     game.dormant_exponent = 1.1 
     game.upgraded_blind_bonus = 4
+    game.dormant_bonus = 3
 
     return game
 end

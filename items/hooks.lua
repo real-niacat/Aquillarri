@@ -1,23 +1,29 @@
--- ease_background_colour({
---     new_colour = G.C.PURPLE,
---     special_colour = mix_colours(G.C.WHITE, G.C.PURPLE, 0.2),
---     contrast = 2.5
--- })
-
-
-local background_colour_hook = ease_background_colour
-function ease_background_colour(args)
+local background_colour_hook = ease_background_colour_blind
+function ease_background_colour_blind(state, blind_override)
     if G.GAME and G.GAME.dormant_blind then
-        background_colour_hook({
+        ease_background_colour({
             new_colour = G.C.PURPLE,
             special_colour = mix_colours(G.C.WHITE, G.C.PURPLE, 0.2),
             contrast = 2.5
         })
+        if G.GAME.blind then
+            G.GAME.blind:change_colour()
+        end
         return
     end
 
 
-    background_colour_hook(args)
+    return background_colour_hook(state, blind_override)
+end
+
+local blind_colour_hook = Blind.change_colour
+function Blind:change_colour(blind_col)
+    local key = self.config.blind.key
+    if G.GAME.dormant_blind then
+        blind_col = mix_colours(G.C.PURPLE, get_blind_main_colour(key == "bl_small" and "Small" or key == "bl_big" and "Big" or key), 0.5)
+    end
+
+    return blind_colour_hook(self,blind_col)
 end
 
 G.C.aqu_bg_prim = HEX("C369FF")
@@ -45,12 +51,12 @@ function Game:main_menu(context)
     return original_return
 end
 
-local update_hook = Game.update
+local cash_out_hook = G.FUNCS.cash_out
+function G.FUNCS.cash_out(...)
 
-function Game:update(dt)
+    attention_text({
+        
+    })
 
-    -- pre
-    update_hook(self,dt)   
-    -- post
-    
+    return cash_out_hook(...)
 end

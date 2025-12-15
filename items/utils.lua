@@ -116,3 +116,11 @@ function aquill.calc_dormant_blind_size(original_blind_size)
     n = aquill.round_to_nearest(n, place_value)
     return n
 end
+
+function aquill.get_current_blind_colour()
+    local col = G.GAME.blind.config.blind.boss_colour
+
+    if not col then
+        col = G.C.BLIND.Small
+    end
+end
