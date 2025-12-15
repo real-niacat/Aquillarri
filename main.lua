@@ -38,15 +38,3 @@ end
 local path = SMODS.current_mod.path
 
 load_files(path, true)
-
-for name,val in pairs(_G) do
-    -- if string.find(name, "create_UIBox") and type(val) == "function" then
-    --     local old = val
-    --     _G[name] = function(...)
-    --         print("running " .. name)
-    --         val(...)
-    --     end
-    -- end
-
-    print(tostring(name) .. ": " .. type(val))
-end
