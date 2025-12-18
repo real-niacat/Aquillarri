@@ -9,43 +9,16 @@ function aquill.recalculate_joker_main()
     }
 end
 
-aquill.paths = {
-    Scoring = 1,
-    Economy = 2,
-    Utility = 3,
-    Upgrade = 4,
-}
-
-function aquill.can_upgrade(card, path)
+function aquill.can_upgrade(card)
     local cen = G.P_CENTERS[card.config.center_key]
-    local scoring, economy, utility, upgrade = cen.scoring_upgrade, cen.economy_upgrade, cen.utility_upgrade, cen
-        .upgrade
-    return (path == aquill.paths.Scoring and scoring) or
-        (path == aquill.paths.Economy and economy) or
-        (path == aquill.paths.Utility and utility) or
-        (path == aquill.paths.Upgrade and upgrade)
+    return cen.upgrade
 end
 
 function aquill.upgrade_joker(card, path)
     if not aquill.can_upgrade(card, path) then return end
-    local ability = nil
     local key = card.config.center_key
-    if path == aquill.paths.Scoring then
-        ability = G.P_CENTERS[key].scoring_upgrade
-    end
-    if path == aquill.paths.Economy then
-        ability = G.P_CENTERS[key].economy_upgrade
-    end
-    if path == aquill.paths.Utility then
-        ability = G.P_CENTERS[key].utility_upgrade
-    end
-    if path == aquill.paths.Upgrade then
-        ability = G.P_CENTERS[key].upgrade
-    end
-
-    if ability then
-        aquill.upgrade_joker_fx(card, ability)
-    end
+    local ability = G.P_CENTERS[key].upgrade
+    aquill.upgrade_joker_fx(card, ability)
 end
 
 function aquill.upgrade_joker_fx(card, ability)
@@ -115,12 +88,4 @@ function aquill.calc_dormant_blind_size(original_blind_size)
     local place_value = 10 ^ math.floor(math.log10(n))
     n = aquill.round_to_nearest(n, place_value)
     return n
-end
-
-function aquill.get_current_blind_colour()
-    local col = G.GAME.blind.config.blind.boss_colour
-
-    if not col then
-        col = G.C.BLIND.Small
-    end
 end

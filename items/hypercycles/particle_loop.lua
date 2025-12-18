@@ -26,14 +26,11 @@ SMODS.Joker {
             }
         }
     end,
-    scoring_upgrade = "j_aqu_particle_loop_scoring",
-    economy_upgrade = "j_aqu_particle_loop_economy",
-    utility_upgrade = "j_aqu_particle_loop_utility",
-    upgrade = nil,
+    upgrade = "j_aqu_particle_loop_upgraded",
 }
 
 SMODS.Joker {
-    key = "particle_loop_scoring",
+    key = "particle_loop_upgraded",
     rarity = "aqu_dormant",
     calculate = function(self, card, context)
         if context.joker_main then

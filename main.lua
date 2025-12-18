@@ -1,5 +1,12 @@
+aquill = {} --helps LSP, serves no real purpose
 aquill = SMODS.current_mod
 aquill.config = SMODS.current_mod.config
+
+aquill.triggers = {}
+
+function aquill.add_trigger(run_func) --used b/c adding a ton of stuff in global_calc.lua is unorganized
+	table.insert(aquill.triggers, {trigger = run_func})
+end
 
 local nativefs = NFS
 
@@ -10,8 +17,8 @@ local function load_file_native(path, id)
     local file_path = path
     local file_content, err = NFS.read(file_path)
     if not file_content then return  nil, "Error reading file '" .. path .. "' for mod with ID '" .. SMODS.current_mod.id .. "': " .. err end
-    local chunk, err = load(file_content, "=[SMODS " .. SMODS.current_mod.id .. ' "' .. path .. '"]')
-    if not chunk then return nil, "Error processing file '" .. path .. "' for mod with ID '" .. SMODS.current_mod.id .. "': " .. err end
+    local chunk, loaderr = load(file_content, "=[SMODS " .. SMODS.current_mod.id .. ' "' .. path .. '"]')
+    if not chunk then return nil, "Error processing file '" .. path .. "' for mod with ID '" .. SMODS.current_mod.id .. "': " .. loaderr end
     return chunk
 end
 local blacklist = {
