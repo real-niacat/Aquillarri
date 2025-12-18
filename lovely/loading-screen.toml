@@ -1,0 +1,42 @@
+[manifest]
+version = "1.0.0"
+dump_lua = true
+priority = 0
+
+[[patches]]
+[patches.pattern]
+target = """=[SMODS _ "src/loader.lua"]"""
+pattern = '''local catimg = NFS.getInfo(SMODS.path.."assets/cat.png") and love.graphics.newImage(love.filesystem.newFileData(NFS.read(SMODS.path.."assets/cat.png")))'''
+position = "after"
+payload = '''
+local scale_factor = {x=nil, y=nil}
+local image_name = nil
+if catimg then
+    local w, h = catimg:getDimensions() 
+    local suspected_path = SMODS.path:sub(1,SMODS.path:find("/")).."Aquillarri"
+    if suspected_path and next(NFS.getDirectoryItems(suspected_path)) then
+        local valid_choices = NFS.getDirectoryItems(suspected_path .. "/assets/loading-screen")
+        print(valid_choices)
+        math.randomseed(os.time() + 999999999)
+        local chosen = valid_choices[math.random(1,#valid_choices)]
+        if chosen then
+            image_name = chosen
+            catimg = love.graphics.newImage(love.filesystem.newFileData(NFS.read(suspected_path.."/assets/loading-screen/"..chosen)))
+            scale_factor = {x=w/catimg:getWidth(), y=h/catimg:getHeight()}
+        end
+    end
+end
+'''
+match_indent = true
+
+
+[[patches]]
+[patches.pattern]
+target = """=[SMODS _ "src/loader.lua"]"""
+pattern = '''if catimg then love.graphics.draw(catimg, realw/2 - 264, realh/2 - 27, 0, 1, 1); love.graphics.rectangle('line', realw/2 - 264, realh/2 - 27, 96, 96, 5) end'''
+position = "at"
+payload = '''
+if catimg then love.graphics.draw(catimg, realw/2 - 264, realh/2 - 27, 0, scale_factor.x or 1, scale_factor.y or 1); love.graphics.rectangle('line', realw/2 - 264, realh/2 - 27, 96, 96, 5) end
+love.graphics.print("Image: " .. image_name, realw / 2 - 150, (realh / 2) + 60)
+'''
+match_indent = true
