@@ -8,7 +8,7 @@ aquill.add_trigger(
     function(context)
         if context.end_of_round and context.main_eval then
             G.GAME.dormant_blind = false
-            G.GAME.dormant_exponent = 1.1 + ((G.GAME.round_resets.ante - 1) * 0.1)
+            G.GAME.dormant_exponent = 1.1 + ((G.GAME.round_resets.ante - 1) * 0.02)
         end
     end
 )

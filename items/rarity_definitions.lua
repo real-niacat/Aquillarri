@@ -10,7 +10,7 @@ SMODS.Rarity {
 
 SMODS.Rarity {
     key = "hyper",
-    badge_colour = HEX("70FFC4"),
+    badge_colour = HEX("32FFAA"),
 }
 
 SMODS.Rarity {

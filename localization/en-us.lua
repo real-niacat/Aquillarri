@@ -1,7 +1,7 @@
 return {
     descriptions = {
         Joker = {
-            j_aqu_particle_loop = {
+            j_aqu_particleloop1 = {
                 name = "Particle Loop",
                 text = {
                     "{C:chips}+#1#{} Chips",
@@ -10,27 +10,8 @@ return {
                     "{C:inactive}(Unmodifiable Probabilities){}",
                 }
             },
-            j_aqu_particle_loop_scoring = {
-                name = "Particle Loop{s:1.2,C:tarot}+{}",
-                text = {
-                    "{C:chips}+#1#{} Chips",
-                    "{C:mult}+#1#{} Mult",
-                    "{C:green}#2# in #3#{} Chance to retrigger itself",
-                    "Gains {C:attention}+#4#{} Chips and Mult per consecutive retrigger",
-                    "{C:inactive}(Unmodifiable Probabilities){}",
-                }
-            },
-            j_aqu_particle_loop_economy = {
-                name = "Particle Loop{s:1.2,C:money}+{}",
-                text = {
-                    "Earn {C:money}$#1#{} at end of round",
-                    "{C:green}#2# in #3#{} Chance to retrigger itself",
-                    "Gains {C:chips}+#4#{} dollars per consecutive retrigger",
-                    "{C:inactive}(Unmodifiable Probabilities){}",
-                }
-            },
-            j_aqu_particle_loop_utility = {
-                name = "Particle Loop{s:1.2,C:grey}+{}",
+            j_aqu_particleloop2 = {
+                name = "Particle Loop{C:tarot}+{}",
                 text = {
                     "{C:chips}+#1#{} Chips",
                     "{C:green}#2# in #3#{} Chance to retrigger itself",
@@ -38,8 +19,26 @@ return {
                     "{C:inactive}(Unmodifiable Probabilities){}",
                 }
             },
+            j_aqu_particleloop3 = {
+                name = "Particle Loop{C:tarot}++{}",
+                text = {
+                    "{X:chips,C:white}X#1#{} Chips",
+                    "{C:green}#2# in #3#{} Chance to retrigger itself",
+                    "Gains {X:chips,C:white}X#4#{} Chips per consecutive retrigger",
+                    "{C:inactive}(Unmodifiable Probabilities){}",
+                }
+            },
         },
 
+        Other = {
+            aqu_upgrade = {
+                name = "Upgradable",
+                text = {
+                    "This card has an {C:attention}upgraded{} variant",
+                    "Upgrades into {X:dark_edition,C:white}#1#{}"
+                }
+            }
+        },
     },
     misc = {
         labels = {
@@ -55,6 +54,8 @@ return {
             k_aqu_hyperplus = "Hyper+",
             k_aqu_hyperplusplus = "Hyper++",
             k_aqu_extreme = "Extreme",
+
+            
         }
     }
 }

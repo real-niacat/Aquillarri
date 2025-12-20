@@ -89,3 +89,14 @@ function aquill.calc_dormant_blind_size(original_blind_size)
     n = aquill.round_to_nearest(n, place_value)
     return n
 end
+
+-- functions as SMODS.find_card but it applies to all cards with the same group
+function aquill.find_card_group(group_key)
+    local found = {}
+    for _,center in pairs(G.P_CENTERS) do
+        if center.group == group_key then
+            found = SMODS.merge_lists({found, SMODS.find_card(center.key)})
+        end
+    end
+    return found
+end

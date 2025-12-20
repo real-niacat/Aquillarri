@@ -1,6 +1,6 @@
-SMODS.Joker {
-    key = "particle_loop",
-    rarity = "aqu_dormant",
+aquill.Upgradable {
+    tier = 1,
+    group = "particleloop",
     calculate = function(self, card, context)
         if context.joker_main then
 
@@ -26,12 +26,11 @@ SMODS.Joker {
             }
         }
     end,
-    upgrade = "j_aqu_particle_loop_upgraded",
 }
 
-SMODS.Joker {
-    key = "particle_loop_upgraded",
-    rarity = "aqu_dormant",
+aquill.Upgradable {
+    tier = 2,
+    group = "particleloop",
     calculate = function(self, card, context)
         if context.joker_main then
 
@@ -39,14 +38,14 @@ SMODS.Joker {
             local loops = 0
             while success do
                 local v = card.ability.extra.chips + (loops * card.ability.extra.gain)
-                SMODS.calculate_effect({chips = v, mult = v}, card)
+                SMODS.calculate_effect({chips = v}, card)
                 loops = loops + 1
                 success = SMODS.pseudorandom_probability(card, "aqu_particle_loop", card.ability.extra.num, card.ability.extra.den, nil, true)
             end
 
         end
     end,
-    config = {extra = {chips = 3, gain = 3, num = 14, den = 15}},
+    config = {extra = {chips = 5, gain = 5, num = 14, den = 15}},
     loc_vars = function(self, info_queue, card)
         local num, den = SMODS.get_probability_vars(card, card.ability.extra.num, card.ability.extra.den, nil, nil, true)
         return {
@@ -58,5 +57,35 @@ SMODS.Joker {
             }
         }
     end,
-    upgrade = nil,
+}
+
+aquill.Upgradable {
+    tier = 3,
+    group = "particleloop",
+    calculate = function(self, card, context)
+        if context.joker_main then
+
+            local success = true
+            local loops = 0
+            while success do
+                local v = card.ability.extra.xchips + (loops * card.ability.extra.gain)
+                SMODS.calculate_effect({xchips = v}, card)
+                loops = loops + 1
+                success = SMODS.pseudorandom_probability(card, "aqu_particle_loop", card.ability.extra.num, card.ability.extra.den, nil, true)
+            end
+
+        end
+    end,
+    config = {extra = {xchips = 1.25, gain = 0.05, num = 14, den = 15}},
+    loc_vars = function(self, info_queue, card)
+        local num, den = SMODS.get_probability_vars(card, card.ability.extra.num, card.ability.extra.den, nil, nil, true)
+        return {
+            vars = {
+                card.ability.extra.xchips,
+                num,
+                den,
+                card.ability.extra.gain
+            }
+        }
+    end,
 }

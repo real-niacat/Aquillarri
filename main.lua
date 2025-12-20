@@ -5,21 +5,23 @@ aquill.config = SMODS.current_mod.config
 aquill.triggers = {}
 
 function aquill.add_trigger(run_func) --used b/c adding a ton of stuff in global_calc.lua is unorganized
-	table.insert(aquill.triggers, {trigger = run_func})
+	table.insert(aquill.triggers, { trigger = run_func })
 end
 
 local nativefs = NFS
 
 local function load_file_native(path, id)
-    if not path or path == "" then
-        error("No path was provided to load.")
-    end
-    local file_path = path
-    local file_content, err = NFS.read(file_path)
-    if not file_content then return  nil, "Error reading file '" .. path .. "' for mod with ID '" .. SMODS.current_mod.id .. "': " .. err end
-    local chunk, loaderr = load(file_content, "=[SMODS " .. SMODS.current_mod.id .. ' "' .. path .. '"]')
-    if not chunk then return nil, "Error processing file '" .. path .. "' for mod with ID '" .. SMODS.current_mod.id .. "': " .. loaderr end
-    return chunk
+	if not path or path == "" then
+		error("No path was provided to load.")
+	end
+	local file_path = path
+	local file_content, err = NFS.read(file_path)
+	if not file_content then return nil,
+			"Error reading file '" .. path .. "' for mod with ID '" .. SMODS.current_mod.id .. "': " .. err end
+	local chunk, loaderr = load(file_content, "=[SMODS " .. SMODS.current_mod.id .. ' "' .. path .. '"]')
+	if not chunk then return nil,
+			"Error processing file '" .. path .. "' for mod with ID '" .. SMODS.current_mod.id .. "': " .. loaderr end
+	return chunk
 end
 local blacklist = {
 	assets = true,
@@ -28,17 +30,44 @@ local blacklist = {
 	[".git"] = true,
 	["localization"] = true
 }
-local function load_files(path, dirs_only)
+local function load_files(path, dirs_only, initial)
 	local info = nativefs.getDirectoryItemsInfo(path)
+	local to_load = {}
+	if initial == nil then initial = true end
 	for i, v in pairs(info) do
-		if v.type == "directory" and not blacklist[v.name] then	
-			load_files(path.."/"..v.name)
+		if v.type == "directory" and not blacklist[v.name] then
+			to_load = SMODS.merge_lists({ to_load, load_files(path .. "/" .. v.name, false, false) })
 		elseif not dirs_only then
 			if string.find(v.name, ".lua") then -- no X.lua.txt files or whatever unless they are also lua files
-				local f, err = load_file_native(path.."/"..v.name)
-				if f then f() 
-				else error("error in file "..v.name..": "..err) end
+				table.insert(to_load, path .. "/" .. v.name)
 			end
+		end
+	end
+
+	-- print(to_load)
+	if not initial then
+		-- print("returning")
+		return to_load
+	end
+
+	-- print("sorting and loading")
+	table.sort(to_load, function(a, b)
+		local prio = "p_"
+		local fa = a:find(prio)
+		local fb = b:find(prio)
+
+		if fa and not fb then return true end
+		if fb and not fa then return false end
+
+		return a < b
+	end)
+
+	for _, file in pairs(to_load) do
+		local f, err = load_file_native(file)
+		if f then
+			f()
+		else
+			error("error in file " .. v.name .. ": " .. err)
 		end
 	end
 end

@@ -135,12 +135,17 @@ vec4 effect( vec4 colour, Image texture, vec2 texture_coords, vec2 screen_coords
     vec4 tex = Texel(texture, texture_coords);
 	vec2 uv = (((texture_coords)*(image_details)) - texture_details.xy*texture_details.ba)/texture_details.ba;
 
-    float noise_value = pNoise(vec2(uv.x,uv.y+(boostedblind.y*0.7)), 1);
+    float vshift = (1.5 - uv.y) / 4; //strength
+    float sign_noise = (pNoise(vec2(uv.x,uv.y), 1) - 0.5);
+    vshift *= sign_noise;
+    float noise_value = pNoise(vec2(uv.x+vshift,uv.y+(boostedblind.y*0.7)), 1);
     float boost = RGBtoHSV(tex).z;
     boost = pow(boost,2) * 1.5;
-    noise_value = pow(2*noise_value,(0.9-uv.y)*1.5);
-    noise_value *= max(1.5*sin(uv.x*PI),1);
+    noise_value = pow(2*noise_value,(0.9-uv.y)*1.5) / (1+(1-uv.y));
+    noise_value *= 0.5+sin(uv.x*PI);
     tex *= vec4(0.8+(uv.y),1-0.2,1+(1-uv.y),1) * (noise_value * boost) * 3;
+
+    // tex = vec4(noise_value,noise_value,noise_value,1);
 
     return dissolve_mask(tex*colour, texture_coords, uv);
 }
