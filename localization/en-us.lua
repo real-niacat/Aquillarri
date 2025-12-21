@@ -11,7 +11,7 @@ return {
                 }
             },
             j_aqu_particleloop2 = {
-                name = "Particle Loop{C:tarot}+{}",
+                name = "Particle Loop",
                 text = {
                     "{C:chips}+#1#{} Chips",
                     "{C:green}#2# in #3#{} Chance to retrigger itself",
@@ -20,11 +20,29 @@ return {
                 }
             },
             j_aqu_particleloop3 = {
-                name = "Particle Loop{C:tarot}++{}",
+                name = "Particle Loop",
                 text = {
                     "{X:chips,C:white}X#1#{} Chips",
                     "{C:green}#2# in #3#{} Chance to retrigger itself",
                     "Gains {X:chips,C:white}X#4#{} Chips per consecutive retrigger",
+                    "{C:inactive}(Unmodifiable Probabilities){}",
+                }
+            },
+            j_aqu_particleloop4 = {
+                name = "Particle Loop",
+                text = {
+                    "{X:chips,C:white}X#1#{} Chips",
+                    "{C:green}#2# in #3#{} Chance to retrigger itself",
+                    "Gains {X:chips,C:white}X#4#{} Chips per consecutive retrigger",
+                    "{C:inactive}(Unmodifiable Probabilities){}",
+                }
+            },
+            j_aqu_particleloop5 = {
+                name = "Particle Loop",
+                text = {
+                    "{X:dark_edition,C:white}^#1#{} Chips",
+                    "{C:green}#2# in #3#{} Chance to retrigger itself",
+                    "Gains {X:dark_edition,C:white}^#4#{} Chips per consecutive retrigger",
                     "{C:inactive}(Unmodifiable Probabilities){}",
                 }
             },

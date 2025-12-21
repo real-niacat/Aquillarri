@@ -18,24 +18,28 @@ aquill.Upgradable = SMODS.Joker:extend {
         self.key = self.class_prefix .. "_" .. self.mod.prefix .. "_" .. self.group .. self.tier
         self.cost = 5 * (2 ^ self.tier)
         local loc_vars_hook = self.loc_vars
-        self.loc_vars = function(self,info_queue,card)
-            if self.upgrade then
-                local upgrade = G.P_CENTERS[self.upgrade]
+        self.loc_vars = function(selfcenter,info_queue,card)
+            if selfcenter.upgrade then
+                local upgrade = G.P_CENTERS[selfcenter.upgrade]
                 info_queue[#info_queue+1] = {set = "Other", key = "aqu_upgrade", vars = {localize{set = upgrade.set, type = "name_text", key = upgrade.key}}}
             end
-            return loc_vars_hook(self,info_queue,card)
+            local hooked_return = loc_vars_hook(selfcenter,info_queue,card)
+            hooked_return.vars = hooked_return.vars or {}
+            return hooked_return
         end
 
         local in_pool_hook = self.in_pool
 
-        self.in_pool = function(self,args)
-            return in_pool_hook(self,args) and (not aquill.find_card_group(self.group)) --cannot spawn >1 of the same group by default
+        self.in_pool = function(selfcenter,args)
+            return in_pool_hook(selfcenter,args) and (not aquill.find_card_group(selfcenter.group)) --cannot spawn >1 of the same group by default
         end
         SMODS.Joker.register(self)
     end,
     discovered = true,
     unlocked = true,
 }
+
+aquill.upgrade_groups = {}
 
 local inject_hook = SMODS.injectItems
 function SMODS.injectItems(...)
@@ -52,12 +56,21 @@ function SMODS.injectItems(...)
     for _,group in pairs(groups) do
         for i,joker in ipairs(group) do
             if group[i+1] then
-                print(joker)
+                -- print(joker)
                 G.P_CENTERS[joker.key].upgrade = group[i+1].key
             end
         end
     end
 
+    aquill.upgrade_groups = groups
+
+    for _,card in pairs(G.P_CENTERS) do
+        if card.tier and card.group then
+            local entry = G.localization.descriptions[card.set][card.key]
+            entry.name = entry.name .. aquill.fancy_roman_numerals(card.tier)
+            entry.name_parsed = {loc_parse_string(entry.name)}
+        end
+    end
 
     return return_value
 end
