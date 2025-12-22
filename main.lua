@@ -38,7 +38,7 @@ local function load_files(path, dirs_only, initial)
 		if v.type == "directory" and not blacklist[v.name] then
 			to_load = SMODS.merge_lists({ to_load, load_files(path .. "/" .. v.name, false, false) })
 		elseif not dirs_only then
-			if string.find(v.name, ".lua") then -- no X.lua.txt files or whatever unless they are also lua files
+			if string.find(v.name, ".lua") and not string.find(v.name, ".ignore_") then -- no X.lua.txt files or whatever unless they are also lua files
 				table.insert(to_load, path .. "/" .. v.name)
 			end
 		end
@@ -67,7 +67,7 @@ local function load_files(path, dirs_only, initial)
 		if f then
 			f()
 		else
-			error("error in file " .. v.name .. ": " .. err)
+			error("error in file " .. file .. ": " .. err)
 		end
 	end
 end

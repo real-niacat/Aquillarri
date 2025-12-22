@@ -141,4 +141,26 @@ function aquill.fancy_roman_numerals(n)
     return " {C:aqu_aquill_" .. n .. "}" .. aquill.roman_numerals(n)
 end
 
-aquill.frn = aquill.fancy_roman_numerals 
+function aquill.x_screen_perc(percent)
+    return percent * love.graphics.getWidth()
+end
+
+function aquill.y_screen_perc(percent)
+    return percent * love.graphics.getHeight()
+end
+
+function aquill.to_pixels(balaunits)
+    return balaunits * 100
+end
+
+function aquill.to_balaunits(pixels)
+    return pixels / 100
+end
+
+function aquill.distance_1d(p1, p2)
+    return math.abs(p1-p2)
+end
+
+function aquill.distance_2d(p1, p2)
+    return math.sqrt(((p1.x - p2.x)^2) + ((p1.y - p2.y)^2))
+end
