@@ -50,13 +50,3 @@ function Game:main_menu(context)
 
     return original_return
 end
-
-local cash_out_hook = G.FUNCS.cash_out
-function G.FUNCS.cash_out(...)
-
-    attention_text({
-        
-    })
-
-    return cash_out_hook(...)
-end

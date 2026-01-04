@@ -106,7 +106,7 @@ function aquill.get_predecessor(key)
 end
 
 function aquill.roman_numerals(s)
-    -- code taken and adapted from https://gist.github.com/efrederickson/4080372 
+    -- code taken and adapted from https://gist.github.com/efrederickson/4080372
     local numbers = { 1, 5, 10, 50, 100, 500, 1000 }
     local chars = { "I", "V", "X", "L", "C", "D", "M" }
 
@@ -158,9 +158,37 @@ function aquill.to_balaunits(pixels)
 end
 
 function aquill.distance_1d(p1, p2)
-    return math.abs(p1-p2)
+    return math.abs(p1 - p2)
 end
 
 function aquill.distance_2d(p1, p2)
-    return math.sqrt(((p1.x - p2.x)^2) + ((p1.y - p2.y)^2))
+    return math.sqrt(((p1.x - p2.x) ^ 2) + ((p1.y - p2.y) ^ 2))
+end
+
+function aquill.create_canvas()
+    local w = love.window.fromPixels(love.graphics.getWidth())
+    local h = love.window.fromPixels(love.graphics.getHeight())
+    local canvas = love.graphics.newCanvas(w * G.CANV_SCALE, h * G.CANV_SCALE, { type = '2d', readable = true })
+    canvas:setFilter('linear', 'linear')
+    return canvas
+end
+
+function aquill.get_editioned_cards(area)
+    local cs = {}
+    for _,card in pairs(area.cards) do
+        if card.edition and card.edition.key then
+            table.insert(cs, card)
+        end
+    end
+    return cs
+end
+
+function aquill.get_relative(card, offset)
+    local found = nil
+    for i,c in ipairs(card.area.cards) do
+        if c == card then
+            found = card.area.cards[i+offset]
+        end
+    end
+    return found
 end

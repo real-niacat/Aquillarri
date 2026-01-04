@@ -11,7 +11,7 @@ pattern = '''{n=G.UIT.R, config={id = 'select_blind_button', align = "cm", ref_t
           }}'''
 position = "after"
 payload = ''',
-(not run_info and {n=G.UIT.R, config={id = 'select_blind_button_harder', align = "cm", ref_table = blind_choice.config, colour = disabled and G.C.UI.BACKGROUND_INACTIVE or G.C.PURPLE, minh = 0.3, minw = 2.7, padding = 0.07, r = 0.1, shadow = true, hover = true, one_press = true, button = 'select_blind_harder'}, nodes={
+(not run_info and {n=G.UIT.R, config={id = 'select_blind_button_harder', align = "cm", ref_table = blind_choice.config, colour = disabled and G.C.UI.BACKGROUND_INACTIVE or G.C.PURPLE, minh = 0.3, minw = 2.7, padding = 0.07, r = 0.1, shadow = true, hover = true, one_press = true, button = 'select_blind_harder', func = 'hover_upgrade_blind'}, nodes={
     {n=G.UIT.T, config={text = "Upgrade Blind", scale = 0.35, colour = disabled and G.C.UI.TEXT_INACTIVE or G.C.UI.TEXT_LIGHT, shadow = not disabled}}
 }} or nil)
 '''
@@ -44,6 +44,7 @@ harder_button.config.hover = true
 harder_button.children[1].config.colour = G.C.WHITE
 '''
 match_indent = true
+
 
 [[patches]]
 [patches.pattern]
@@ -93,7 +94,8 @@ target = """functions/UI_definitions.lua"""
 pattern = '''{n=G.UIT.T, config={text = string.rep(localize("$"), blind_choice.config.dollars)..'+', scale = 0.35, colour = disabled and G.C.UI.TEXT_INACTIVE or G.C.MONEY, shadow = not disabled}}'''
 position = "at"
 payload = '''
-{n=G.UIT.T, config={text = string.rep(localize("$"), blind_choice.config.dollars), scale = 0.35, colour = disabled and G.C.UI.TEXT_INACTIVE or G.C.MONEY, shadow = not disabled}},
-{n=G.UIT.T, config={text = string.rep(localize("$"), G.GAME.dormant_bonus)..'+', scale = 0.35, colour = disabled and G.C.UI.TEXT_INACTIVE or G.C.PURPLE, shadow = not disabled}}
+{n=G.UIT.T, config={text = string.rep(localize("$"), blind_choice.config.dollars + math.min(G.GAME.dormant_bonus, 0)), scale = 0.35, colour = disabled and G.C.UI.TEXT_INACTIVE or G.C.MONEY, shadow = not disabled}},
+{n=G.UIT.T, config={text = string.rep(localize("$"), math.max(0, -G.GAME.dormant_bonus)), scale = 0.35, colour = disabled and G.C.UI.TEXT_INACTIVE or G.C.RED, shadow = not disabled}},
+{n=G.UIT.T, config={text = string.rep(localize("$"), G.GAME.dormant_bonus)..'+', scale = 0.35, colour = disabled and G.C.UI.TEXT_INACTIVE or G.C.PURPLE, shadow = not disabled}},
 '''
 match_indent = true

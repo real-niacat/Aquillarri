@@ -1,0 +1,27 @@
+[manifest]
+version = "1.0.0"
+dump_lua = true
+priority = 0
+
+[[patches]]
+[patches.pattern]
+target = """=[SMODS _ "src/loader.lua"]"""
+pattern = '''this patch will never match because meow'''
+position = "after"
+payload = '''fuh'''
+match_indent = true
+
+# for key,shader in pairs(aquill.shader_stack) do
+#     if not shader.canvas then
+#         shader.canvas = aquill.create_canvas() 
+#     end
+# 
+#     love.graphics.setCanvas(shader.canvas)
+# 
+#     for _,send in pairs(shader.send) do
+#         G.SHADERS[shader.key]:send(send.key, send.func and send.func() or send.value or 0)
+#     end
+# 
+#     love.graphics.setShader(G.SHADERS[shader.key])
+#     love.graphics.draw(self.CANVAS, 0, 0)
+# end

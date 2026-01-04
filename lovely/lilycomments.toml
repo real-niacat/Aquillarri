@@ -1,0 +1,19 @@
+[manifest]
+version = "1.0.0"
+dump_lua = true
+priority = 0
+
+[[patches]]
+[patches.pattern]
+target = "functions/common_events.lua"
+pattern = '''
+for _, v in ipairs(info_queue) do
+    generate_card_ui(v, full_UI_table)
+end'''
+position = "before"
+payload = '''
+if first_pass and localize({set="Other",key="lily_".._c.key,type="name_text"}) ~= "ERROR" then
+    info_queue[#info_queue+1] = {set = "Other", key = "lily_".._c.key}
+end
+'''
+match_indent = true

@@ -3,11 +3,6 @@ SMODS.Shader {
     path = "boostedblind.fs",
 }
 
-SMODS.Shader {
-    key = "crt_override",
-    path = "CRTOverride.fs"
-}
-
 local blind_draw_hook = Blind.draw
 function Blind:draw()
     blind_draw_hook(self)

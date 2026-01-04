@@ -4,6 +4,10 @@ aquill.config = SMODS.current_mod.config
 
 aquill.triggers = {}
 
+SMODS.current_mod.optional_features = {
+	retrigger_joker = true
+}
+
 function aquill.add_trigger(run_func) --used b/c adding a ton of stuff in global_calc.lua is unorganized
 	table.insert(aquill.triggers, { trigger = run_func })
 end
