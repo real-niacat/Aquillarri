@@ -4,7 +4,7 @@ function G.FUNCS.select_blind_harder(e)
     G.FUNCS.select_blind(e)
 end
 
-function create_UIBox_hover()
+function create_UIBox_hover_upgraded()
     local text_scale = 0.3
     local text_col = G.C.PURPLE
     local dt1 = DynaText({
@@ -56,14 +56,12 @@ function create_UIBox_hover()
     }
 end
 
-_G.create_UIBox_hover = create_UIBox_hover --just trust me bro
-
 function G.FUNCS.hover_upgrade_blind(e)
     if not e.parent or not e.parent.states then return end
+    -- print(e.states.hover.is, e.parent.states.hover.is)
     if (e.states.hover.is or e.parent.states.hover.is) and (e.created_on_pause == G.SETTINGS.paused) and not e.parent.children.alert then
-        -- e.parent.children.alert =
         e.parent.children.alert = UIBox {
-            definition = create_UIBox_hover(),
+            definition = create_UIBox_hover_upgraded(),
             config = { align = "tm", offset = { x = 0, y = -0.1 },
                 major = e.parent,
                 instance_type = 'POPUP' },
@@ -131,6 +129,20 @@ aquill.add_trigger(
                     return true
                 end
             }))
+        end
+    end
+)
+
+aquill.add_trigger(
+    function(context)
+        if aquill.corruption.enabled() and context.setting_blind then
+            
+            if G.GAME.dormant_blind then
+                aquill.corruption.modify(G.GAME.entropic_corruption_loss)
+            else
+                aquill.corruption.modify(G.GAME.entropic_corruption_gain)
+            end
+
         end
     end
 )

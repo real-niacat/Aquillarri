@@ -14,22 +14,58 @@ function aquill.can_upgrade(card)
     return cen.upgrade
 end
 
-function aquill.upgrade_joker(card, path)
-    if not aquill.can_upgrade(card, path) then return end
+function aquill.upgrade_joker(card)
+    if not aquill.can_upgrade(card) then return end
     local key = card.config.center_key
     local ability = G.P_CENTERS[key].upgrade
     aquill.upgrade_joker_fx(card, ability)
 end
 
 function aquill.upgrade_joker_fx(card, ability)
+    local particle_list = {}
+
+    local colour_list = {
+        HEX("3c096c"),
+        HEX("5a189a"),
+        HEX("9d4edd"),
+    }
+
     for i = 1, 3 do
         G.E_MANAGER:add_event(Event({
             trigger = "after",
             func = function()
                 card:juice_up(i / 5, i / 5)
+                play_sound("aqu_impact", 1 + (i / 8), 5)
+                particle_list[i] = Particles(1, 1, 0, 0, {
+                    timer = 0.01,
+                    scale = 0.3 * i,
+                    initialize = true,
+                    speed = 0.7 * i,
+                    padding = 1,
+                    attach = card,
+                    lifespan = 1+i,
+                    fill = true,
+                    colours = colour_list,
+                })
+                G.E_MANAGER:add_event(Event({
+                    func = function()
+                        particle_list[i]:fade(1, 1)
+                        G.E_MANAGER:add_event(Event({
+                            func = function()
+                                if particle_list[i].fade_alpha == 1 then
+                                    particle_list[i]:remove()
+                                    return true
+                                end
+                            end,
+                        }), "other")
+                        return true
+                    end,
+                    trigger = "after",
+                    delay = i
+                }), "other")
                 return true
             end,
-            delay = 0.25 + (0.5 * i),
+            delay = 0.25 + (i),
             timer = "REAL",
             blocking = true,
             blockable = false,
@@ -41,11 +77,12 @@ function aquill.upgrade_joker_fx(card, ability)
         trigger = "after",
         func = function()
             card:juice_up(1, 1)
-            play_sound("explosion_release1", 1, 3)
+            play_sound("aqu_bass", 1, 8)
             card:set_ability(ability)
+            SMODS.calculate_context({aqu_upgrade = true, card = card})
             return true
         end,
-        delay = 0.5,
+        delay = 1,
         timer = "REAL",
     }))
 end
@@ -175,7 +212,7 @@ end
 
 function aquill.get_editioned_cards(area)
     local cs = {}
-    for _,card in pairs(area.cards) do
+    for _, card in pairs(area.cards) do
         if card.edition and card.edition.key then
             table.insert(cs, card)
         end
@@ -185,10 +222,14 @@ end
 
 function aquill.get_relative(card, offset)
     local found = nil
-    for i,c in ipairs(card.area.cards) do
+    for i, c in ipairs(card.area.cards) do
         if c == card then
-            found = card.area.cards[i+offset]
+            found = card.area.cards[i + offset]
         end
     end
     return found
+end
+
+function aquill.bool(value)
+    return not not value
 end

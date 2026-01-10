@@ -139,6 +139,27 @@ return {
 
             lily_j_joker = com("i love this guy")
         },
+
+        Spectral = {
+            c_aqu_nilscape_portal_first = {
+                name = "Nilscape Portal",
+                text = {
+                    "{C:attention}Upgrade{} a selected eligible Joker",
+                    "Upgraded blinds permanently give {C:money}$#1#{} more",
+                    "Increase upgraded blind exponent by {X:dark_edition,C:white}^#2#{}",
+                    "Enables {C:attention}Entropic Corruption{}"
+                }
+            },
+            c_aqu_nilscape_portal_used = {
+                name = "Nilscape Portal",
+                text = {
+                    "{C:attention}Upgrade{} a selected eligible Joker",
+                    "Upgraded blinds permanently give {C:money}$#1#{} more",
+                    "Increase upgraded blind exponent by {X:dark_edition,C:white}^#2#{}",
+                    "{X:attention,C:white}X#3#{} Entropic Corruption gain"
+                }
+            }
+        },
     },
     misc = {
         labels = {
@@ -161,6 +182,16 @@ return {
 
             ph_aqu_upgrade_1 = "Upgraded Blinds have higher Blind size but higher rewards.",
             ph_aqu_upgrade_2 = "They also increase the spawn rates of Dormant Jokers.",
+
+            ph_aqu_corruption_desc = {
+                "Higher Entropic Corruption",
+                "exponentially increases Blind size.",
+                "Reaching max corruption",
+                "will make blinds impossible.",
+            },
+
+            ph_aqu_corruption = "Entropic Corruption",
+            ph_aqu_corruption_disabled = "Inactive",
         },
         v_dictionary = {
             aqu_dormant_rates = "X#1# Dormant Spawnrate"
