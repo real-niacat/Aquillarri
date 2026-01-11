@@ -13,7 +13,7 @@ SMODS.Consumable {
                 return true
             end
         }))
-        G.GAME.upgraded_blind_bonus = G.GAME.upgraded_blind_bonus + card.ability.extra.bonus_increase
+        G.GAME.dormant_bonus = G.GAME.dormant_bonus + card.ability.extra.bonus_increase
         G.GAME.dormant_exponent_gain = G.GAME.dormant_exponent_gain + card.ability.extra.exponent_increase
 
         if not aquill.corruption.enabled() then
@@ -30,7 +30,7 @@ SMODS.Consumable {
     end,
     config = { extra = { bonus_increase = 1, exponent_increase = 0.03, corruption_mult = 1.1 } },
     hidden = true,
-    soul_rate = 0.05,
+    soul_rate = 0.075,
     soul_set = "Tarot",
     in_pool = function(self, args)
         for _,joker in pairs(G.jokers.cards) do

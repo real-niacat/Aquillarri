@@ -23,6 +23,7 @@ end
 
 function aquill.upgrade_joker_fx(card, ability)
     local particle_list = {}
+    local high_detail = not aquill.config.alt_upgrade
 
     local colour_list = {
         HEX("3c096c"),
@@ -36,33 +37,37 @@ function aquill.upgrade_joker_fx(card, ability)
             func = function()
                 card:juice_up(i / 5, i / 5)
                 play_sound("aqu_impact", 1 + (i / 8), 5)
-                particle_list[i] = Particles(1, 1, 0, 0, {
-                    timer = 0.01,
-                    scale = 0.3 * i,
-                    initialize = true,
-                    speed = 0.7 * i,
-                    padding = 1,
-                    attach = card,
-                    lifespan = 1+i,
-                    fill = true,
-                    colours = colour_list,
-                })
-                G.E_MANAGER:add_event(Event({
-                    func = function()
-                        particle_list[i]:fade(1, 1)
-                        G.E_MANAGER:add_event(Event({
-                            func = function()
-                                if particle_list[i].fade_alpha == 1 then
-                                    particle_list[i]:remove()
-                                    return true
-                                end
-                            end,
-                        }), "other")
-                        return true
-                    end,
-                    trigger = "after",
-                    delay = i
-                }), "other")
+                if high_detail then
+                    particle_list[i] = Particles(1, 1, 0, 0, {
+                        timer = 0.01,
+                        scale = 0.3 * i,
+                        initialize = true,
+                        speed = 0.7 * i,
+                        padding = 1,
+                        attach = card,
+                        lifespan = 1 + i,
+                        fill = true,
+                        colours = colour_list,
+                    })
+
+                    G.E_MANAGER:add_event(Event({
+                        func = function()
+                            particle_list[i]:fade(1, 1)
+                            G.E_MANAGER:add_event(Event({
+                                func = function()
+                                    if particle_list[i].fade_alpha == 1 then
+                                        particle_list[i]:remove()
+                                        return true
+                                    end
+                                end,
+                            }), "other")
+                            return true
+                        end,
+                        trigger = "after",
+                        delay = i
+                    }), "other")
+                end
+
                 return true
             end,
             delay = 0.25 + (i),
@@ -73,13 +78,36 @@ function aquill.upgrade_joker_fx(card, ability)
         }))
     end
 
+    if not high_detail then
+        G.E_MANAGER:add_event(Event({
+            trigger = "after",
+            func = function()
+                card:flip()
+                return true
+            end,
+            delay = 0.99,
+            timer = "REAL",
+        }))
+        G.E_MANAGER:add_event(Event({
+            trigger = "after",
+            func = function()
+                card:flip()
+                return true
+            end,
+            delay = 1.25,
+            timer = "REAL",
+            blocking = false,
+            blockable = true
+        }))
+    end
+
     G.E_MANAGER:add_event(Event({
         trigger = "after",
         func = function()
             card:juice_up(1, 1)
             play_sound("aqu_bass", 1, 8)
             card:set_ability(ability)
-            SMODS.calculate_context({aqu_upgrade = true, card = card})
+            SMODS.calculate_context({ aqu_upgrade = true, card = card })
             return true
         end,
         delay = 1,
@@ -232,4 +260,25 @@ end
 
 function aquill.bool(value)
     return not not value
+end
+
+function aquill.log(table_of_funcs, ref)
+    if ref then
+        local old = table_of_funcs[ref]
+        table_of_funcs[ref] = function(...)
+            print(ref, "called with args", ...)
+            return old(...)
+        end
+        return
+    end
+
+
+    for k, entry in pairs(table_of_funcs) do
+        if type(entry) == "function" then
+            table_of_funcs[k] = function(...)
+                print(k, "called with args", ...)
+                return entry(...)
+            end
+        end
+    end
 end

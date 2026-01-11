@@ -183,11 +183,21 @@ return {
             ph_aqu_upgrade_1 = "Upgraded Blinds have higher Blind size but higher rewards.",
             ph_aqu_upgrade_2 = "They also increase the spawn rates of Dormant Jokers.",
 
+            ph_aqu_upgrade_corruption_1 = "Upgraded Blinds also lower Entropic Corruption",
+            ph_aqu_upgrade_corruption_2 = "Similarly, non-upgraded blinds raise Entropic Corruption",
+
             ph_aqu_corruption_desc = {
                 "Higher Entropic Corruption",
                 "exponentially increases Blind size.",
                 "Reaching max corruption",
                 "will make blinds impossible.",
+            },
+
+            ph_aqu_config_alt_upgrade_effect_label = "Alternate Upgrade VFX",
+            ph_aqu_config_alt_upgrade_effect_info = {
+                "Changes the particle-heavy upgrading VFX",
+                "to a much lighter one which flips the card.",
+                "Note that this may look less polished."
             },
 
             ph_aqu_corruption = "Entropic Corruption",

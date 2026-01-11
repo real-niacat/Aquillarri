@@ -117,15 +117,8 @@ aquill.add_trigger(
                     G.HUD_blind:recalculate()
 
                     G.GAME.blind.dollars = G.GAME.blind.dollars + G.GAME.dormant_bonus
+                    G.GAME.dormant_blind_bonus_display = string.rep(localize("$"), G.GAME.dormant_bonus)
                     G.GAME.blind.loc_name = G.GAME.blind.loc_name .. "+"
-
-                    G.E_MANAGER:add_event(Event({
-                        func = function()
-                            G.hand_text_area.blind_chips:juice_up()
-                            G.HUD_blind:get_UIE_by_ID("dollars_to_be_earned"):juice_up(7)
-                            return true
-                        end
-                    }))
                     return true
                 end
             }))
@@ -136,13 +129,11 @@ aquill.add_trigger(
 aquill.add_trigger(
     function(context)
         if aquill.corruption.enabled() and context.setting_blind then
-            
             if G.GAME.dormant_blind then
                 aquill.corruption.modify(G.GAME.entropic_corruption_loss)
             else
                 aquill.corruption.modify(G.GAME.entropic_corruption_gain)
             end
-
         end
     end
 )
