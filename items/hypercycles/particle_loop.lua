@@ -3,26 +3,27 @@ aquill.Upgradable {
     group = "particleloop",
     calculate = function(self, card, context)
         if context.joker_main then
-
-            local success = true
-            local loops = 0
-            while success do
-                SMODS.calculate_effect({chips = card.ability.extra.chips + (loops * card.ability.extra.gain)}, card)
-                loops = loops + 1
-                success = SMODS.pseudorandom_probability(card, "aqu_particle_loop", card.ability.extra.num, card.ability.extra.den, nil, true)
+            for i = 0, (card.ability.extra.retriggers - 1) do --imitates retriggering without actually doing it
+                SMODS.calculate_effect(
+                { chips = card.ability.extra.chips + (i * (card.ability.extra.gain / 100) * card.ability.extra.chips) },
+                    card)
+                SMODS.calculate_effect({ message = localize("k_again_ex") }, card)
             end
+        end
 
+        if context.end_of_round and context.main_eval then
+            SMODS.scale_card(card,
+                { ref_table = card.ability.extra, ref_value = "retriggers", scalar_value = "retrig_gain" })
         end
     end,
-    config = {extra = {chips = 2, gain = 2, num = 9, den = 10}},
+    config = { extra = { chips = 2, gain = 10, retriggers = 2, retrig_gain = 1 } },
     loc_vars = function(self, info_queue, card)
-        local num, den = SMODS.get_probability_vars(card, card.ability.extra.num, card.ability.extra.den, nil, nil, true)
         return {
             vars = {
                 card.ability.extra.chips,
-                num,
-                den,
-                card.ability.extra.gain
+                card.ability.extra.gain,
+                card.ability.extra.retriggers,
+                card.ability.extra.retrig_gain
             }
         }
     end,
@@ -33,27 +34,27 @@ aquill.Upgradable {
     group = "particleloop",
     calculate = function(self, card, context)
         if context.joker_main then
-
-            local success = true
-            local loops = 0
-            while success do
-                local v = card.ability.extra.chips + (loops * card.ability.extra.gain)
-                SMODS.calculate_effect({chips = v}, card)
-                loops = loops + 1
-                success = SMODS.pseudorandom_probability(card, "aqu_particle_loop", card.ability.extra.num, card.ability.extra.den, nil, true)
+            for i = 0, (card.ability.extra.retriggers - 1) do --imitates retriggering without actually doing it
+                SMODS.calculate_effect(
+                { chips = card.ability.extra.chips + (i * (card.ability.extra.gain / 100) * card.ability.extra.chips) },
+                    card)
+                SMODS.calculate_effect({ message = localize("k_again_ex") }, card)
             end
+        end
 
+        if context.end_of_round and context.main_eval then
+            SMODS.scale_card(card,
+                { ref_table = card.ability.extra, ref_value = "retriggers", scalar_value = "retrig_gain" })
         end
     end,
-    config = {extra = {chips = 5, gain = 5, num = 14, den = 15}},
+    config = { extra = { chips = 20, gain = 10, retriggers = 2, retrig_gain = 2 } },
     loc_vars = function(self, info_queue, card)
-        local num, den = SMODS.get_probability_vars(card, card.ability.extra.num, card.ability.extra.den, nil, nil, true)
         return {
             vars = {
                 card.ability.extra.chips,
-                num,
-                den,
-                card.ability.extra.gain
+                card.ability.extra.gain,
+                card.ability.extra.retriggers,
+                card.ability.extra.retrig_gain
             }
         }
     end,
@@ -64,27 +65,31 @@ aquill.Upgradable {
     group = "particleloop",
     calculate = function(self, card, context)
         if context.joker_main then
-
-            local success = true
-            local loops = 0
-            while success do
-                local v = card.ability.extra.xchips + (loops * card.ability.extra.gain)
-                SMODS.calculate_effect({xchips = v}, card)
-                loops = loops + 1
-                success = SMODS.pseudorandom_probability(card, "aqu_particle_loop", card.ability.extra.num, card.ability.extra.den, nil, true)
+            for i = 0, (card.ability.extra.retriggers - 1) do --imitates retriggering without actually doing it
+                SMODS.calculate_effect(
+                { chips = card.ability.extra.chips + (i * (card.ability.extra.gain / 100) * card.ability.extra.chips) },
+                    card)
+                SMODS.calculate_effect(
+                { xchips = card.ability.extra.xchips +
+                (i * (card.ability.extra.gain / 100) * (card.ability.extra.xchips - 1)) }, card)
+                SMODS.calculate_effect({ message = localize("k_again_ex") }, card)
             end
+        end
 
+        if context.end_of_round and context.main_eval then
+            SMODS.scale_card(card,
+                { ref_table = card.ability.extra, ref_value = "retriggers", scalar_value = "retrig_gain" })
         end
     end,
-    config = {extra = {xchips = 1.25, gain = 0.05, num = 14, den = 15}},
+    config = { extra = { chips = 20, gain = 10, retriggers = 2, retrig_gain = 2, xchips = 1.2 } },
     loc_vars = function(self, info_queue, card)
-        local num, den = SMODS.get_probability_vars(card, card.ability.extra.num, card.ability.extra.den, nil, nil, true)
         return {
             vars = {
+                card.ability.extra.chips,
+                card.ability.extra.gain,
+                card.ability.extra.retriggers,
+                card.ability.extra.retrig_gain,
                 card.ability.extra.xchips,
-                num,
-                den,
-                card.ability.extra.gain
             }
         }
     end,
@@ -95,27 +100,31 @@ aquill.Upgradable {
     group = "particleloop",
     calculate = function(self, card, context)
         if context.joker_main then
-
-            local success = true
-            local loops = 0
-            while success do
-                local v = card.ability.extra.xchips + (loops * card.ability.extra.gain)
-                SMODS.calculate_effect({xchips = v}, card)
-                loops = loops + 1
-                success = SMODS.pseudorandom_probability(card, "aqu_particle_loop", card.ability.extra.num, card.ability.extra.den, nil, true)
+            for i = 0, (card.ability.extra.retriggers - 1) do --imitates retriggering without actually doing it
+                SMODS.calculate_effect(
+                { chips = card.ability.extra.chips + (i * (card.ability.extra.gain / 100) * card.ability.extra.chips) },
+                    card)
+                SMODS.calculate_effect(
+                { xchips = card.ability.extra.xchips +
+                (i * (card.ability.extra.gain / 100) * (card.ability.extra.xchips - 1)) }, card)
+                SMODS.calculate_effect({ message = localize("k_again_ex") }, card)
             end
+        end
 
+        if context.end_of_round and context.main_eval then
+            SMODS.scale_card(card,
+                { ref_table = card.ability.extra, ref_value = "retriggers", scalar_value = "retrig_gain" })
         end
     end,
-    config = {extra = {xchips = 2, gain = 0.25, num = 19, den = 20}},
+    config = { extra = { chips = 25, gain = 25, retriggers = 3, retrig_gain = 3, xchips = 1.2 } },
     loc_vars = function(self, info_queue, card)
-        local num, den = SMODS.get_probability_vars(card, card.ability.extra.num, card.ability.extra.den, nil, nil, true)
         return {
             vars = {
-                card.ability.extra.xchips,
-                num,
-                den,
+                card.ability.extra.chips,
                 card.ability.extra.gain,
+                card.ability.extra.retriggers,
+                card.ability.extra.retrig_gain,
+                card.ability.extra.xchips,
             }
         }
     end,
@@ -126,27 +135,35 @@ aquill.Upgradable {
     group = "particleloop",
     calculate = function(self, card, context)
         if context.joker_main then
-
-            local success = true
-            local loops = 0
-            while success do
-                local v = card.ability.extra.echips + (loops * card.ability.extra.gain)
-                SMODS.calculate_effect({echips = v}, card)
-                loops = loops + 1
-                success = SMODS.pseudorandom_probability(card, "aqu_particle_loop", card.ability.extra.num, card.ability.extra.den, nil, true)
+            for i = 0, (card.ability.extra.retriggers - 1) do --imitates retriggering without actually doing it
+                SMODS.calculate_effect(
+                { chips = card.ability.extra.chips + (i * (card.ability.extra.gain / 100) * card.ability.extra.chips) },
+                    card)
+                SMODS.calculate_effect(
+                { xchips = card.ability.extra.xchips +
+                (i * (card.ability.extra.gain / 100) * (card.ability.extra.xchips - 1)) }, card)
+                SMODS.calculate_effect(
+                { echips = card.ability.extra.echips +
+                (i * (card.ability.extra.gain / 100) * (card.ability.extra.echips - 1)) }, card)
+                SMODS.calculate_effect({ message = localize("k_again_ex") }, card)
             end
+        end
 
+        if context.end_of_round and context.main_eval then
+            SMODS.scale_card(card,
+                { ref_table = card.ability.extra, ref_value = "retriggers", scalar_value = "retrig_gain" })
         end
     end,
-    config = {extra = {echips = 1.2, gain = 0.05, num = 19, den = 20}},
+    config = { extra = { chips = 50, gain = 15, retriggers = 3, retrig_gain = 2, xchips = 1.2, echips = 1.01 } },
     loc_vars = function(self, info_queue, card)
-        local num, den = SMODS.get_probability_vars(card, card.ability.extra.num, card.ability.extra.den, nil, nil, true)
         return {
             vars = {
-                card.ability.extra.echips,
-                num,
-                den,
+                card.ability.extra.chips,
                 card.ability.extra.gain,
+                card.ability.extra.retriggers,
+                card.ability.extra.retrig_gain,
+                card.ability.extra.xchips,
+                card.ability.extra.echips
             }
         }
     end,

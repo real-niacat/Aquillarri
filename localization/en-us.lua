@@ -7,49 +7,60 @@ return {
         Joker = {
             j_aqu_particleloop1 = {
                 name = "Particle Loop",
-                text = {
+                text = {{
                     "{C:chips}+#1#{} Chips",
-                    "{C:green}#2# in #3#{} Chance to retrigger itself",
-                    "Gains {C:chips}+#4#{} Chips per consecutive retrigger",
-                    "{C:inactive}(Unmodifiable Probabilities){}",
-                }
+                },{
+                    "Retriggers self {C:attention}#3#{} times",
+                    "Increases by {C:attention}#4#{} retrigger at end of round",
+                    "Gives {C:attention}#2#%{} more Chips per trigger",
+                }} --i really, really hate how this is worded, but i don't know how i could do it better
             },
             j_aqu_particleloop2 = {
                 name = "Particle Loop",
-                text = {
+                text = {{
                     "{C:chips}+#1#{} Chips",
-                    "{C:green}#2# in #3#{} Chance to retrigger itself",
-                    "Gains {C:chips}+#4#{} Chips per consecutive retrigger",
-                    "{C:inactive}(Unmodifiable Probabilities){}",
-                }
+                },{
+                    "Retriggers self {C:attention}#3#{} times",
+                    "Increases by {C:attention}#4#{} retrigger at end of round",
+                    "Gives {C:attention}#2#%{} more Chips per trigger",
+                }}
             },
             j_aqu_particleloop3 = {
                 name = "Particle Loop",
-                text = {
-                    "{X:chips,C:white}X#1#{} Chips",
-                    "{C:green}#2# in #3#{} Chance to retrigger itself",
-                    "Gains {X:chips,C:white}X#4#{} Chips per consecutive retrigger",
-                    "{C:inactive}(Unmodifiable Probabilities){}",
-                }
+                text = {{
+                    "{C:chips}+#1#{} Chips",
+                    "{X:chips,C:white}X#5#{} Chips"
+                },{
+                    "Retriggers self {C:attention}#3#{} times",
+                    "Increases by {C:attention}#4#{} retrigger at end of round",
+                    "Gives {C:attention}#2#%{} more Chips per trigger",
+                }}
             },
             j_aqu_particleloop4 = {
                 name = "Particle Loop",
-                text = {
-                    "{X:chips,C:white}X#1#{} Chips",
-                    "{C:green}#2# in #3#{} Chance to retrigger itself",
-                    "Gains {X:chips,C:white}X#4#{} Chips per consecutive retrigger",
-                    "{C:inactive}(Unmodifiable Probabilities){}",
-                }
+                text = {{
+                    "{C:chips}+#1#{} Chips",
+                    "{X:chips,C:white}X#5#{} Chips"
+                },{
+                    "Retriggers self {C:attention}#3#{} times",
+                    "Increases by {C:attention}#4#{} retrigger at end of round",
+                    "Gives {C:attention}#2#%{} more Chips per trigger",
+                }}
             },
             j_aqu_particleloop5 = {
                 name = "Particle Loop",
-                text = {
-                    "{X:dark_edition,C:white}^#1#{} Chips",
-                    "{C:green}#2# in #3#{} Chance to retrigger itself",
-                    "Gains {X:dark_edition,C:white}^#4#{} Chips per consecutive retrigger",
-                    "{C:inactive}(Unmodifiable Probabilities){}",
-                }
+                text = {{
+                    "{C:chips}+#1#{} Chips",
+                    "{X:chips,C:white}X#5#{} Chips",
+                    "{X:dark_edition,C:white}^#6#{} Chips"
+                },{
+                    "Retriggers self {C:attention}#3#{} times",
+                    "Increases by {C:attention}#4#{} retrigger at end of round",
+                    "Gives {C:attention}#2#%{} more Chips per trigger",
+                }}
             },
+
+
             j_aqu_magicorb1 = {
                 name = "Magic Orb",
                 text = {
@@ -158,6 +169,14 @@ return {
                     "Increase upgraded blind exponent by {X:dark_edition,C:white}^#2#{}",
                     "{X:attention,C:white}X#3#{} Entropic Corruption gain"
                 }
+            },
+            c_aqu_nilscape_portal_no_corruption = {
+                name = "Nilscape Portal",
+                text = {
+                    "{C:attention}Upgrade{} a selected eligible Joker",
+                    "Upgraded blinds permanently give {C:money}$#1#{} more",
+                    "Increase upgraded blind exponent by {X:dark_edition,C:white}^#2#{}",
+                }
             }
         },
     },
@@ -180,6 +199,9 @@ return {
             k_aqu_gems = "Gem",
             b_aqu_gems_cards = "Gem Cards",
 
+            ph_aqu_visual = "Visual",
+            ph_aqu_gameplay = "Gameplay",
+
             ph_aqu_upgrade_1 = "Upgraded Blinds have higher Blind size but higher rewards.",
             ph_aqu_upgrade_2 = "They also increase the spawn rates of Dormant Jokers.",
 
@@ -198,6 +220,13 @@ return {
                 "Changes the particle-heavy upgrading VFX",
                 "to a much lighter one which flips the card.",
                 "Note that this may look less polished."
+            },
+
+            ph_aqu_config_disable_corruption_label = "Disable Entropic Corruption",
+            ph_aqu_config_disable_corruption_info = {
+                "Disables Entropic Corruption and all related mechanics.",
+                "This setting is best turned off, but if your experience is",
+                "majorly worsened by Corruption, consider turning this on."
             },
 
             ph_aqu_corruption = "Entropic Corruption",

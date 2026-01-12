@@ -23,9 +23,13 @@ SMODS.Consumable {
         end
     end,
     loc_vars = function(self, info_queue, card)
+        local desc_key = aquill.corruption.enabled() and self.key .. "_used" or self.key .. "_first"
+        if not aquill.corruption.allowed then
+            desc_key = self.key .. "_no_corruption"
+        end
         return {
             vars = { card.ability.extra.bonus_increase, card.ability.extra.exponent_increase, card.ability.extra.corruption_mult },
-            key = aquill.corruption.enabled() and self.key .. "_used" or self.key .. "_first"
+            key = desc_key
         }
     end,
     config = { extra = { bonus_increase = 1, exponent_increase = 0.03, corruption_mult = 1.1 } },
@@ -173,16 +177,24 @@ function aquill.corruption.refresh_ui()
 end
 
 function aquill.corruption.enable()
+    if not aquill.corruption.allowed() then
+        return
+    end
+
     G.GAME.entropic_corruption_enabled = true
     G.GAME.entropic_corruption_percent = G.GAME.entropic_corruption_percent or 0
     G.GAME.entropic_corruption_max = 100
     G.GAME.entropic_corruption_min = 0
-    G.GAME.entropic_corruption_loss = -15 --lose 10% when upgrading blind
-    G.GAME.entropic_corruption_gain = 5 --gain 5% when selecting non-upgraded blind
+    G.GAME.entropic_corruption_loss = -20 --lose 10% when upgrading blind
+    G.GAME.entropic_corruption_gain = 4 --gain 5% when selecting non-upgraded blind
     G.GAME.entropic_corruption_gain_multiplier = 1
     G.GAME.entropic_corruption_loss_multiplier = 1
     aquill.corruption.refresh_ui()
     aquill.corruption.modify(0)
+end
+
+function aquill.corruption.allowed()
+    return not aquill.config.disable_corruption
 end
 
 function aquill.corruption.disable()
@@ -229,7 +241,7 @@ function aquill.corruption.modify(amount, func)
 end
 
 function aquill.corruption.enabled()
-    return G.GAME.entropic_corruption_enabled
+    return G.GAME.entropic_corruption_enabled and aquill.corruption.allowed()
 end
 
 function aquill.corruption.get_progress()
