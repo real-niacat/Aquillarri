@@ -126,19 +126,6 @@ function aquill.lerp_mouse(pos, amount)
     love.mouse.setY(math.floor(new.y + 0.5))
 end
 
-function Card:get_screen_coords()
-    return { x = (self.T.x * 100) + (self.T.w * 25), y = (self.T.y * 100) + (self.T.h * 25) }
-end
-
-local upd = Card.update
-function Card:update(dt)
-    upd(self, dt)
-
-    if self.gravitational_pull then
-        aquill.lerp_mouse(self:get_screen_coords(), 1 - self.gravitational_pull)
-    end
-end
-
 function math.round(n)
     return math.floor(n + 0.5)
 end
@@ -203,7 +190,7 @@ end
 
 function aquill.fancy_roman_numerals(n)
     -- n is 1-10, assume no more
-    return " {C:aqu_aquill_" .. n .. "}" .. aquill.roman_numerals(n)
+    return " {C:aqu_aquill_" .. n*2 .."}" .. aquill.roman_numerals(n)
 end
 
 function aquill.x_screen_perc(percent)
