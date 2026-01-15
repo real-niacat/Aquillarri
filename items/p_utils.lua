@@ -158,7 +158,7 @@ function aquill.get_predecessor(key)
 end
 
 function aquill.roman_numerals(s)
-    -- code taken and adapted from https://gist.github.com/efrederickson/4080372
+    -- code taken and (MINORLY) adapted from https://gist.github.com/efrederickson/4080372
     local numbers = { 1, 5, 10, 50, 100, 500, 1000 }
     local chars = { "I", "V", "X", "L", "C", "D", "M" }
 
@@ -247,6 +247,18 @@ end
 
 function aquill.bool(value)
     return not not value
+end
+
+function aquill.unique_ranks(table_of_cards)
+    local ranks = {}
+    for _,card in pairs(table_of_cards) do
+        ranks[card:get_id()] = true
+    end
+    local amount = 0
+    for _,rank in pairs(ranks) do
+        amount = amount + 1
+    end
+    return amount
 end
 
 function aquill.log(table_of_funcs, ref)

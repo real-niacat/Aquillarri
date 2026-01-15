@@ -59,6 +59,67 @@ return {
                     "Gives {C:attention}#2#%{} more Chips per trigger",
                 }}
             },
+            j_aqu_scorebound_crystal1 = {
+                name = "Scorebound Crystal",
+                text = {{
+                    "Scored {C:attention}2s{} give {C:chips}+#1#{} Chips",
+                }, {
+                    "Scored {C:attention}Aces{} give {C:mult}+#2#{} Mult",
+                }, {
+                    "{C:attention}X#3#{} to above bonuses for",
+                    "each unique rank in scoring hand",
+                }}
+            },
+            j_aqu_scorebound_crystal2 = {
+                name = "Scorebound Crystal",
+                text = {{
+                    "Scored {C:attention}2s{} and {C:attention}3s{} give {C:chips}+#1#{} Chips",
+                }, {
+                    "Scored {C:attention}Aces{} and {C:attention}Kings{} give {C:mult}+#2#{} Mult",
+                }, {
+                    "{C:attention}X#3#{} to above bonuses for",
+                    "each unique rank in scoring hand",
+                }}
+            },
+            j_aqu_scorebound_crystal3 = {
+                name = "Scorebound Crystal",
+                text = {{
+                    "Scored {C:attention}2s, 3s, 4s,{} and {C:attention}5s{} give {C:chips}+#1#{} Chips",
+                }, {
+                    "Scored {C:attention}Aces, Kings, Queens, Jacks{} and {C:attention}10s{} give {C:mult}+#2#{} Mult",
+                }, {
+                    "{C:attention}X#3#{} to above bonuses for",
+                    "each unique rank in scoring hand",
+                }}
+            },
+            j_aqu_scorebound_crystal4 = {
+                name = "Scorebound Crystal",
+                text = {{
+                    "Scored {C:attention}2s, 3s, 4s, 5s{} ",
+                    "and {C:attention}6s{} give {C:chips}+#1#{} Chips"
+                }, {
+                    "Scored {C:attention}Aces, Kings, Queens, Jacks{} ",
+                    "and {C:attention}10s{} give {C:mult}+#2#{} Mult"
+                }, {
+                    "{C:attention}X#3#{} to above bonuses for",
+                    "each unique rank in scoring hand",
+                }}
+            },
+            j_aqu_scorebound_crystal5 = {
+                name = "Scorebound Crystal",
+                text = {{
+                    "Scored {C:attention}2s, 3s, 4s, 5s, 6s{} ",
+                    "and {C:attention}7s{} give {C:chips}+#1#{} Chips"
+                }, {
+                    "Scored {C:attention}Aces, Kings, Queens, Jacks, 10s{} ",
+                    "and {C:attention}9s{} give {C:mult}+#2#{} Mult"
+                }, {
+                    "Scores {C:attention}8s{} give {X:mult,C:white}X#4#{} Mult and {X:chips,C:white}X#4#{} Chips"
+                }, {
+                    "{C:attention}X#3#{} to above bonuses for",
+                    "each unique rank in scoring hand",
+                }}
+            },
 
 
             j_aqu_magicorb1 = {

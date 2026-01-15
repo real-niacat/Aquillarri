@@ -37,7 +37,7 @@ SMODS.Consumable {
     soul_rate = 0.075,
     soul_set = "Tarot",
     in_pool = function(self, args)
-        for _,joker in pairs(G.jokers.cards) do
+        for _, joker in pairs(G.jokers.cards) do
             if joker.config.center.upgrade then
                 return true
             end
@@ -46,7 +46,8 @@ SMODS.Consumable {
     end,
     set_ability = function(self, card, initial, delay_sprites)
         if card.ability and card.ability.extra and G.GAME.consumeable_usage[self.key] then
-            card.ability.extra.exponent_increase = card.ability.extra.exponent_increase / math.sqrt(G.GAME.consumeable_usage[self.key].count)
+            card.ability.extra.exponent_increase = card.ability.extra.exponent_increase /
+            math.sqrt(G.GAME.consumeable_usage[self.key].count)
             card.ability.extra.exponent_increase = aquill.round_to_nearest(card.ability.extra.exponent_increase, 0.0001)
         end
     end
@@ -79,7 +80,7 @@ function create_UIBox_corruption() -- base ui def
                 config = { padding = 0.1, colour = G.C.UI.BACKGROUND_INACTIVE, r = 0.01 },
                 nodes = {
                     { n = G.UIT.R, nodes = { { n = G.UIT.T, config = { text = localize("ph_aqu_corruption"), colour = G.C.WHITE, scale = text_scale * 0.5 } } } },
-                    { n = G.UIT.R, config = { align = "cm" },                                                                                                   nodes = { { n = G.UIT.O, config = { object = dyna, id = "percentage" } } } }
+                    { n = G.UIT.R, config = { align = "cm" }, nodes = { { n = G.UIT.O, config = { object = dyna, id = "percentage" } } } }
                 }
             },
         }
@@ -90,7 +91,7 @@ function create_UIBox_hover_corruption() -- hover ui def
     local text_scale = 0.3
     local text_col = G.C.PURPLE
     local times = 0
-    local function t(text)
+    local function t(text) -- just shorthand
         times = times + 1
         return DynaText({
             string = { { string = text, colour = text_col } },
@@ -136,7 +137,7 @@ function create_UIBox_hover_corruption() -- hover ui def
     }
 end
 
-function G.FUNCS.hover_entropic_corruption(e)
+function G.FUNCS.hover_entropic_corruption(e) -- i :heart: hover ui
     if not e.parent or not e.parent.states then return end
     aquill.e = e
     if (e.states.hover.is or e.parent.states.hover.is) and (e.created_on_pause == G.SETTINGS.paused) and not e.parent.children.desc_popup then
@@ -186,7 +187,7 @@ function aquill.corruption.enable()
     G.GAME.entropic_corruption_max = 100
     G.GAME.entropic_corruption_min = 0
     G.GAME.entropic_corruption_loss = -20 --lose 10% when upgrading blind
-    G.GAME.entropic_corruption_gain = 4 --gain 5% when selecting non-upgraded blind
+    G.GAME.entropic_corruption_gain = 4   --gain 5% when selecting non-upgraded blind
     G.GAME.entropic_corruption_gain_multiplier = 1
     G.GAME.entropic_corruption_loss_multiplier = 1
     aquill.corruption.refresh_ui()
@@ -275,14 +276,15 @@ function get_blind_amount(ante)
 
     if not aquill.corruption.enabled() then
         return original_value
-    end 
+    end
 
-    local x = aquill.corruption.get() / (100 + (G.GAME.entropic_corruption_max-100) / 5) -- intentionally allows for x values of beyond 1 to further punish high corruption even with higher maximums
+    local x = aquill.corruption.get() /
+    (100 + (G.GAME.entropic_corruption_max - 100) / 5)                                   -- intentionally allows for x values of beyond 1 to further punish high corruption even with higher maximums
     local rx = aquill.corruption.get_progress()
     if x and (x >= 0.2) then
         -- some silly math
         local operator = math.floor((x + 5) ^ x)
-        local index = ((x+1) * 2) ^ (x ^ 5)
+        local index = ((x + 1) * 2) ^ (x ^ 5)
         if rx == 1 then --actually at max
             operator = math.huge
         end
