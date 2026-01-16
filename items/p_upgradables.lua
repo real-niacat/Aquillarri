@@ -22,6 +22,9 @@ aquill.Upgradable = SMODS.Joker:extend {
             if selfcenter.upgrade then
                 local upgrade = G.P_CENTERS[selfcenter.upgrade]
                 info_queue[#info_queue+1] = {set = "Other", key = "aqu_upgrade", vars = {localize{set = upgrade.set, type = "name_text", key = upgrade.key}}}
+                if aquill.config.show_upgrade_info_queue then
+                    info_queue[#info_queue+1] = G.P_CENTERS[selfcenter.upgrade]
+                end
             end
             local hooked_return = loc_vars_hook(selfcenter,info_queue,card) or {}
             hooked_return.vars = hooked_return.vars or {}

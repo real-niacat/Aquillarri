@@ -52,6 +52,19 @@ function aquill.config_ui.visual()
                             }
                         },
                     },
+                    {
+                        n = G.UIT.R,
+                        config = { minw = G.ROOM.T.w * aquill.config_ui.width, padding = 0.05, align = "tl", },
+                        nodes = {
+                            create_toggle {
+                                label = localize("ph_aqu_config_upgrade_info_queue_label"),
+                                info = localize("ph_aqu_config_upgrade_info_queue_info"),
+                                active_colour = G.C.GREEN,
+                                ref_table = aquill.config,
+                                ref_value = "show_upgrade_info_queue"
+                            }
+                        },
+                    },
                 }
             },
 

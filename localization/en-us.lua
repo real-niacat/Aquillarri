@@ -21,7 +21,7 @@ return {
                     "{C:chips}+#1#{} Chips",
                 },{
                     "Retriggers self {C:attention}#3#{} times",
-                    "Increases by {C:attention}#4#{} retrigger at end of round",
+                    "Increases by {C:attention}#4#{} retriggers at end of round",
                     "Gives {C:attention}#2#%{} more Chips per trigger",
                 }}
             },
@@ -32,7 +32,7 @@ return {
                     "{X:chips,C:white}X#5#{} Chips"
                 },{
                     "Retriggers self {C:attention}#3#{} times",
-                    "Increases by {C:attention}#4#{} retrigger at end of round",
+                    "Increases by {C:attention}#4#{} retriggers at end of round",
                     "Gives {C:attention}#2#%{} more Chips per trigger",
                 }}
             },
@@ -43,7 +43,7 @@ return {
                     "{X:chips,C:white}X#5#{} Chips"
                 },{
                     "Retriggers self {C:attention}#3#{} times",
-                    "Increases by {C:attention}#4#{} retrigger at end of round",
+                    "Increases by {C:attention}#4#{} retriggers at end of round",
                     "Gives {C:attention}#2#%{} more Chips per trigger",
                 }}
             },
@@ -52,10 +52,9 @@ return {
                 text = {{
                     "{C:chips}+#1#{} Chips",
                     "{X:chips,C:white}X#5#{} Chips",
-                    "{X:dark_edition,C:white}^#6#{} Chips"
                 },{
                     "Retriggers self {C:attention}#3#{} times",
-                    "Increases by {C:attention}#4#{} retrigger at end of round",
+                    "Increases by {C:attention}#4#{} retriggers at end of round",
                     "Gives {C:attention}#2#%{} more Chips per trigger",
                 }}
             },
@@ -164,7 +163,8 @@ return {
                 }, {
                     "{C:dark_edition}Editioned{} cards have a {C:green}#3# in #4#{} chance to ",
                     "copy their {C:dark_edition}Edition{} to another card at end of round",
-                    "{C:inactive}(May overwrite other Editions)"
+                    "{C:inactive}(May overwrite other Editions)",
+                    "{C:inactive,s:0.8}(Cannot copy {C:dark_edition}Negative{C:inactive})"
                 }
                 }
             },
@@ -181,9 +181,10 @@ return {
                 }, {
                     "{C:dark_edition}Editioned{} cards have a {C:green}#3# in #4#{} chance to ",
                     "copy their {C:dark_edition}Edition{} to another card at end of round",
-                    "{C:inactive}(May overwrite other Editions)"
+                    "{C:inactive}(May overwrite other Editions)",
+                    "{C:inactive,s:0.8}(Cannot copy {C:dark_edition}Negative{C:inactive})"
                 }, {
-                    "Retrigger {C:dark_edition}Editioned{} cards once for every {C:dark_edition}Editioned{} Joker owned",
+                    "Retrigger {C:dark_edition}Editioned{} playing cards once for every {C:dark_edition}Editioned{} Joker owned",
                 }
                 }
             },
@@ -217,26 +218,35 @@ return {
                 name = "Nilscape Portal",
                 text = {
                     "{C:attention}Upgrade{} a selected eligible Joker",
-                    "Upgraded blinds permanently give {C:money}$#1#{} more",
                     "Increase upgraded blind exponent by {X:dark_edition,C:white}^#2#{}",
-                    "Enables {C:attention}Entropic Corruption{}"
+                    "Enables {C:attention}Entropic Corruption{}",
+                    "{C:inactive}(Cannot go past {V:1}Tier #4#{C:inactive})",
                 }
             },
             c_aqu_nilscape_portal_used = {
                 name = "Nilscape Portal",
                 text = {
                     "{C:attention}Upgrade{} a selected eligible Joker",
-                    "Upgraded blinds permanently give {C:money}$#1#{} more",
                     "Increase upgraded blind exponent by {X:dark_edition,C:white}^#2#{}",
-                    "{X:attention,C:white}X#3#{} Entropic Corruption gain"
+                    "{X:attention,C:white}X#3#{} Entropic Corruption gain",
+                    "{C:inactive}(Cannot go past {V:1}Tier #4#{C:inactive})",
                 }
             },
             c_aqu_nilscape_portal_no_corruption = {
                 name = "Nilscape Portal",
                 text = {
                     "{C:attention}Upgrade{} a selected eligible Joker",
-                    "Upgraded blinds permanently give {C:money}$#1#{} more",
                     "Increase upgraded blind exponent by {X:dark_edition,C:white}^#2#{}",
+                    "{C:inactive}(Cannot go past {V:1}Tier #4#{C:inactive})",
+                }
+            },
+            c_aqu_nilscape_portal_blocked = {
+                name = "Nilscape Portal",
+                text = {
+                    "{C:attention}Upgrade{} a selected eligible Joker",
+                    "Increase upgraded blind exponent by {X:dark_edition,C:white}^#2#{}",
+                    "Use on a {V:1}Tier #5#{} Joker to create {C:attention}Closed Portal{}",
+                    "{C:inactive}(Cannot go past {V:1}Tier #4#{C:inactive})",
                 }
             }
         },
@@ -281,6 +291,13 @@ return {
                 "Changes the particle-heavy upgrading VFX",
                 "to a much lighter one which flips the card.",
                 "Note that this may look less polished."
+            },
+
+            ph_aqu_config_upgrade_info_queue_label = "Add Upgrade info-queues",
+            ph_aqu_config_upgrade_info_queue_info = {
+                "Whenever a card references its upgrades, the",
+                "description of the upgrade will also be referenced",
+                "This may cause unnecessary text bloat on-screen."
             },
 
             ph_aqu_config_disable_corruption_label = "Disable Entropic Corruption",

@@ -9,13 +9,27 @@ function aquill.recalculate_joker_main()
     }
 end
 
-function aquill.can_upgrade(card)
+aquill.add_enum("can_upgrade", {"yes", "no", "low_power"})
+
+function aquill.can_upgrade(card, power)
     local cen = G.P_CENTERS[card.config.center_key]
-    return cen.upgrade
+
+    if not cen.upgrade then
+        return aquill.enums.can_upgrade.no --explicitly false, just in case
+    end
+
+    if not power then power = math.huge end
+    --power not specified? don't limit!
+
+    local tier = G.P_CENTERS[cen.upgrade].tier --check against power level of upgrade source
+    if tier <= power then
+        return aquill.enums.can_upgrade.yes
+    end
+    return aquill.enums.can_upgrade.low_power --not strong enough!
 end
 
 function aquill.upgrade_joker(card)
-    if not aquill.can_upgrade(card) then return end
+    if aquill.can_upgrade(card) == aquill.enums.can_upgrade.no then return end
     local key = card.config.center_key
     local ability = G.P_CENTERS[key].upgrade
     aquill.upgrade_joker_fx(card, ability)
@@ -106,7 +120,7 @@ function aquill.upgrade_joker_fx(card, ability)
         func = function()
             card:juice_up(1, 1)
             play_sound("aqu_bass", 1, 8)
-            card:set_ability(ability)
+            aquill.preserved_set_ability(card, ability)
             SMODS.calculate_context({ aqu_upgrade = true, card = card })
             return true
         end,
@@ -117,6 +131,42 @@ end
 
 function aquill.lerp(a, b, t)
     return a + t * (b - a)
+end
+
+-- sets ability of a card like Card:set_ability but it also respects Card.ability.preserve
+-- Card.ability.preserve should be an arraylike table of keys to variables in Card.ability.extra to keep
+function aquill.preserved_set_ability(card, ability_key)
+    -- usually i would hook, but this is ONLY to be used for upgrading jokers
+    -- so i dont want any shenanigans from other mods to affect or cause this 
+
+    local vars = card.ability
+
+    if not vars.preserve then --there's nothing to preserve brochacho
+        card:set_ability(ability_key)
+        return
+    end
+
+    if not vars.extra then --there's still nothing to preserve brochacho
+        card:set_ability(ability_key)
+        return
+    end
+
+    local saved = {}
+    for _, entry in pairs(vars.preserve) do
+        saved[entry] = vars.extra[entry] --standard is to keep them in extra
+    end
+
+
+    card:set_ability(ability_key)
+    G.E_MANAGER:add_event(Event({
+        func = function()
+            -- this is in an event due to timing issues, but it's in the "other" queue as to not disrupt anything else
+            for key, value in pairs(saved) do
+                card.ability.extra[key] = value --copying back
+            end
+            return true
+        end
+    }), "other")
 end
 
 function aquill.lerp_mouse(pos, amount)
@@ -136,7 +186,7 @@ end
 
 function aquill.calc_dormant_blind_size(original_blind_size)
     local n = to_big(original_blind_size):pow(G.GAME.dormant_exponent)
-    local place_value = 10 ^ math.floor(math.log10(n))
+    local place_value = to_big(10):pow(math.floor(math.log10(n)) - 1)
     n = aquill.round_to_nearest(n, place_value)
     return n
 end
@@ -190,7 +240,7 @@ end
 
 function aquill.fancy_roman_numerals(n)
     -- n is 1-10, assume no more
-    return " {C:aqu_aquill_" .. n*2 .."}" .. aquill.roman_numerals(n)
+    return " {C:aqu_aquill_" .. n * 2 .. "}" .. aquill.roman_numerals(n)
 end
 
 function aquill.x_screen_perc(percent)
@@ -251,11 +301,11 @@ end
 
 function aquill.unique_ranks(table_of_cards)
     local ranks = {}
-    for _,card in pairs(table_of_cards) do
+    for _, card in pairs(table_of_cards) do
         ranks[card:get_id()] = true
     end
     local amount = 0
-    for _,rank in pairs(ranks) do
+    for _, rank in pairs(ranks) do
         amount = amount + 1
     end
     return amount

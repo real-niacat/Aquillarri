@@ -1,58 +1,5 @@
 aquill.corruption = {}
 
-SMODS.Consumable {
-    set = "Spectral",
-    key = "nilscape_portal",
-    can_use = function(self, card)
-        return #G.jokers.highlighted == 1 and aquill.bool(G.jokers.highlighted[1].config.center.upgrade)
-    end,
-    use = function(self, card, area, copier)
-        G.E_MANAGER:add_event(Event({
-            func = function()
-                aquill.upgrade_joker(G.jokers.highlighted[1])
-                return true
-            end
-        }))
-        G.GAME.dormant_bonus = G.GAME.dormant_bonus + card.ability.extra.bonus_increase
-        G.GAME.dormant_exponent_gain = G.GAME.dormant_exponent_gain + card.ability.extra.exponent_increase
-
-        if not aquill.corruption.enabled() then
-            aquill.corruption.enable()
-        else
-            aquill.corruption.add_gain_multiplier(card.ability.extra.corruption_mult)
-        end
-    end,
-    loc_vars = function(self, info_queue, card)
-        local desc_key = aquill.corruption.enabled() and self.key .. "_used" or self.key .. "_first"
-        if not aquill.corruption.allowed then
-            desc_key = self.key .. "_no_corruption"
-        end
-        return {
-            vars = { card.ability.extra.bonus_increase, card.ability.extra.exponent_increase, card.ability.extra.corruption_mult },
-            key = desc_key
-        }
-    end,
-    config = { extra = { bonus_increase = 1, exponent_increase = 0.03, corruption_mult = 1.1 } },
-    hidden = true,
-    soul_rate = 0.075,
-    soul_set = "Tarot",
-    in_pool = function(self, args)
-        for _, joker in pairs(G.jokers.cards) do
-            if joker.config.center.upgrade then
-                return true
-            end
-        end
-        return false --need an upgradable joker
-    end,
-    set_ability = function(self, card, initial, delay_sprites)
-        if card.ability and card.ability.extra and G.GAME.consumeable_usage[self.key] then
-            card.ability.extra.exponent_increase = card.ability.extra.exponent_increase /
-            math.sqrt(G.GAME.consumeable_usage[self.key].count)
-            card.ability.extra.exponent_increase = aquill.round_to_nearest(card.ability.extra.exponent_increase, 0.0001)
-        end
-    end
-}
-
 function create_UIBox_corruption() -- base ui def
     local text_scale = 0.4
 
@@ -186,10 +133,11 @@ function aquill.corruption.enable()
     G.GAME.entropic_corruption_percent = G.GAME.entropic_corruption_percent or 0
     G.GAME.entropic_corruption_max = 100
     G.GAME.entropic_corruption_min = 0
-    G.GAME.entropic_corruption_loss = -20 --lose 10% when upgrading blind
-    G.GAME.entropic_corruption_gain = 4   --gain 5% when selecting non-upgraded blind
+    G.GAME.entropic_corruption_loss = -12 --lose 10% when upgrading blind
+    G.GAME.entropic_corruption_gain = 6.5   --gain 6.5% when selecting non-upgraded blind
     G.GAME.entropic_corruption_gain_multiplier = 1
     G.GAME.entropic_corruption_loss_multiplier = 1
+    G.GAME.entropic_corruption_blind_thresh = 0.15 --need 15% corruption before it starts affecting blind sizes
     aquill.corruption.refresh_ui()
     aquill.corruption.modify(0)
 end
@@ -281,7 +229,7 @@ function get_blind_amount(ante)
     local x = aquill.corruption.get() /
     (100 + (G.GAME.entropic_corruption_max - 100) / 5)                                   -- intentionally allows for x values of beyond 1 to further punish high corruption even with higher maximums
     local rx = aquill.corruption.get_progress()
-    if x and (x >= 0.2) then
+    if x and (x >= G.GAME.entropic_corruption_blind_thresh) then
         -- some silly math
         local operator = math.floor((x + 5) ^ x)
         local index = ((x + 1) * 2) ^ (x ^ 5)

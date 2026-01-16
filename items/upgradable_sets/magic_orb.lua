@@ -62,6 +62,10 @@ aquill.Upgradable {
     config = { extra = { max = 14, remaining = 1, loss = 1 } },
 }
 
+aquill.magic_orb_edition_blacklist = {
+    ["e_negative"] = true
+}
+
 aquill.Upgradable {
     tier = 4,
     group = "magicorb",
@@ -83,9 +87,9 @@ aquill.Upgradable {
         if context.end_of_round and context.main_eval then
            
             for _,c in pairs(G.I.CARD) do
-                if c.edition and SMODS.pseudorandom_probability(c, "edition_copy_" .. c.unique_val, card.ability.extra.num, card.ability.extra.den) then
+                if c.edition and (not aquill.magic_orb_edition_blacklist[c.edition.key]) and SMODS.pseudorandom_probability(c, "edition_copy_" .. c.unique_val, card.ability.extra.num, card.ability.extra.den) then
                     local to_copy = pseudorandom_element(c.area.cards, "aqu_edition_copy")
-                    to_copy:set_edition(c.edition.key)
+                    if not to_copy.edtion then to_copy:set_edition(c.edition.key) end
                 end
             end
 
@@ -119,15 +123,15 @@ aquill.Upgradable {
         if context.end_of_round and context.main_eval then
            
             for _,c in pairs(G.I.CARD) do
-                if c.edition and SMODS.pseudorandom_probability(c, "edition_copy_" .. c.unique_val, card.ability.extra.num, card.ability.extra.den) then
+                if c.edition and (not aquill.magic_orb_edition_blacklist[c.edition.key]) and SMODS.pseudorandom_probability(c, "edition_copy_" .. c.unique_val, card.ability.extra.num, card.ability.extra.den) then
                     local to_copy = pseudorandom_element(c.area.cards, "aqu_edition_copy")
-                    to_copy:set_edition(c.edition.key)
+                    if not to_copy.edtion then to_copy:set_edition(c.edition.key) end
                 end
             end
 
         end
 
-        if (context.retrigger_joker_check and context.other_card.edition) or (context.repetition and context.other_card.edition) then
+        if context.repetition and context.other_card.edition then
             return {repetitions = #aquill.get_editioned_cards(card.area)}
         end
     end,

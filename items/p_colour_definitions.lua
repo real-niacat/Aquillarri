@@ -91,4 +91,5 @@ local aquill_colours = {
 loc_colour()
 for i,colour in pairs(aquill_colours) do
     G.ARGS.LOC_COLOURS[colour.key] = colour
+    G.C[colour.key] = colour
 end

@@ -3,6 +3,7 @@ aquill = SMODS.current_mod
 aquill.config = SMODS.current_mod.config
 
 aquill.triggers = {}
+aquill.enums = {}
 
 SMODS.current_mod.optional_features = {
 	retrigger_joker = true
@@ -10,6 +11,17 @@ SMODS.current_mod.optional_features = {
 
 function aquill.add_trigger(run_func) --used b/c adding a ton of stuff in global_calc.lua is unorganized
 	table.insert(aquill.triggers, { trigger = run_func })
+end
+
+---@param name string
+---@param enum table
+--enum is a table of strings for names
+-- eg aquill.add_enum("test", {"a", "b"}) → aquill.enums.test.a/b
+function aquill.add_enum(name, enum)
+	aquill.enums[name] = {}
+	for i,entry in ipairs(enum) do
+		aquill.enums[name][entry] = i
+	end
 end
 
 local nativefs = NFS

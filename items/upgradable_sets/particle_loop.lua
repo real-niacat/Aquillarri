@@ -16,7 +16,7 @@ aquill.Upgradable {
                 { ref_table = card.ability.extra, ref_value = "retriggers", scalar_value = "retrig_gain" })
         end
     end,
-    config = { extra = { chips = 2, gain = 10, retriggers = 2, retrig_gain = 1 } },
+    config = { extra = { chips = 2, gain = 10, retriggers = 2, retrig_gain = 1 }, preserve = {"retriggers"} },
     loc_vars = function(self, info_queue, card)
         return {
             vars = {
@@ -47,7 +47,7 @@ aquill.Upgradable {
                 { ref_table = card.ability.extra, ref_value = "retriggers", scalar_value = "retrig_gain" })
         end
     end,
-    config = { extra = { chips = 20, gain = 10, retriggers = 2, retrig_gain = 2 } },
+    config = { extra = { chips = 20, gain = 10, retriggers = 2, retrig_gain = 2 }, preserve = {"retriggers"} },
     loc_vars = function(self, info_queue, card)
         return {
             vars = {
@@ -81,7 +81,7 @@ aquill.Upgradable {
                 { ref_table = card.ability.extra, ref_value = "retriggers", scalar_value = "retrig_gain" })
         end
     end,
-    config = { extra = { chips = 20, gain = 10, retriggers = 2, retrig_gain = 2, xchips = 1.2 } },
+    config = { extra = { chips = 20, gain = 10, retriggers = 2, retrig_gain = 2, xchips = 1.2 }, preserve = {"retriggers"} },
     loc_vars = function(self, info_queue, card)
         return {
             vars = {
@@ -116,7 +116,7 @@ aquill.Upgradable {
                 { ref_table = card.ability.extra, ref_value = "retriggers", scalar_value = "retrig_gain" })
         end
     end,
-    config = { extra = { chips = 25, gain = 25, retriggers = 3, retrig_gain = 3, xchips = 1.2 } },
+    config = { extra = { chips = 25, gain = 25, retriggers = 3, retrig_gain = 3, xchips = 1.2 }, preserve = {"retriggers"} },
     loc_vars = function(self, info_queue, card)
         return {
             vars = {
@@ -154,7 +154,7 @@ aquill.Upgradable {
                 { ref_table = card.ability.extra, ref_value = "retriggers", scalar_value = "retrig_gain" })
         end
     end,
-    config = { extra = { chips = 50, gain = 15, retriggers = 3, retrig_gain = 2, xchips = 1.2, echips = 1.01 } },
+    config = { extra = { chips = 50, gain = 75, retriggers = 3, retrig_gain = 3, xchips = 2 }, preserve = {"retriggers"} },
     loc_vars = function(self, info_queue, card)
         return {
             vars = {
@@ -163,7 +163,6 @@ aquill.Upgradable {
                 card.ability.extra.retriggers,
                 card.ability.extra.retrig_gain,
                 card.ability.extra.xchips,
-                card.ability.extra.echips
             }
         }
     end,
