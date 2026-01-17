@@ -2,16 +2,16 @@ SMODS.Rarity {
     key = "dormant",
     badge_colour = HEX("CCCCCC"),
     get_weight = function(self, weight, object_type)
-        local multiplier = G.GAME.dormant_boost_per_upgraded ^ G.GAME.dormant_rarity_boost
-        local div = 1
+        local m = G.GAME.dormant_boost_per_upgraded ^ G.GAME.dormant_rarity_boost
+        local d = 1
         if G.jokers then
-            local jokers = 0
+            local j = 0
             for _,joker in pairs(G.jokers.cards) do
-                if joker.config.center.upgrade then jokers = jokers + 1 end
+                if joker.config.center.upgrade then j = j + 1 end
             end
-            div = 5^(3*(jokers+1))
+            d = 5^(3*(j+1))
         end
-        return math.min((weight * multiplier) / div, 0.3)
+        return math.min((weight * m) / d, 0.3)
     end,
     default_weight = 0.01,
     pools = { ["Joker"] = true },

@@ -164,7 +164,7 @@ return {
                     "{C:dark_edition}Editioned{} cards have a {C:green}#3# in #4#{} chance to ",
                     "copy their {C:dark_edition}Edition{} to another card at end of round",
                     "{C:inactive}(May overwrite other Editions)",
-                    "{C:inactive,s:0.8}(Cannot copy {C:dark_edition}Negative{C:inactive})"
+                    "{C:inactive,s:0.8}(Cannot copy {C:dark_edition,s:0.8}Negative{C:inactive,s:0.8})"
                 }
                 }
             },
@@ -182,7 +182,7 @@ return {
                     "{C:dark_edition}Editioned{} cards have a {C:green}#3# in #4#{} chance to ",
                     "copy their {C:dark_edition}Edition{} to another card at end of round",
                     "{C:inactive}(May overwrite other Editions)",
-                    "{C:inactive,s:0.8}(Cannot copy {C:dark_edition}Negative{C:inactive})"
+                    "{C:inactive,s:0.8}(Cannot copy {C:dark_edition,s:0.8}Negative{C:inactive,s:0.8})"
                 }, {
                     "Retrigger {C:dark_edition}Editioned{} playing cards once for every {C:dark_edition}Editioned{} Joker owned",
                 }
