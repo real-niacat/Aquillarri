@@ -99,3 +99,15 @@ payload = '''
 {n=G.UIT.T, config={text = string.rep(localize("$"), G.GAME.dormant_bonus)..'+', scale = 0.35, colour = disabled and G.C.UI.TEXT_INACTIVE or G.C.PURPLE, shadow = not disabled}},
 '''
 match_indent = true
+
+
+
+[[patches]]
+[patches.pattern]
+target = """functions/state_events.lua"""
+pattern = '''-- TARGET: setting_blind effects'''
+position = "at"
+payload = '''
+SMODS.calculate_context({setting_dormant_blind = true, blind = G.GAME.round_resets.blind})
+'''
+match_indent = true

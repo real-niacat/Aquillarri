@@ -248,7 +248,60 @@ return {
                     "Use on a {V:1}Tier #5#{} Joker to create {C:attention}Closed Portal{}",
                     "{C:inactive}(Cannot go past {V:1}Tier #4#{C:inactive})",
                 }
-            }
+            },
+
+            
+            c_aqu_closed_portal = { 
+                name = "Closed Portal",
+                text = {{
+                    "Creates a {C:attention}Nilscape Portal{} with a higher",
+                    "maximum upgrade {C:aqu_aquill_2}Tier{} when certain conditions are met",
+                }, {
+                    "Conditions are {C:green}randomized{} when this card is spawned"
+                }}    
+            },
+            -- the below is just a base for closed portal effects. commenting it out makes it harder to copy+paste
+            c_aqu_clp_ = { 
+                name = "Closed Portal",
+                text = {{
+                    "Creates a {C:attention}Nilscape Portal{} with a max of {V:1}Tier #4#{}",
+                    "when the following condition is met",
+                }, {
+                    "",
+                    "{C:attention,s:1.2}#1#{s:1.2} / {C:attention,s:1.2}#2#{}",
+                }}    
+            },
+
+            c_aqu_clp_upgrade = { 
+                name = "Closed Portal",
+                text = {{
+                    "Creates a {C:attention}Nilscape Portal{} with a max of {V:1}Tier #3#{}",
+                    "when the following condition is met",
+                }, {
+                    "{C:purple}Upgrade{} {C:attention}#2#{} blinds",
+                    "{C:attention,s:1.2}#1#{s:1.2} / {C:attention,s:1.2}#2#{}",
+                }}    
+            },
+            c_aqu_clp_scorecards = { 
+                name = "Closed Portal",
+                text = {{
+                    "Creates a {C:attention}Nilscape Portal{} with a max of {V:1}Tier #3#{}",
+                    "when the following condition is met",
+                }, {
+                    "Score {C:attention}#2#{} playing cards",
+                    "{C:attention,s:1.2}#1#{s:1.2} / {C:attention,s:1.2}#2#{}",
+                }}    
+            },
+            c_aqu_clp_selljokers = { 
+                name = "Closed Portal",
+                text = {{
+                    "Creates a {C:attention}Nilscape Portal{} with a max of {V:1}Tier #3#{}",
+                    "when the following condition is met",
+                }, {
+                    "Sell {C:attention}#2#{} Jokers",
+                    "{C:attention,s:1.2}#1#{s:1.2} / {C:attention,s:1.2}#2#{}",
+                }}    
+            },
         },
     },
     misc = {

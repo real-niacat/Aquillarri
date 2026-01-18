@@ -109,7 +109,7 @@ aquill.add_trigger(
 
 aquill.add_trigger(
     function(context)
-        if context.setting_blind and G.GAME.dormant_blind then
+        if context.setting_dormant_blind then
             G.E_MANAGER:add_event(Event({
                 func = function()
                     G.GAME.blind.chips = aquill.calc_dormant_blind_size(G.GAME.blind.chips)

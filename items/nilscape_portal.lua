@@ -24,7 +24,13 @@ SMODS.Consumable {
         local highlighted = G.jokers.highlighted[1]
 
         if highlighted.config.center.tier == card.ability.extra.upgrade_strength then
-            SMODS.add_card({ key = "c_aqu_closed_portal", area = G.consumeables })
+            local closed_portal = SMODS.add_card({ key = "c_aqu_closed_portal", area = G.consumeables })
+            local option = pseudorandom("aqu_closed_portal_seed", 1, #aquill.closed_portal_options)
+            local tab = aquill.closed_portal_options[option]
+
+            closed_portal.ability.extra.next_tier = card.ability.extra.upgrade_strength + 1
+            closed_portal.ability.extra.option = option
+            closed_portal.ability.extra.max_counter = tab.max
             return
         end
 
@@ -44,20 +50,21 @@ SMODS.Consumable {
     end,
     loc_vars = function(self, info_queue, card)
         local desc_key = aquill.corruption.enabled() and self.key .. "_used" or self.key .. "_first"
+        local st = card.ability.extra.upgrade_strength
         if not aquill.corruption.allowed then
             desc_key = self.key .. "_no_corruption"
         end
 
         if G.jokers then
             for _, joker in pairs(G.jokers.cards) do
-                if joker.config.center.tier >= card.ability.extra.upgrade_strength then
+                if joker.config.center.tier and joker.config.center.tier >= st then
                     desc_key = self.key .. "_blocked"
                 end
             end
         end
 
 
-        local st = card.ability.extra.upgrade_strength
+        
         return {
             vars = {
                 nil, --load bearing nil
@@ -91,10 +98,70 @@ SMODS.Consumable {
     end,
 }
 
---to future me, add a system to pull this into your consumables and add a goal/cost to allow for upgrading to t4/5. t2-3 are still free (albiet with downsides)
+-- format: {key = loc_key, max = max_counter, should_inc = function(context) end}
+-- should_inc is just like calculate except it just increments if the function returns true rather than directly doing anything
+aquill.closed_portal_options = {
+    {
+        key = "c_aqu_clp_upgrade",
+        max = 2,
+        should_inc = function(context)
+            if context.setting_dormant_blind then
+                return true
+            end
+        end
+    },
+    {
+        key = "c_aqu_clp_scorecards",
+        max = 20,
+        should_inc = function(context)
+            if context.individual and context.cardarea == G.play then
+                return true
+            end
+        end
+    },
+    {
+        key = "c_aqu_clp_selljokers",
+        max = 3,
+        should_inc = function(context)
+            if context.selling_card and context.card.config.center.set == "Joker" then
+                return true
+            end
+        end
+    },
+}
 
 SMODS.Consumable {
     key = "closed_portal",
     set = "Spectral",
-    in_pool = function() return false end
+    in_pool = function() return false end,
+    config = { extra = { next_tier = 0, current_counter = 0, max_counter = 0, option = 0, scale_by = 1 } }, --scale_by should always be 1
+    loc_vars = function(self, info_queue, card)
+        local option = card.ability.extra.option
+        return {
+            vars = {
+                card.ability.extra.current_counter,
+                card.ability.extra.max_counter,
+                card.ability.extra.next_tier,
+                colours = { G.C["aqu_aquill_" .. (card.ability.extra.next_tier * 2)] },
+            },
+            key = option > 0 and aquill.closed_portal_options[option].key or nil
+        }
+    end,
+    calculate = function(self, card, context)
+        local option = card.ability.extra.option
+        if option > 0 and aquill.closed_portal_options[card.ability.extra.option].should_inc(context) then
+            SMODS.scale_card(card,
+                { ref_table = card.ability.extra, ref_value = "current_counter", scalar_value = "scale_by" })
+            if card.ability.extra.current_counter >= card.ability.extra.max_counter then
+                local nilscape = SMODS.add_card({ key = "c_aqu_nilscape_portal", area = G.consumeables })
+                nilscape.ability.extra.upgrade_strength = card.ability.extra.next_tier
+                G.E_MANAGER:add_event(Event({
+                    func = function()
+                        card:start_dissolve({ G.C.PURPLE })
+                        return true
+                    end
+                }))
+            end
+        end
+    end
 }
