@@ -34,6 +34,9 @@ for key, shader in pairs(aquill.shader_stack) do
 		end
 		
 		love.graphics.setCanvas(shader.canvas)
+		if shader.canvas.clear then
+			shader.canvas:clear(G.C.CLEAR)
+		end
 
 		for _, send in pairs(shader.send or {}) do
 			G.SHADERS[shader.key]:send(send.key, send.func and send.func() or send.value or 0)
