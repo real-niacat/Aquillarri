@@ -1,4 +1,4 @@
-aquill = {} --helps LSP, serves no real purpose
+aquill = {}
 aquill = SMODS.current_mod
 aquill.config = SMODS.current_mod.config
 
@@ -19,7 +19,7 @@ end
 -- eg aquill.add_enum("test", {"a", "b"}) → aquill.enums.test.a/b
 function aquill.add_enum(name, enum)
 	aquill.enums[name] = {}
-	for i,entry in ipairs(enum) do
+	for i, entry in ipairs(enum) do
 		aquill.enums[name][entry] = i
 	end
 end
@@ -32,11 +32,15 @@ local function load_file_native(path, id)
 	end
 	local file_path = path
 	local file_content, err = NFS.read(file_path)
-	if not file_content then return nil,
-			"Error reading file '" .. path .. "' for mod with ID '" .. SMODS.current_mod.id .. "': " .. err end
+	if not file_content then
+		return nil,
+			"Error reading file '" .. path .. "' for mod with ID '" .. SMODS.current_mod.id .. "': " .. err
+	end
 	local chunk, loaderr = load(file_content, "=[SMODS " .. SMODS.current_mod.id .. ' "' .. path .. '"]')
-	if not chunk then return nil,
-			"Error processing file '" .. path .. "' for mod with ID '" .. SMODS.current_mod.id .. "': " .. loaderr end
+	if not chunk then
+		return nil,
+			"Error processing file '" .. path .. "' for mod with ID '" .. SMODS.current_mod.id .. "': " .. loaderr
+	end
 	return chunk
 end
 local blacklist = {
@@ -90,3 +94,6 @@ end
 local path = SMODS.current_mod.path
 
 load_files(path, true)
+
+
+

@@ -59,6 +59,7 @@ SMODS.Consumable {
             for _, joker in pairs(G.jokers.cards) do
                 if joker.config.center.tier and joker.config.center.tier >= st then
                     desc_key = self.key .. "_blocked"
+                    info_queue[#info_queue+1] = G.P_CENTERS.c_aqu_closed_portal
                 end
             end
         end
@@ -124,6 +125,15 @@ aquill.closed_portal_options = {
         max = 3,
         should_inc = function(context)
             if context.selling_card and context.card.config.center.set == "Joker" then
+                return true
+            end
+        end
+    },
+    {
+        key = "c_aqu_clp_earnmoney",
+        max = 3,
+        should_inc = function(context)
+            if context.money_altered and to_big(context.amount) > to_big() then
                 return true
             end
         end

@@ -257,7 +257,7 @@ return {
                     "Creates a {C:attention}Nilscape Portal{} with a higher",
                     "maximum upgrade {C:aqu_aquill_2}Tier{} when certain conditions are met",
                 }, {
-                    "Conditions are {C:green}randomized{} when this card is spawned"
+                    "Conditions are chosen {C:green}randomly{} when this card is spawned"
                 }}    
             },
             -- the below is just a base for closed portal effects. commenting it out makes it harder to copy+paste
@@ -299,6 +299,16 @@ return {
                     "when the following condition is met",
                 }, {
                     "Sell {C:attention}#2#{} Jokers",
+                    "{C:attention,s:1.2}#1#{s:1.2} / {C:attention,s:1.2}#2#{}",
+                }}    
+            },
+            c_aqu_clp_earnmoney = { 
+                name = "Closed Portal",
+                text = {{
+                    "Creates a {C:attention}Nilscape Portal{} with a max of {V:1}Tier #3#{}",
+                    "when the following condition is met",
+                }, {
+                    "Earn money {C:attention}#2#{} seperate times",
                     "{C:attention,s:1.2}#1#{s:1.2} / {C:attention,s:1.2}#2#{}",
                 }}    
             },

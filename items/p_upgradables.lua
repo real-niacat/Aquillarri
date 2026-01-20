@@ -1,3 +1,10 @@
+SMODS.Atlas {
+    key = "upgradable_placeholder",
+    path = "placeholder_upgradables.png",
+    px = 71,
+    py = 95,
+}
+
 
 
 aquill.Upgradable = SMODS.Joker:extend {
@@ -17,6 +24,12 @@ aquill.Upgradable = SMODS.Joker:extend {
         self.rarity = rarities[self.tier]
         self.key = self.class_prefix .. "_" .. self.mod.prefix .. "_" .. self.group .. self.tier
         self.cost = 5 * (2 ^ self.tier)
+        
+        if (self.atlas == "Joker") or (not self.atlas) then
+            self.atlas = "aqu_upgradable_placeholder"
+            self.pos = {x=self.tier-1, y=0}
+        end
+
         local loc_vars_hook = self.loc_vars or function(s,iq,c) end
         self.loc_vars = function(selfcenter,info_queue,card)
             if selfcenter.upgrade then
