@@ -1,8 +1,12 @@
+extern float test;
+extern float test2;
+
 vec4 effect( vec4 colour, Image texture, vec2 texture_coords, vec2 screen_coords )
 {
     vec4 tex = Texel(texture, texture_coords);
     // add your effects here
-    
+    tex.r = test;
+    tex.g = test2;
 
     return tex;
 }

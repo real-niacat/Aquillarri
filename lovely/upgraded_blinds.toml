@@ -106,8 +106,8 @@ match_indent = true
 [patches.pattern]
 target = """functions/state_events.lua"""
 pattern = '''-- TARGET: setting_blind effects'''
-position = "at"
+position = "before"
 payload = '''
-SMODS.calculate_context({setting_dormant_blind = true, blind = G.GAME.round_resets.blind})
+SMODS.calculate_context({setting_dormant_blind = G.GAME.dormant_blind, blind = G.GAME.round_resets.blind})
 '''
 match_indent = true

@@ -351,8 +351,8 @@ return {
 
             ph_aqu_config_alt_upgrade_effect_label = "Alternate Upgrade VFX",
             ph_aqu_config_alt_upgrade_effect_info = {
-                "Changes the particle-heavy upgrading VFX",
-                "to a much lighter one which flips the card.",
+                "Changes the potentially excessive upgrading VFX",
+                "to a much simpler one which flips the card.",
                 "Note that this may look less polished."
             },
 

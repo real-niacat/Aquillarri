@@ -23,7 +23,7 @@ SMODS.Consumable {
     use = function(self, card, area, copier)
         local highlighted = G.jokers.highlighted[1]
 
-        if highlighted.config.center.tier == card.ability.extra.upgrade_strength then
+        if highlighted.config.center.tier >= card.ability.extra.upgrade_strength then
             local closed_portal = SMODS.add_card({ key = "c_aqu_closed_portal", area = G.consumeables })
             local option = pseudorandom("aqu_closed_portal_seed", 1, #aquill.closed_portal_options)
             local tab = aquill.closed_portal_options[option]

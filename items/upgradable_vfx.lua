@@ -3,26 +3,40 @@ SMODS.Shader {
     path = "flashlight.fs",
 }
 
-aquill.add_screen_shader({
-    key = "aqu_flashlight",
-    should_apply = function()
+SMODS.ScreenShader {
+    key = "flashlight",
+    shader = "aqu_flashlight",
+    send_vars = function(self)
+        return {
+            center_pos = G.aqu_flashlight_center or { love.graphics.getWidth() / 2, love.graphics.getHeight() / 2 },
+            dist = G.aqu_flashlight_distance or 500,
+        }
+    end,
+    should_apply = function(self)
         return G.aqu_flashlight_enabled
     end,
-    send = {
-        {
-            key = "center_pos",
-            func = function()                  -- PIXELS
-                return G.aqu_flashlight_center or { love.graphics.getWidth() / 2, love.graphics.getHeight() / 2 }
-            end
-        },
-        {
-            key = "dist",
-            func = function()
-                return G.aqu_flashlight_distance or 500
-            end
-        },
-    }
-})
+    order = 5,
+}
+
+SMODS.Shader {
+    key = "invertradius",
+    path = "invertradius.fs",
+}
+
+SMODS.ScreenShader {
+    key = "invert",
+    shader = "aqu_invertradius",
+    send_vars = function(self)
+        return {
+            center_pos = G.aqu_invert_center or { love.graphics.getWidth() / 2, love.graphics.getHeight() / 2 },
+            dist = G.aqu_invert_distance or 500,
+        }
+    end,
+    should_apply = function(self)
+        return G.aqu_invert_enabled
+    end,
+    order = 6
+}
 
 function aquill.upgrade_joker_fx(card, ability)
     local particle_list = {}
@@ -40,11 +54,15 @@ function aquill.upgrade_joker_fx(card, ability)
             func = function()
                 G.aqu_flashlight_enabled = true
                 G.aqu_flashlight_distance = 3500 -- if your monitor is more than 10,000 pixels wide i don't even fucking care anymore
+                G.aqu_invert_enabled = true
+                G.aqu_invert_distance = 0
 
-                G.aqu_flashlight_center = { -- this shit pisses me the fuck off but i see no better solution than approximating it
-                    (card.T.x * (G.TILESCALE * G.TILESIZE)) + (G.TILESCALE*love.graphics.getWidth()*0.01),
-                    (card.T.y * (G.TILESCALE * G.TILESIZE)) + (G.TILESCALE*love.graphics.getHeight()*0.01),
+                local card_position = { -- this shit pisses me the fuck off but i see no better solution than approximating it
+                    (G.ROOM.T.x+card.T.x+card.T.w*0.5)*(G.TILESIZE*G.TILESCALE),
+                    (G.ROOM.T.y+card.T.y+card.T.h*0.5)*(G.TILESIZE*G.TILESCALE),
                 }
+                G.aqu_flashlight_center = card_position
+                G.aqu_invert_center = card_position
                 return true
             end,
             delay = 0.25,
@@ -63,7 +81,7 @@ function aquill.upgrade_joker_fx(card, ability)
                 if high_detail then
                     G.E_MANAGER:add_event(Event({
                         trigger = 'ease',
-                        ease = 'outexpo',
+                        ease = 'inexpo',
                         ref_table = G,
                         ref_value = 'aqu_flashlight_distance',
                         ease_to = G.aqu_flashlight_distance / 2,
@@ -148,9 +166,10 @@ function aquill.upgrade_joker_fx(card, ability)
             SMODS.calculate_context({ aqu_upgrade = true, card = card })
 
             if high_detail then
+                local border = math.sqrt((love.graphics.getWidth()^2)+(love.graphics.getHeight()^2))
                 G.E_MANAGER:add_event(Event({
                     trigger = 'ease',
-                    ease = 'inexpo',
+                    ease = 'outexpo',
                     ref_table = G,
                     ref_value = 'aqu_flashlight_distance',
                     ease_to = 100000,
@@ -158,15 +177,34 @@ function aquill.upgrade_joker_fx(card, ability)
                     timer = "REAL",
                     func = (function(t) return t end),
                     blockable = false,
-                }))
+                }), "other")
                 G.E_MANAGER:add_event(Event({
-                    trigger = 'after',
-                    delay = 2,
+                    trigger = 'ease',
+                    ease = 'insine',
+                    ref_table = G,
+                    ref_value = 'aqu_invert_distance',
+                    ease_to = border,
+                    delay = 4,
+                    timer = "REAL",
+                    func = (function(t) return t end),
+                    blockable = false,
+                }), "other")
+                G.E_MANAGER:add_event(Event({
+                    trigger = "after",
+                    delay = 4,
                     func = function()
                         G.aqu_flashlight_enabled = false
                         return true
                     end
-                }))
+                }), "other")
+                G.E_MANAGER:add_event(Event({
+                    trigger = "after",
+                    delay = 4,
+                    func = function()
+                        G.aqu_invert_enabled = false
+                        return true
+                    end
+                }), "other")
             end
             return true
         end,
