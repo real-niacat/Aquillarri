@@ -188,6 +188,72 @@ return {
                 }
                 }
             },
+
+            j_aqu_biava1 = {
+                name = "Biblica Avaritia",
+                text = {{
+                    "Spends {C:money}$#1#{} at end of round to",
+                    "create a random {C:uncommon}Uncommon{} or {C:rare}Rare{} Joker",
+                    "{C:inactive}(Must have room)",
+                }}
+            },
+            j_aqu_biava2 = {
+                name = "Biblica Avaritia",
+                text = {{
+                    "Spends {C:money}$#1#{} at end of round to",
+                    "create a random {C:uncommon}Uncommon{} or {C:rare}Rare{} Joker",
+                    "{C:inactive}(Must have room)",
+                }, {
+                    "Gives {X:mult,C:white}XMult{} equal to {C:attention}#2#%{}",
+                    "of your current money",
+                    "{C:inactive}(Currently {X:mult,C:white}X#3#{C:inactive} Mult)",
+                }}
+            },
+            j_aqu_biava3 = {
+                name = "Biblica Avaritia",
+                text = {{
+                    "Spends {C:money}$#1#{} at end of round to",
+                    "create a random {C:uncommon}Uncommon{} or {C:rare}Rare{} Joker",
+                    "{C:inactive}(Must have room)",
+                }, {
+                    "Gives {X:mult,C:white}XMult{} equal to {C:attention}#2#%{}",
+                    "of your current money",
+                    "{C:inactive}(Currently {X:mult,C:white}X#3#{C:inactive} Mult)",
+                }, {
+                    "When {C:attention}Boss Blind{} defeated, destroy the Joker",
+                    "to the right, and gain {C:attention}triple{} its sell value",
+                }}
+            },
+            j_aqu_biava4 = {
+                name = "Biblica Avaritia",
+                text = {{
+                    "Spends {C:money}$#1#{} at end of round to",
+                    "create a random {C:uncommon}Uncommon{} or {C:rare}Rare{} Joker",
+                    "{C:inactive}(Room not needed)",
+                }, {
+                    "Gives {X:mult,C:white}XMult{} equal to {C:attention}#2#%{}",
+                    "of your current money",
+                    "{C:inactive}(Currently {X:mult,C:white}X#3#{C:inactive} Mult)",
+                }, {
+                    "When {C:attention}Boss Blind{} defeated, destroy the Joker",
+                    "to the right, and gain {C:attention}quadruple{} its sell value",
+                }}
+            },
+            j_aqu_biava5 = {
+                name = "Biblica Avaritia",
+                text = {{
+                    "Spends {C:money}$#1#{} when a playing card is scored to",
+                    "create a random {C:uncommon}Uncommon{} or {C:rare}Rare{} Joker",
+                    "{C:inactive}(Room not needed)",
+                }, {
+                    "Gives {X:mult,C:white}XMult{} equal to {C:attention}#2#%{}",
+                    "of your current money",
+                    "{C:inactive}(Currently {X:mult,C:white}X#3#{C:inactive} Mult)",
+                }, {
+                    "When {C:attention}Boss Blind{} defeated, destroy all Jokers",
+                    "to the right, and gain {C:attention}quadruple{} their sell value",
+                }}
+            },
         },
 
         Back = {
@@ -210,7 +276,42 @@ return {
                 }
             },
 
+            enables_corruption = {
+                name = "Warning",
+                text = {
+                    "Usage of this card will enable",
+                    "{C:attention}Entropic Corruption{} if it is disabled."
+                }
+            },
+
             lily_j_joker = com("i love this guy")
+        },
+
+        Voucher = {
+
+            v_aqu_pyro_radioactive_plasma = {
+                name = "Pyro-Radioactive Plasma",
+                text = {
+                    "Gives {X:dark_edition,C:white}^Mult{} based on upgraded blind exponent",
+                    "Increase {C:attention}Entropic Corruption{} by {C:attention}#1#%{} after hand scores",
+                    "{C:inactive}(Currently {X:dark_edition,C:white}^#2#{C:inactive} Mult)",
+                }
+            },
+            v_aqu_hybridized_uran_astatine = {
+                name = "Hybridized Uran-Astatine",
+                text = {
+                    "Upgraded blind exponent is substantially less effective",
+                    "{C:inactive}(Does not affect {C:attention}Pyro-Radioactive Plasma{C:inactive})",
+                }
+            },
+            v_aqu_neutronium_zero = {
+                name = "Neutronium-0",
+                text = {
+                    "Creates a random {C:attention}Tag{} when",
+                    "an upgraded blind is selected",
+                }
+            },
+
         },
 
         Spectral = {

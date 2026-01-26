@@ -95,5 +95,4 @@ local path = SMODS.current_mod.path
 
 load_files(path, true)
 
-
-
+aquill.config.disable_corruption = false

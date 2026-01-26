@@ -9,7 +9,7 @@ function aquill.recalculate_joker_main()
     }
 end
 
-aquill.add_enum("can_upgrade", {"yes", "no", "low_power"})
+aquill.add_enum("can_upgrade", { "yes", "no", "low_power" })
 
 function aquill.can_upgrade(card, power)
     local cen = G.P_CENTERS[card.config.center_key]
@@ -43,7 +43,7 @@ end
 -- Card.ability.preserve should be an arraylike table of keys to variables in Card.ability.extra to keep
 function aquill.preserved_set_ability(card, ability_key)
     -- usually i would hook, but this is ONLY to be used for upgrading jokers
-    -- so i dont want any shenanigans from other mods to affect or cause this 
+    -- so i dont want any shenanigans from other mods to affect or cause this
 
     local vars = card.ability
 
@@ -91,7 +91,12 @@ function aquill.round_to_nearest(n, round)
 end
 
 function aquill.calc_dormant_blind_size(original_blind_size)
-    local n = to_big(original_blind_size):pow(G.GAME.dormant_exponent)
+    local exponent = G.GAME.dormant_exponent
+    local base = G.GAME and G.GAME.aqu_hua_base
+    if base then
+        exponent = math.log((base * 0.5) + exponent, base)
+    end
+    local n = to_big(original_blind_size):pow(exponent)
     local place_value = to_big(10):pow(math.floor(math.log10(n)) - 1)
     n = aquill.round_to_nearest(n, place_value)
     return n
@@ -236,4 +241,41 @@ function aquill.log(table_of_funcs, ref)
             end
         end
     end
+end
+
+function aquill.random_tag(seed)
+    local tag_pool = get_current_pool('Tag')
+    for i = #tag_pool, 1, -1 do
+        if tag_pool[i] == "UNAVAILABLE" then
+            table.remove(tag_pool, i)
+        end
+    end --more code than just iterating, but this is significantly cleaner in my head
+    local selected_tag = pseudorandom_element(tag_pool, pseudoseed(seed))
+    return selected_tag
+end
+
+function aquill.get_card_pixel_pos(card)
+    return {
+        (G.ROOM.T.x + card.T.x + card.T.w * 0.5) * (G.TILESIZE * G.TILESCALE),
+        (G.ROOM.T.y + card.T.y + card.T.h * 0.5) * (G.TILESIZE * G.TILESCALE),
+    }
+end
+
+function aquill.pythag(a, b)
+    local ax, ay, bx, by = a[1], a[2], b[1], b[2]
+    return math.sqrt(((ax - bx) ^ 2) + ((ay - by) ^ 2))
+end
+
+function aquill.max_diagonal()
+    return aquill.pythag({0, 0}, {love.graphics.getWidth(), love.graphics.getHeight()})
+end
+
+function aquill.get_index(card)
+    local area = card.area
+    for i,c in ipairs(area.cards) do
+        if c == card then
+            return i
+        end
+    end
+    return false -- what the fuck?
 end

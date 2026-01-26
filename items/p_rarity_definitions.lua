@@ -11,7 +11,8 @@ SMODS.Rarity {
             end
             d = 5^(3*(j+1))
         end
-        return math.min((weight * m) / d, 0.3)
+        local rmod = 3 ^ (1 / (G.GAME.round+1))
+        return math.min((weight * m * rmod) / d, 0.3)
     end,
     default_weight = 0.01,
     pools = { ["Joker"] = true },

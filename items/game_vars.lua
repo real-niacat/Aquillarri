@@ -6,7 +6,7 @@ function Game:init_game_object()
     game.dormant_exponent_base = 1.064
     game.dormant_exponent = game.dormant_exponent_base
     game.dormant_boost_per_upgraded = 1.5
-    game.dormant_exponent_gain = 0.012
+    game.dormant_exponent_gain = 0.006
     game.dormant_bonus = 2
     game.dormant_rarity_boost = 0
 
