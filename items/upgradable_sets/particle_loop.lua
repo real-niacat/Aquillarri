@@ -144,7 +144,7 @@ aquill.Upgradable {
                 (i * (card.ability.extra.gain / 100) * (card.ability.extra.xchips - 1)) }, card)
                 SMODS.calculate_effect(
                 { echips = card.ability.extra.echips +
-                (i * (card.ability.extra.gain / 100) * (card.ability.extra.echips - 1)) }, card)
+                (i * (card.ability.extra.gain / 100) * (card.ability.extra.xchips - 1)) }, card)
                 SMODS.calculate_effect({ message = localize("k_again_ex") }, card)
             end
         end

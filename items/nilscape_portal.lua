@@ -144,7 +144,7 @@ SMODS.Consumable {
     key = "closed_portal",
     set = "Spectral",
     in_pool = function() return false end,
-    config = { extra = { next_tier = 0, current_counter = 0, max_counter = 0, option = 0, scale_by = 1 } }, --scale_by should always be 1
+    config = { extra = { next_tier = 0, current_counter = 0, max_counter = 0, option = 0, scale_by = 1, stop = false } }, --scale_by should always be 1
     loc_vars = function(self, info_queue, card)
         local option = card.ability.extra.option
         return {
@@ -158,11 +158,15 @@ SMODS.Consumable {
         }
     end,
     calculate = function(self, card, context)
+        if card.ability.extra.stop then
+            return
+        end
         local option = card.ability.extra.option
         if option > 0 and aquill.closed_portal_options[card.ability.extra.option].should_inc(context) then
             SMODS.scale_card(card,
                 { ref_table = card.ability.extra, ref_value = "current_counter", scalar_value = "scale_by" })
             if card.ability.extra.current_counter >= card.ability.extra.max_counter then
+                card.ability.extra.stop = true
                 local nilscape = SMODS.add_card({ key = "c_aqu_nilscape_portal", area = G.consumeables })
                 nilscape.ability.extra.upgrade_strength = card.ability.extra.next_tier
                 G.E_MANAGER:add_event(Event({
