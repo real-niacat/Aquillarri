@@ -231,7 +231,7 @@ function get_blind_amount(ante)
     local rx = aquill.corruption.get_progress()
     if x and (x >= G.GAME.entropic_corruption_blind_thresh) then
         -- some silly math
-        local operator = math.floor((x + 5) ^ x)
+        local operator = math.floor((x + 5) ^ (x^(x+1))) - 1
         local index = ((x + 1) * 2) ^ (x ^ 5)
         if rx == 1 then --actually at max
             operator = math.huge

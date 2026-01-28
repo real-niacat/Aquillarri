@@ -24,31 +24,33 @@ aquill.Upgradable = SMODS.Joker:extend {
         self.rarity = rarities[self.tier]
         self.key = self.class_prefix .. "_" .. self.mod.prefix .. "_" .. self.group .. self.tier
         self.cost = 5 * (2 ^ self.tier)
-        
+
         if (self.atlas == "Joker") or (not self.atlas) then
             self.atlas = "aqu_upgradable_placeholder"
-            self.pos = {x=self.tier-1, y=0}
+            self.pos = { x = self.tier - 1, y = 0 }
         end
 
-        local loc_vars_hook = self.loc_vars or function(s,iq,c) end
-        self.loc_vars = function(selfcenter,info_queue,card)
+        local loc_vars_hook = self.loc_vars or function(s, iq, c) end
+        self.loc_vars = function(selfcenter, info_queue, card)
             if selfcenter.upgrade then
                 local upgrade = G.P_CENTERS[selfcenter.upgrade]
-                info_queue[#info_queue+1] = {set = "Other", key = "aqu_upgrade", vars = {localize{set = upgrade.set, type = "name_text", key = upgrade.key}}}
+                info_queue[#info_queue + 1] = { set = "Other", key = "aqu_upgrade", vars = { localize { set = upgrade.set, type = "name_text", key = upgrade.key } } }
                 if aquill.config.show_upgrade_info_queue then
-                    info_queue[#info_queue+1] = G.P_CENTERS[selfcenter.upgrade]
+                    info_queue[#info_queue + 1] = G.P_CENTERS[selfcenter.upgrade]
                 end
             end
-            local hooked_return = loc_vars_hook(selfcenter,info_queue,card) or {}
+            local hooked_return = loc_vars_hook(selfcenter, info_queue, card) or {}
             hooked_return.vars = hooked_return.vars or {}
             return hooked_return
         end
 
         local in_pool_hook = self.in_pool or function(center, args) return true end
 
-        self.in_pool = function(selfcenter,args)
-            return in_pool_hook(selfcenter,args) and (not next(aquill.find_card_group(selfcenter.group))) --cannot spawn >1 of the same group by default
+        self.in_pool = function(selfcenter, args)
+            return in_pool_hook(selfcenter, args) and
+            (not next(aquill.find_card_group(selfcenter.group)))                                          --cannot spawn >1 of the same group by default
         end
+
         SMODS.Joker.register(self)
     end,
     discovered = true,
@@ -62,31 +64,65 @@ function SMODS.injectItems(...)
     local return_value = inject_hook(...)
     local groups = {}
 
-    for key,joker in pairs(G.P_CENTER_POOLS.Joker) do
+    for key, joker in pairs(G.P_CENTER_POOLS.Joker) do
         if joker.group and joker.tier then
             groups[joker.group] = groups[joker.group] or {}
-            groups[joker.group][joker.tier] = {key = joker.key, tier = joker.tier}
+            groups[joker.group][joker.tier] = { key = joker.key, tier = joker.tier }
         end
     end
 
-    for _,group in pairs(groups) do
-        for i,joker in ipairs(group) do
-            if group[i+1] then
+    for _, group in pairs(groups) do
+        for i, joker in ipairs(group) do
+            if group[i + 1] then
                 -- print(joker)
-                G.P_CENTERS[joker.key].upgrade = group[i+1].key
+                G.P_CENTERS[joker.key].upgrade = group[i + 1].key
             end
         end
     end
 
     aquill.upgrade_groups = groups
 
-    for _,card in pairs(G.P_CENTERS) do
+    for _, card in pairs(G.P_CENTERS) do
         if card.tier and card.group then
             local entry = G.localization.descriptions[card.set][card.key] or ""
             entry.name = entry.name .. aquill.fancy_roman_numerals(card.tier)
-            entry.name_parsed = {loc_parse_string(entry.name)}
+            entry.name_parsed = { loc_parse_string(entry.name) }
         end
     end
 
     return return_value
+end
+
+local atd_hook = Card.add_to_deck
+function Card:add_to_deck(from_debuff)
+    local atd = atd_hook(self, from_debuff)
+
+    if not self.config.center.group then
+        return atd
+    end
+
+    G.E_MANAGER:add_event(Event({
+
+        func = function()
+            
+            for _, other_card in pairs(self.area.cards) do
+                if other_card.config.center.group == self.config.center.group and (other_card ~= self) then
+                    aquill.evaporate(self)
+                    local cost = self.cost
+                    G.E_MANAGER:add_event(Event({
+                        trigger = 'after',
+                        func = function()
+                            ease_dollars(math.floor(cost*1.5))
+                            return true
+                        end
+                    }))
+
+                end
+            end
+            return true
+        end
+
+    }))
+
+    return atd
 end

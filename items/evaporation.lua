@@ -21,27 +21,14 @@ SMODS.DrawStep {
 
 function aquill.evaporate(card)
     -- used for when you have >1 of the same set of upgradable which is Illegal
-    G.aqu_flashlight_center = aquill.get_card_pixel_pos(card)
     card.evaporation = 0
-    G.aqu_flashlight_enabled = true
-    G.aqu_flashlight_distance = aquill.max_diagonal()
+    card.no_shadow = true
 
 
-    G.E_MANAGER:add_event(Event({
-        trigger = 'ease',
-        ease = 'inexpo',
-        ref_table = G,
-        ref_value = 'aqu_flashlight_distance',
-        ease_to = 400,
-        delay = 1,
-        timer = "REAL",
-        func = (function(t) return t end),
-        blockable = false,
-    }))
 
     G.E_MANAGER:add_event(Event({
         trigger = 'after',
-        delay = 2,
+        delay = 1,
         timer = "REAL",
         func = function()
             G.E_MANAGER:add_event(Event({
@@ -55,55 +42,20 @@ function aquill.evaporate(card)
                 func = (function(t) return t end),
                 blockable = false,
             }))
-            return true
-        end
-    }))
-
-
-    G.E_MANAGER:add_event(Event({
-        trigger = 'after',
-        delay = 3,
-        timer = "REAL",
-        func = function()
             G.E_MANAGER:add_event(Event({
                 trigger = 'after',
-                delay = 1,
+                delay = 2,
+                timer = "REAL",
                 func = function()
                     card:remove()
                     return true
-                end
+                end,
+                blocking = true,
+                blockable = false,
             }))
-
-            G.E_MANAGER:add_event(Event({
-                trigger = 'after',
-                delay = 3,
-                timer = "REAL",
-                func = function()
-                    G.E_MANAGER:add_event(Event({
-                        trigger = 'ease',
-                        ease = 'insine',
-                        ref_table = G,
-                        ref_value = 'aqu_flashlight_distance',
-                        ease_to = aquill.max_diagonal() * 1.5,
-                        delay = 1,
-                        timer = "REAL",
-                        func = (function(t) return t end),
-                        blockable = false,
-                    }))
-                    return true
-                end
-            }))
-
-            G.E_MANAGER:add_event(Event({
-                trigger = 'after',
-                delay = 1,
-                func = function()
-                    G.aqu_flashlight_enabled = false
-                    return true
-                end
-            }))
-
             return true
-        end
+        end,
+        blocking = true,
+        blockable = false,
     }))
 end

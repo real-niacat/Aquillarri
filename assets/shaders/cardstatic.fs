@@ -55,16 +55,21 @@ vec4 effect( vec4 colour, Image texture, vec2 texture_coords, vec2 screen_coords
     vec4 tex = Texel(texture, texture_coords);
 	vec2 uv = (((texture_coords)*(image_details)) - texture_details.xy*texture_details.ba)/texture_details.ba;
     
-    float cdist = 1.0 - distance(uv, vec2(0.5, 0.5));
+    // float cdist = 1.0 - distance(uv, vec2(0.5, 0.5));
+    float cdist = 1.0 - distance(uv, vec2(uv.x, 1.0));
     // 100% static at cdist > 2*progress
     float stat = noise(screen_coords, iTime);
     vec4 static_vec = vec4(stat);
     static_vec.a = tex.a;
 
-    float t = smoothstep(0.0, 1.0, progress/cdist);
-    tex = lerp(tex, static_vec, t);
+    float ip = 1.0 - progress; 
 
-    tex.a = lerp(tex.a, 0.0, smoothstep(0.0, 1.0, progress / (cdist*2)));
+    float t = progress / cdist;
+    float st = smoothstep(0.0, 1.0, progress/cdist);
+    // float t = abs(ip - uv.y);
+    tex = lerp(tex, static_vec, st);
+
+    tex.a = lerp(tex.a, 0.0, smoothstep(0.0, 1.0, t*0.5));
 
 
     return dissolve_mask(tex*colour, texture_coords, uv);
