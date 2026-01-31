@@ -45,7 +45,7 @@ function create_UIBox_hover_corruption() -- hover ui def
             scale = text_scale,
             silent = true,
             pop_delay = 4.5,
-            pop_in = 0.7 * (times - 1),
+            pop_in = 0.7 * math.floor((times-1)/2), --results in lines 1 & 2 popping in together, same with 3 & 4
             bump = true,
             bump_amount = 0.3,
         })

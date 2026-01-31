@@ -67,8 +67,8 @@ target = """functions/UI_definitions.lua"""
 pattern = '''local blind_amt = get_blind_amount(G.GAME.round_resets.blind_ante)*blind_choice.config.mult*G.GAME.starting_params.ante_scaling'''
 position = "after"
 payload = '''
-local dormant_blind_amt = aquill.calc_dormant_blind_size(blind_amt)
-local dormant_blind_text_scale = score_number_scale(score_number_scale(0.9-(0.05*math.min(#tostring(dormant_blind_amt)-4, 6)), dormant_blind_amt), dormant_blind_amt)
+local upgraded_blind_amt = aquill.calc_upgraded_blind_size(blind_amt)
+local upgraded_blind_text_scale = score_number_scale(score_number_scale(0.9-(0.05*math.min(#tostring(upgraded_blind_amt)-4, 6)), upgraded_blind_amt), upgraded_blind_amt)
 '''
 match_indent = true
 
@@ -78,9 +78,9 @@ target = """functions/UI_definitions.lua"""
 pattern = '''{n=G.UIT.T, config={text = number_format(blind_amt), scale = score_number_scale(0.9, blind_amt), colour = disabled and G.C.UI.TEXT_INACTIVE or G.C.RED, shadow =  not disabled}}'''
 position = "at"
 payload = '''
-{n=G.UIT.T, config={text = number_format(blind_amt), scale = dormant_blind_text_scale, colour = disabled and G.C.UI.TEXT_INACTIVE or G.C.RED, shadow =  not disabled}},
-{n=G.UIT.T, config={text = "/", scale = dormant_blind_text_scale, colour = disabled and G.C.UI.TEXT_INACTIVE or G.C.WHITE, shadow = not disabled}},
-{n=G.UIT.T, config={text = ""..number_format(dormant_blind_amt).."", scale = dormant_blind_text_scale, colour = disabled and G.C.UI.TEXT_INACTIVE or G.C.PURPLE, shadow =  not disabled}}
+{n=G.UIT.T, config={text = number_format(blind_amt), scale = upgraded_blind_text_scale, colour = disabled and G.C.UI.TEXT_INACTIVE or G.C.RED, shadow =  not disabled}},
+{n=G.UIT.T, config={text = "/", scale = upgraded_blind_text_scale, colour = disabled and G.C.UI.TEXT_INACTIVE or G.C.WHITE, shadow = not disabled}},
+{n=G.UIT.T, config={text = ""..number_format(upgraded_blind_amt).."", scale = upgraded_blind_text_scale, colour = disabled and G.C.UI.TEXT_INACTIVE or G.C.PURPLE, shadow =  not disabled}}
 '''
 match_indent = true
 
@@ -94,9 +94,9 @@ target = """functions/UI_definitions.lua"""
 pattern = '''{n=G.UIT.T, config={text = string.rep(localize("$"), blind_choice.config.dollars)..'+', scale = 0.35, colour = disabled and G.C.UI.TEXT_INACTIVE or G.C.MONEY, shadow = not disabled}}'''
 position = "at"
 payload = '''
-{n=G.UIT.T, config={text = string.rep(localize("$"), blind_choice.config.dollars + math.min(G.GAME.dormant_bonus, 0)), scale = 0.35, colour = disabled and G.C.UI.TEXT_INACTIVE or G.C.MONEY, shadow = not disabled}},
-{n=G.UIT.T, config={text = string.rep(localize("$"), math.max(0, -G.GAME.dormant_bonus)), scale = 0.35, colour = disabled and G.C.UI.TEXT_INACTIVE or G.C.RED, shadow = not disabled}},
-{n=G.UIT.T, config={text = string.rep(localize("$"), G.GAME.dormant_bonus)..'+', scale = 0.35, colour = disabled and G.C.UI.TEXT_INACTIVE or G.C.PURPLE, shadow = not disabled}},
+{n=G.UIT.T, config={text = string.rep(localize("$"), blind_choice.config.dollars + math.min(G.GAME.upgraded_bonus, 0)), scale = 0.35, colour = disabled and G.C.UI.TEXT_INACTIVE or G.C.MONEY, shadow = not disabled}},
+{n=G.UIT.T, config={text = string.rep(localize("$"), math.max(0, -G.GAME.upgraded_bonus)), scale = 0.35, colour = disabled and G.C.UI.TEXT_INACTIVE or G.C.RED, shadow = not disabled}},
+{n=G.UIT.T, config={text = string.rep(localize("$"), G.GAME.upgraded_bonus)..'+', scale = 0.35, colour = disabled and G.C.UI.TEXT_INACTIVE or G.C.PURPLE, shadow = not disabled}},
 '''
 match_indent = true
 
@@ -108,6 +108,33 @@ target = """functions/state_events.lua"""
 pattern = '''-- TARGET: setting_blind effects'''
 position = "before"
 payload = '''
-SMODS.calculate_context({setting_dormant_blind = G.GAME.dormant_blind, blind = G.GAME.round_resets.blind})
+SMODS.calculate_context({setting_upgraded_blind = G.GAME.upgraded_blind, blind = G.GAME.round_resets.blind})
+'''
+match_indent = true
+
+
+
+[[patches]]
+[patches.pattern]
+target = """functions/state_events.lua"""
+pattern = '''if G.GAME.dollars >= 5 and not G.GAME.modifiers.no_interest then'''
+position = "before"
+payload = '''
+if G.GAME.upgraded_blind or G.GAME.last_blind_upgraded then
+    add_round_eval_row({bonus = true, pitch = pitch, dollars = G.GAME.upgraded_bonus, name = "upgraded_blind"})
+    dollars = dollars + G.GAME.upgraded_bonus
+end
+'''
+match_indent = true
+
+[[patches]]
+[patches.pattern]
+target = """functions/common_events.lua"""
+pattern = '''elseif config.name == 'interest' then'''
+position = "before"
+payload = '''
+elseif config.name == 'upgraded_blind' then
+    table.insert(left_text, {n=G.UIT.O, config={object = DynaText({string = {localize("ph_aqu_upgraded")}, colours = {mix_colours(G.C.UI.TEXT_LIGHT, G.C.PURPLE, 0.25)}, shadow = true, pop_in = 0, scale = 0.5*scale, silent = true})}})
+
 '''
 match_indent = true

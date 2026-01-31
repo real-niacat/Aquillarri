@@ -1,3 +1,19 @@
+-- sound initialization
+SMODS.Sound {
+    key = "exhume",
+    path = "WeaponExhume.ogg"
+}
+
+SMODS.Sound {
+    key = "bass",
+    path = "bass.ogg"
+}
+
+SMODS.Sound {
+    key = "impact",
+    path = "impact.ogg"
+}
+
 SMODS.Shader {
     key = "flashlight",
     path = "flashlight.fs",
@@ -86,7 +102,7 @@ function aquill.upgrade_joker_fx(card, ability)
                         G.aqu_invert_enabled = true
                         G.aqu_invert_distance = 0
 
-                        local card_position = aquill.get_card_pixel_pos(card)
+                        local card_position = aquill.get_movable_pixel_pos(card)
                         G.aqu_flashlight_center = card_position
                         G.aqu_invert_center = card_position
                         return true

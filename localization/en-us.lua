@@ -4,96 +4,111 @@ end
 
 return {
     descriptions = {
+        Mod = {
+            aquillarri = {
+                name = "Aquillarri",
+                text = {
+                    "{s:0.9}In the depths of {C:aqu_aquill_10,s:1.1}The Nilscape...{}",
+                    "Aquillarri adds {E:1,C:attention}upgradable cards{}, with suitably {E:aqu_shadereffect}dramatic{} effects",
+                    "and new mechanics to make upgrading more interesting",
+                    "While it may not seem so, this mod is meant to be slightly in your favor.",
+                    " ",
+                    "This mod has many {E:1,C:aqu_aquill_2}visual effects{} that you may find intense.",
+                    "If you are photosensitive, consider toggling them off in the {C:attention}config{}",
+                }
+            }
+        },
+
         Joker = {
             j_aqu_particleloop1 = {
                 name = "Particle Loop",
-                text = {{
+                text = { {
                     "{C:chips}+#1#{} Chips",
-                },{
+                }, {
                     "Retriggers self {C:attention}#3#{} times",
                     "Increases by {C:attention}#4#{} retrigger at end of round",
                     "Gives {C:attention}#2#%{} more Chips per trigger",
-                }} --i really, really hate how this is worded, but i don't know how i could do it better
+                } } --i really, really hate how this is worded, but i don't know how i could do it better
             },
             j_aqu_particleloop2 = {
                 name = "Particle Loop",
-                text = {{
+                text = { {
                     "{C:chips}+#1#{} Chips",
-                },{
+                }, {
                     "Retriggers self {C:attention}#3#{} times",
                     "Increases by {C:attention}#4#{} retriggers at end of round",
                     "Gives {C:attention}#2#%{} more Chips per trigger",
-                }}
+                } }
             },
             j_aqu_particleloop3 = {
                 name = "Particle Loop",
-                text = {{
+                text = { {
                     "{C:chips}+#1#{} Chips",
                     "{X:chips,C:white}X#5#{} Chips"
-                },{
+                }, {
                     "Retriggers self {C:attention}#3#{} times",
                     "Increases by {C:attention}#4#{} retriggers at end of round",
                     "Gives {C:attention}#2#%{} more Chips per trigger",
-                }}
+                } }
             },
             j_aqu_particleloop4 = {
                 name = "Particle Loop",
-                text = {{
+                text = { {
                     "{C:chips}+#1#{} Chips",
                     "{X:chips,C:white}X#5#{} Chips"
-                },{
+                }, {
                     "Retriggers self {C:attention}#3#{} times",
                     "Increases by {C:attention}#4#{} retriggers at end of round",
                     "Gives {C:attention}#2#%{} more Chips per trigger",
-                }}
+                } }
             },
             j_aqu_particleloop5 = {
                 name = "Particle Loop",
-                text = {{
+                text = { {
                     "{C:chips}+#1#{} Chips",
                     "{X:chips,C:white}X#5#{} Chips",
-                },{
+                }, {
                     "Retriggers self {C:attention}#3#{} times",
                     "Increases by {C:attention}#4#{} retriggers at end of round",
                     "Gives {C:attention}#2#%{} more Chips per trigger",
-                }}
+                } }
             },
             j_aqu_scorebound_crystal1 = {
                 name = "Scorebound Crystal",
-                text = {{
+                text = { {
                     "Scored {C:attention}2s{} give {C:chips}+#1#{} Chips",
                 }, {
                     "Scored {C:attention}Aces{} give {C:mult}+#2#{} Mult",
                 }, {
                     "{C:attention}X#3#{} to above bonuses for",
                     "each unique rank in scoring hand",
-                }}
+                } }
             },
             j_aqu_scorebound_crystal2 = {
                 name = "Scorebound Crystal",
-                text = {{
+                text = { {
                     "Scored {C:attention}2s{} and {C:attention}3s{} give {C:chips}+#1#{} Chips",
                 }, {
                     "Scored {C:attention}Aces{} and {C:attention}Kings{} give {C:mult}+#2#{} Mult",
                 }, {
                     "{C:attention}X#3#{} to above bonuses for",
                     "each unique rank in scoring hand",
-                }}
+                } }
             },
             j_aqu_scorebound_crystal3 = {
                 name = "Scorebound Crystal",
-                text = {{
+                text = { {
                     "Scored {C:attention}2s, 3s, 4s,{} and {C:attention}5s{} give {C:chips}+#1#{} Chips",
                 }, {
                     "Scored {C:attention}Aces, Kings, Queens, Jacks{} and {C:attention}10s{} give {C:mult}+#2#{} Mult",
                 }, {
                     "{C:attention}X#3#{} to above bonuses for",
                     "each unique rank in scoring hand",
-                }}
+                } }
             },
             j_aqu_scorebound_crystal4 = {
                 name = "Scorebound Crystal",
-                text = {{
+                text = { {
                     "Scored {C:attention}2s, 3s, 4s, 5s{} ",
                     "and {C:attention}6s{} give {C:chips}+#1#{} Chips"
                 }, {
@@ -102,11 +117,11 @@ return {
                 }, {
                     "{C:attention}X#3#{} to above bonuses for",
                     "each unique rank in scoring hand",
-                }}
+                } }
             },
             j_aqu_scorebound_crystal5 = {
                 name = "Scorebound Crystal",
-                text = {{
+                text = { {
                     "Scored {C:attention}2s, 3s, 4s, 5s, 6s{} ",
                     "and {C:attention}7s{} give {C:chips}+#1#{} Chips"
                 }, {
@@ -117,7 +132,7 @@ return {
                 }, {
                     "{C:attention}X#3#{} to above bonuses for",
                     "each unique rank in scoring hand",
-                }}
+                } }
             },
 
 
@@ -191,15 +206,15 @@ return {
 
             j_aqu_biava1 = {
                 name = "Biblica Avaritia",
-                text = {{
+                text = { {
                     "Spends {C:money}$#1#{} at end of round to",
                     "create a random {C:uncommon}Uncommon{} or {C:rare}Rare{} Joker",
                     "{C:inactive}(Must have room)",
-                }}
+                } }
             },
             j_aqu_biava2 = {
                 name = "Biblica Avaritia",
-                text = {{
+                text = { {
                     "Spends {C:money}$#1#{} at end of round to",
                     "create a random {C:uncommon}Uncommon{} or {C:rare}Rare{} Joker",
                     "{C:inactive}(Must have room)",
@@ -207,11 +222,11 @@ return {
                     "Gives {X:mult,C:white}XMult{} equal to {C:attention}#2#%{}",
                     "of your current money",
                     "{C:inactive}(Currently {X:mult,C:white}X#3#{C:inactive} Mult)",
-                }}
+                } }
             },
             j_aqu_biava3 = {
                 name = "Biblica Avaritia",
-                text = {{
+                text = { {
                     "Spends {C:money}$#1#{} at end of round to",
                     "create a random {C:uncommon}Uncommon{} or {C:rare}Rare{} Joker",
                     "{C:inactive}(Must have room)",
@@ -222,11 +237,11 @@ return {
                 }, {
                     "When {C:attention}Boss Blind{} defeated, destroy the Joker",
                     "to the right, and gain {C:attention}triple{} its sell value",
-                }}
+                } }
             },
             j_aqu_biava4 = {
                 name = "Biblica Avaritia",
-                text = {{
+                text = { {
                     "Spends {C:money}$#1#{} at end of round to",
                     "create a random {C:uncommon}Uncommon{} or {C:rare}Rare{} Joker",
                     "{C:inactive}(Room not needed)",
@@ -237,11 +252,11 @@ return {
                 }, {
                     "When {C:attention}Boss Blind{} defeated, destroy the Joker",
                     "to the right, and gain {C:attention}quadruple{} its sell value",
-                }}
+                } }
             },
             j_aqu_biava5 = {
                 name = "Biblica Avaritia",
-                text = {{
+                text = { {
                     "Spends {C:money}$#1#{} when a playing card is scored to",
                     "create a random {C:uncommon}Uncommon{} or {C:rare}Rare{} Joker",
                     "{C:inactive}(Room not needed)",
@@ -252,7 +267,7 @@ return {
                 }, {
                     "When {C:attention}Boss Blind{} defeated, destroy all Jokers",
                     "to the right, and gain {C:attention}quadruple{} their sell value",
-                }}
+                } }
             },
         },
 
@@ -320,7 +335,6 @@ return {
                 text = {
                     "{C:attention}Upgrade{} a selected eligible Joker",
                     "Increase upgraded blind exponent by {X:dark_edition,C:white}^#2#{}",
-                    "Enables {C:attention}Entropic Corruption{}",
                     "{C:inactive}(Cannot go past {V:1}Tier #4#{C:inactive})",
                 }
             },
@@ -330,14 +344,6 @@ return {
                     "{C:attention}Upgrade{} a selected eligible Joker",
                     "Increase upgraded blind exponent by {X:dark_edition,C:white}^#2#{}",
                     "{X:attention,C:white}X#3#{} Entropic Corruption gain",
-                    "{C:inactive}(Cannot go past {V:1}Tier #4#{C:inactive})",
-                }
-            },
-            c_aqu_nilscape_portal_no_corruption = {
-                name = "Nilscape Portal",
-                text = {
-                    "{C:attention}Upgrade{} a selected eligible Joker",
-                    "Increase upgraded blind exponent by {X:dark_edition,C:white}^#2#{}",
                     "{C:inactive}(Cannot go past {V:1}Tier #4#{C:inactive})",
                 }
             },
@@ -351,67 +357,67 @@ return {
                 }
             },
 
-            
-            c_aqu_closed_portal = { 
+
+            c_aqu_closed_portal = {
                 name = "Closed Portal",
-                text = {{
+                text = { {
                     "Creates a {C:attention}Nilscape Portal{} with a higher",
                     "maximum upgrade {C:aqu_aquill_2}Tier{} when certain conditions are met",
                 }, {
                     "Conditions are chosen {C:green}randomly{} when this card is spawned"
-                }}    
+                } }
             },
             -- the below is just a base for closed portal effects. commenting it out makes it harder to copy+paste
-            c_aqu_clp_ = { 
+            c_aqu_clp_ = {
                 name = "Closed Portal",
-                text = {{
+                text = { {
                     "Creates a {C:attention}Nilscape Portal{} with a max of {V:1}Tier #4#{}",
                     "when the following condition is met",
                 }, {
                     "",
                     "{C:attention,s:1.2}#1#{s:1.2} / {C:attention,s:1.2}#2#{}",
-                }}    
+                } }
             },
 
-            c_aqu_clp_upgrade = { 
+            c_aqu_clp_upgrade = {
                 name = "Closed Portal",
-                text = {{
+                text = { {
                     "Creates a {C:attention}Nilscape Portal{} with a max of {V:1}Tier #3#{}",
                     "when the following condition is met",
                 }, {
                     "{C:purple}Upgrade{} {C:attention}#2#{} blinds",
                     "{C:attention,s:1.2}#1#{s:1.2} / {C:attention,s:1.2}#2#{}",
-                }}    
+                } }
             },
-            c_aqu_clp_scorecards = { 
+            c_aqu_clp_scorecards = {
                 name = "Closed Portal",
-                text = {{
+                text = { {
                     "Creates a {C:attention}Nilscape Portal{} with a max of {V:1}Tier #3#{}",
                     "when the following condition is met",
                 }, {
                     "Score {C:attention}#2#{} playing cards",
                     "{C:attention,s:1.2}#1#{s:1.2} / {C:attention,s:1.2}#2#{}",
-                }}    
+                } }
             },
-            c_aqu_clp_selljokers = { 
+            c_aqu_clp_selljokers = {
                 name = "Closed Portal",
-                text = {{
+                text = { {
                     "Creates a {C:attention}Nilscape Portal{} with a max of {V:1}Tier #3#{}",
                     "when the following condition is met",
                 }, {
                     "Sell {C:attention}#2#{} Jokers",
                     "{C:attention,s:1.2}#1#{s:1.2} / {C:attention,s:1.2}#2#{}",
-                }}    
+                } }
             },
-            c_aqu_clp_earnmoney = { 
+            c_aqu_clp_earnmoney = {
                 name = "Closed Portal",
-                text = {{
+                text = { {
                     "Creates a {C:attention}Nilscape Portal{} with a max of {V:1}Tier #3#{}",
                     "when the following condition is met",
                 }, {
                     "Earn money {C:attention}#2#{} seperate times",
                     "{C:attention,s:1.2}#1#{s:1.2} / {C:attention,s:1.2}#2#{}",
-                }}    
+                } }
             },
         },
     },
@@ -431,11 +437,11 @@ return {
             k_aqu_hyperplus = "Hyper+",
             k_aqu_hyperplusplus = "Hyper++",
             k_aqu_extreme = "Extreme",
-            k_aqu_gems = "Gem",
-            b_aqu_gems_cards = "Gem Cards",
 
             ph_aqu_visual = "Visual",
             ph_aqu_gameplay = "Gameplay",
+
+            ph_aqu_upgraded = "Upgraded Blind Bonus",
 
             ph_aqu_upgrade_1 = "Upgraded Blinds have higher Blind size but higher rewards.",
             ph_aqu_upgrade_2 = "They also increase the spawn rates of Dormant Jokers.",
@@ -469,6 +475,12 @@ return {
                 "Disables Entropic Corruption and all related mechanics.",
                 "This setting is best turned off, but if your experience is",
                 "majorly worsened by Corruption, consider turning this on."
+            },
+
+            ph_aqu_config_disable_screenshader_label = "Disable Screen-wide VFX",
+            ph_aqu_config_disable_screenshader_info = {
+                "Disables ALL screen-wide visual effects used by the mod.",
+                "This may look worse, but will be easier on your eyes."
             },
 
             ph_aqu_corruption = "Entropic Corruption",

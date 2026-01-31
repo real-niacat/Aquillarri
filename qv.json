@@ -1,13 +1,13 @@
 {
-	"id": "quillas",
+	"id": "aquillarri",
 	"name": "Aquillarri", 
 	"author": ["Lily Felli"], 
-	"description": "high effort numberslop",
+	"description": "",
 	"prefix": "aqu",
 	"main_file": "main.lua",
 	"priority": 99999, 
 	"badge_colour": "ff8c8c",
-	"version": "0.0.0", 
+	"version": "1.0.0~ALPHA", 
 	"dependencies": [ 
 		"Steamodded (>=1.0.0~BETA-0827)",
         "Talisman",

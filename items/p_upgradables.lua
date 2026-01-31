@@ -1,5 +1,5 @@
 SMODS.Atlas {
-    key = "upgradable_placeholder",
+    key = "generic_1",
     path = "placeholder_upgradables.png",
     px = 71,
     py = 95,
@@ -26,7 +26,7 @@ aquill.Upgradable = SMODS.Joker:extend {
         self.cost = 5 * (2 ^ self.tier)
 
         if (self.atlas == "Joker") or (not self.atlas) then
-            self.atlas = "aqu_upgradable_placeholder"
+            self.atlas = "aqu_generic_1"
             self.pos = { x = self.tier - 1, y = 0 }
         end
 

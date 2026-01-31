@@ -1,6 +1,6 @@
 function G.FUNCS.select_blind_harder(e)
-    G.GAME.dormant_blind = true
-    G.GAME.dormant_blind_visuals = true
+    G.GAME.upgraded_blind = true
+    G.GAME.upgraded_blind_visuals = true
     G.FUNCS.select_blind(e)
 end
 
@@ -79,13 +79,14 @@ end
 aquill.add_trigger(
     function(context)
         if context.end_of_round and context.main_eval then
-            if G.GAME.dormant_blind then
-                G.GAME.dormant_rarity_boost = G.GAME.dormant_rarity_boost + 1
+            if G.GAME.upgraded_blind then
+                G.GAME.upgraded_rarity_boost = G.GAME.upgraded_rarity_boost + 1
             end
 
-            G.GAME.dormant_blind = false
-            G.GAME.dormant_exponent = G.GAME.dormant_exponent_base +
-                ((G.GAME.round_resets.ante - 1) * G.GAME.dormant_exponent_gain)
+            G.GAME.last_blind_upgraded = G.GAME.upgraded_blind
+            G.GAME.upgraded_blind = false
+            G.GAME.upgraded_exponent = G.GAME.upgraded_exponent_base +
+                ((G.GAME.round_resets.ante - 1) * G.GAME.upgraded_exponent_gain)
         end
     end
 )
@@ -93,32 +94,30 @@ aquill.add_trigger(
 aquill.add_trigger(
     function(context)
         if context.starting_shop then
-            if G.GAME.dormant_blind_visuals then
+            if G.GAME.upgraded_blind_visuals then
                 -- attention_text({
                 --     cover = G.jokers,
-                --     text = localize({ type = "variable", key = "aqu_dormant_rates", vars = { G.GAME.dormant_boost_per_upgraded } }),
+                --     text = localize({ type = "variable", key = "aqu_upgraded_rates", vars = { G.GAME.upgraded_boost_per_upgraded } }),
                 --     hold = 4,
                 --     scale = 1,
                 --     cover_colour = G.C.FILTER
                 -- })
             end
-            G.GAME.dormant_blind_visuals = false
+            G.GAME.upgraded_blind_visuals = false
         end
     end
 )
 
 aquill.add_trigger(
     function(context)
-        if context.setting_dormant_blind then
+        if context.setting_upgraded_blind then
             G.E_MANAGER:add_event(Event({
                 func = function()
-                    G.GAME.blind.chips = aquill.calc_dormant_blind_size(G.GAME.blind.chips)
+                    G.GAME.blind.chips = aquill.calc_upgraded_blind_size(G.GAME.blind.chips)
                     G.GAME.blind.chip_text = number_format(G.GAME.blind.chips)
                     G.HUD_blind:recalculate()
 
-                    G.GAME.blind.dollars = G.GAME.blind.dollars + G.GAME.dormant_bonus
-                    G.GAME.dormant_blind_bonus_display = string.rep(localize("$"), G.GAME.dormant_bonus)
-                    G.GAME.blind.loc_name = G.GAME.blind.loc_name .. "+"
+                    -- G.GAME.blind.dollars = G.GAME.blind.dollars + G.GAME.upgraded_bonus
                     return true
                 end
             }))
@@ -129,7 +128,7 @@ aquill.add_trigger(
 aquill.add_trigger(
     function(context)
         if aquill.corruption.enabled() and context.setting_blind then
-            if G.GAME.dormant_blind then
+            if G.GAME.upgraded_blind then
                 aquill.corruption.modify(G.GAME.entropic_corruption_loss)
             else
                 aquill.corruption.modify(G.GAME.entropic_corruption_gain)
@@ -137,3 +136,47 @@ aquill.add_trigger(
         end
     end
 )
+
+--used for upgraded blind vfx
+SMODS.Shader {
+    key = "boostedblind",
+    path = "boostedblind.fs",
+}
+
+local blind_draw_hook = Blind.draw
+function Blind:draw()
+    blind_draw_hook(self)
+
+    if G.GAME.upgraded_blind_visuals then
+        self.children.animatedSprite:draw_shader("aqu_boostedblind", nil, {1,G.TIMERS.REAL}, nil)
+    end
+end
+
+-- changes background colour for upgraded blinds
+local background_colour_hook = ease_background_colour_blind
+function ease_background_colour_blind(state, blind_override)
+    if G.GAME and G.GAME.upgraded_blind then
+        ease_background_colour({
+            new_colour = G.C.PURPLE,
+            special_colour = mix_colours(G.C.WHITE, G.C.PURPLE, 0.2),
+            contrast = 2.5
+        })
+        if G.GAME.blind then
+            G.GAME.blind:change_colour()
+        end
+        return
+    end
+
+
+    return background_colour_hook(state, blind_override)
+end
+
+local blind_colour_hook = Blind.change_colour
+function Blind:change_colour(blind_col)
+    local key = self.config.blind.key
+    if G.GAME.upgraded_blind then
+        blind_col = mix_colours(G.C.PURPLE, get_blind_main_colour(key == "bl_small" and "Small" or key == "bl_big" and "Big" or key), 0.5)
+    end
+
+    return blind_colour_hook(self,blind_col)
+end

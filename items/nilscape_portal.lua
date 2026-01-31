@@ -40,7 +40,7 @@ SMODS.Consumable {
                 return true
             end
         }))
-        G.GAME.dormant_exponent_gain = G.GAME.dormant_exponent_gain + card.ability.extra.exponent_increase
+        G.GAME.upgraded_exponent_gain = G.GAME.upgraded_exponent_gain + card.ability.extra.exponent_increase
 
         if not aquill.corruption.enabled() then
             aquill.corruption.enable()
@@ -49,12 +49,9 @@ SMODS.Consumable {
         end
     end,
     loc_vars = function(self, info_queue, card)
+        info_queue[#info_queue+1] = {set = "Other", key = "enables_corruption"}
         local desc_key = aquill.corruption.enabled() and self.key .. "_used" or self.key .. "_first"
         local st = card.ability.extra.upgrade_strength
-        if not aquill.corruption.allowed then
-            desc_key = self.key .. "_no_corruption"
-        end
-
         if G.jokers then
             for _, joker in pairs(G.jokers.cards) do
                 if joker.config.center.tier and joker.config.center.tier >= st then
@@ -106,7 +103,7 @@ aquill.closed_portal_options = {
         key = "c_aqu_clp_upgrade",
         max = 2,
         should_inc = function(context)
-            if context.setting_dormant_blind then
+            if context.setting_upgraded_blind then
                 return true
             end
         end

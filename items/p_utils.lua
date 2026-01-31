@@ -90,8 +90,8 @@ function aquill.round_to_nearest(n, round)
     return math.round(n / round) * round
 end
 
-function aquill.calc_dormant_blind_size(original_blind_size)
-    local exponent = G.GAME.dormant_exponent
+function aquill.calc_upgraded_blind_size(original_blind_size)
+    local exponent = G.GAME.upgraded_exponent
     local base = G.GAME and G.GAME.aqu_hua_base
     if base then
         exponent = math.log((base * 0.5) + exponent, base)
@@ -254,10 +254,10 @@ function aquill.random_tag(seed)
     return selected_tag
 end
 
-function aquill.get_card_pixel_pos(card)
+function aquill.get_movable_pixel_pos(mov)
     return {
-        (G.ROOM.T.x + card.T.x + card.T.w * 0.5) * (G.TILESIZE * G.TILESCALE),
-        (G.ROOM.T.y + card.T.y + card.T.h * 0.5) * (G.TILESIZE * G.TILESCALE),
+        (G.ROOM.T.x + mov.T.x + mov.T.w * 0.5) * (G.TILESIZE * G.TILESCALE),
+        (G.ROOM.T.y + mov.T.y + mov.T.h * 0.5) * (G.TILESIZE * G.TILESCALE),
     }
 end
 
@@ -278,4 +278,15 @@ function aquill.get_index(card)
         end
     end
     return false -- what the fuck?
+end
+
+function aquill.balance(a, b, percent)
+    local arem = a*percent
+    local brem = b*percent
+
+    local total = arem+brem
+    a = a + (total / 2) - arem
+    b = b + (total / 2) - brem
+
+    return a, b
 end

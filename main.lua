@@ -9,9 +9,24 @@ SMODS.current_mod.optional_features = {
 	retrigger_joker = true
 }
 
-function aquill.add_trigger(run_func) --used b/c adding a ton of stuff in global_calc.lua is unorganized
-	table.insert(aquill.triggers, { trigger = run_func })
+if not SMODS.ScreenShader then
+	aquill.can_load = false
+	aquill.load_issues = {
+		dependencies = {
+			"SMODS.ScreenShader"
+		},
+		conflicts = {},
+
+	}
+	return
 end
+
+SMODS.Atlas {
+	px = 34,
+	py = 34,
+	key = "modicon",
+	path = "modicon.png",
+}
 
 ---@param name string
 ---@param enum table
@@ -96,3 +111,4 @@ local path = SMODS.current_mod.path
 load_files(path, true)
 
 aquill.config.disable_corruption = false
+
