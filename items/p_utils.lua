@@ -290,3 +290,7 @@ function aquill.balance(a, b, percent)
 
     return a, b
 end
+
+function aquill.get_current_profile() --shorthand
+    return G.PROFILES[G.SETTINGS.profile]
+end

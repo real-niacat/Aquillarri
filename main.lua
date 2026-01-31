@@ -112,3 +112,17 @@ load_files(path, true)
 
 aquill.config.disable_corruption = false
 
+if not G.E_MANAGER then return end
+
+G.E_MANAGER:add_event(Event({
+	trigger = 'after',
+	func = function()
+		if G.FUNCS and G.FUNCS.openModUI_aquillarri and (not aquill.get_current_profile().played_aqu_before) then
+			G.FUNCS.openModUI_aquillarri()
+			aquill.get_current_profile().played_aqu_before = true
+			return true
+		end
+	end,
+	blockable = true,
+	blocking = false,
+}))

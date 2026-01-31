@@ -94,6 +94,8 @@ SMODS.Consumable {
             card.ability.extra.exponent_increase = aquill.round_to_nearest(card.ability.extra.exponent_increase, 0.0001)
         end
     end,
+    atlas = "generic_1",
+    pos = {x=0, y=3},
 }
 
 -- format: {key = loc_key, max = max_counter, should_inc = function(context) end}
@@ -174,5 +176,7 @@ SMODS.Consumable {
                 }))
             end
         end
-    end
+    end,
+    atlas = "generic_1",
+    pos = {x=1, y=3},
 }
