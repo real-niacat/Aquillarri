@@ -73,7 +73,7 @@ function create_UIBox_hover_corruption() -- hover ui def
                 }
             )
         end
-
+        -- 
         return ret
     end
 
