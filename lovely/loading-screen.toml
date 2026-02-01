@@ -37,6 +37,6 @@ pattern = '''if catimg then love.graphics.draw(catimg, realw/2 - 264, realh/2 - 
 position = "at"
 payload = '''
 if catimg then love.graphics.draw(catimg, realw/2 - 264, realh/2 - 27, 0, scale_factor.x or 1, scale_factor.y or 1); love.graphics.rectangle('line', realw/2 - 264, realh/2 - 27, 96, 96, 5) end
-love.graphics.print("Image: " .. image_name, realw / 2 - 150, (realh / 2) + 60)
+love.graphics.print("Image: " .. (image_name or "???"), realw / 2 - 150, (realh / 2) + 60)
 '''
 match_indent = true
