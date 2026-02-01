@@ -294,3 +294,9 @@ end
 function aquill.get_current_profile() --shorthand
     return G.PROFILES[G.SETTINGS.profile]
 end
+
+function aquill.graph(inc, func)
+    for i=0,5,(inc or 1) do
+        print(i, func(i))
+    end
+end

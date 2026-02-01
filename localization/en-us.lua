@@ -334,26 +334,23 @@ return {
                 name = "Nilscape Portal",
                 text = {
                     "{C:attention}Upgrade{} a selected eligible Joker",
-                    "Increase upgraded blind exponent by {X:dark_edition,C:white}^#2#{}",
-                    "{C:inactive}(Cannot go past {V:1}Tier #4#{C:inactive})",
+                    "{C:inactive}(Cannot go past {V:1}Tier #1#{C:inactive})",
                 }
             },
             c_aqu_nilscape_portal_used = {
                 name = "Nilscape Portal",
                 text = {
                     "{C:attention}Upgrade{} a selected eligible Joker",
-                    "Increase upgraded blind exponent by {X:dark_edition,C:white}^#2#{}",
-                    "{X:attention,C:white}X#3#{} Entropic Corruption gain",
-                    "{C:inactive}(Cannot go past {V:1}Tier #4#{C:inactive})",
+                    "{X:attention,C:white}X#2#{} Entropic Corruption gain",
+                    "{C:inactive}(Cannot go past {V:1}Tier #1#{C:inactive})",
                 }
             },
             c_aqu_nilscape_portal_blocked = {
                 name = "Nilscape Portal",
                 text = {
                     "{C:attention}Upgrade{} a selected eligible Joker",
-                    "Increase upgraded blind exponent by {X:dark_edition,C:white}^#2#{}",
-                    "Use on a {V:1}Tier #5#{} Joker to create {C:attention}Closed Portal{}",
-                    "{C:inactive}(Cannot go past {V:1}Tier #4#{C:inactive})",
+                    "Use on a {V:1}Tier #1#{} Joker to create {C:attention}Closed Portal{}",
+                    "{C:inactive}(Cannot go past {V:1}Tier #1#{C:inactive})",
                 }
             },
 

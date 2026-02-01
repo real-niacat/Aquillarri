@@ -138,7 +138,7 @@ vec4 effect(vec4 colour,Image texture,vec2 texture_coords,vec2 screen_coords)
     float vshift=(1.5-uv.y)/4.;//strength
     float sign_noise=(pNoise(vec2(uv.x,uv.y),1)-.5);
     vshift*=sign_noise;
-    float noise_value=pNoise(vec2(uv.x+vshift,uv.y+(boostedblind.y*.7)),1.);
+    float noise_value=pNoise(vec2(uv.x+vshift,uv.y+(boostedblind.y*.7)),1);
     float boost=RGBtoHSV(tex).z;
     boost=pow(boost,2.)*1.5;
     noise_value=pow(2.*noise_value,(.9-uv.y)*1.5)/(1.+(1.-uv.y));

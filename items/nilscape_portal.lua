@@ -40,7 +40,6 @@ SMODS.Consumable {
                 return true
             end
         }))
-        G.GAME.upgraded_exponent_gain = G.GAME.upgraded_exponent_gain + card.ability.extra.exponent_increase
 
         if not aquill.corruption.enabled() then
             aquill.corruption.enable()
@@ -65,17 +64,14 @@ SMODS.Consumable {
         
         return {
             vars = {
-                nil, --load bearing nil
-                card.ability.extra.exponent_increase,
-                card.ability.extra.corruption_mult,
                 st,
-                st,
+                card.ability.extra.corruption_mult
                 colours = { G.C["aqu_aquill_" .. (st * 2)] }
             },
             key = desc_key
         }
     end,
-    config = { extra = { exponent_increase = 0.03, corruption_mult = 1.1, upgrade_strength = 3 } },
+    config = { extra = { corruption_mult = 1.1, upgrade_strength = 3 } },
     hidden = true,
     soul_rate = 0.075,
     soul_set = "Tarot",
@@ -86,13 +82,6 @@ SMODS.Consumable {
             end
         end
         return false --need an upgradable joker
-    end,
-    set_ability = function(self, card, initial, delay_sprites)
-        if card.ability and card.ability.extra and G.GAME.consumeable_usage[self.key] then
-            card.ability.extra.exponent_increase = card.ability.extra.exponent_increase /
-                math.sqrt(G.GAME.consumeable_usage[self.key].count)
-            card.ability.extra.exponent_increase = aquill.round_to_nearest(card.ability.extra.exponent_increase, 0.0001)
-        end
     end,
     atlas = "generic_1",
     pos = {x=0, y=3},
