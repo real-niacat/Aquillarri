@@ -451,9 +451,13 @@ return {
 
             ph_aqu_corruption_desc = {
                 "Higher Entropic Corruption",
-                "exponentially increases Blind size.",
-                "Reaching max corruption",
-                "will make blinds impossible.",
+                "heavily increases Blind size",
+                "Corruption increases when ",
+                "playing non-upgraded blinds",
+                "Corruption decreases when",
+                "playing upgraded blinds",
+                "Other sources also may",
+                "increase Corruption"
             },
 
             ph_aqu_config_alt_upgrade_effect_label = "Alternate Upgrade VFX",

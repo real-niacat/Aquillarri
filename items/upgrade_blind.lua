@@ -55,7 +55,6 @@ function create_UIBox_hover_upgraded()
         }
     }
 end
-
 function G.FUNCS.hover_upgrade_blind(e)
     if not e.parent or not e.parent.states then return end
     -- print(e.states.hover.is, e.parent.states.hover.is)
@@ -74,6 +73,10 @@ function G.FUNCS.hover_upgrade_blind(e)
         e.parent.children.alert:remove()
         e.parent.children.alert = nil
     end
+end
+
+function G.FUNCS.hover_blind(e)
+    -- unused
 end
 
 aquill.add_trigger(

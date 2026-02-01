@@ -18,7 +18,7 @@ SMODS.Voucher {
     redeem = function(self, voucher)
         aquill.corruption.enable()
     end,
-    config = {extra = {corruption_increase = 5, exponent = 1.1}},
+    config = {extra = {corruption_increase = 2, exponent = 1.1}},
     get_emult = function(self, card)
         local d = 0.05
         return to_big(G.GAME.upgraded_exponent+d):pow(card.ability.extra.exponent) - d
