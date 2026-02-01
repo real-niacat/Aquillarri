@@ -76,29 +76,35 @@ vec2 loop_add(vec2 base, vec2 add) {
     return vec2(loop_add(base.x, add.x), loop_add(base.y, add.y));
 }
 
+float floor_to_nearest(float base, float nearest) {
+    return floor(base / nearest) * nearest;
+}
+
 // This is what actually changes the look of card
 vec4 effect( vec4 colour, Image texture, vec2 texture_coords, vec2 screen_coords )
 {
     
 	vec2 uv = (((texture_coords)*(image_details)) - texture_details.xy*texture_details.ba)/texture_details.ba;
-    if (dented.y > dented.y*2) {
-        uv = dented;
-    }
+    // 72 and 13 are arbitrary numbers
+    vec2 off = vec2((pNoise(uv + vec2(72.,13.), 32, 2) * 4.5) - 1., (pNoise(uv, 8, 2) * 4.5) - 1.);
 
-    vec2 off = vec2((pNoise(uv + vec2(999,999), 3, 2) * 4.5) - 1, (pNoise(uv, 3, 2) * 4.5) - 1);
-
-    float div = 200;
+    float div = 200.;
     off /= div;
     
 
     off.x *= sin(dented.y);
-    off.y *= cos(dented.y);
+    off.y *= cos(dented.y*1.2);
 
-    float theta = mod(dented.y, PI*2);
-    off = vec2((off.x * cos(theta)) - (off.y * sin(theta*2)), (off.x * sin(theta*2)) + (off.y * cos(theta)));
+    vec2 atlas = image_details / texture_details.zw;
+    atlas.x = 1.0 / atlas.x;
+    atlas.y = 1.0 / atlas.y;
 
-    vec4 tex = Texel(texture, loop_add(texture_coords, off));
+    float theta = mod(dented.y, PI*2.);
+    off = vec2((off.x * cos(theta)) - (off.y * sin(theta*2.)), (off.x * sin(theta*2.)) + (off.y * cos(theta)));
+    vec4 tex = Texel(texture, texture_coords+off);
     tex.a = min(Texel(texture, texture_coords).a, tex.a);
+    if (floor_to_nearest(texture_coords.x+off.x, atlas.x) != floor_to_nearest(texture_coords.x, atlas.x)) {tex.a = 0.0;}
+    if (floor_to_nearest(texture_coords.y+off.y, atlas.y) != floor_to_nearest(texture_coords.y, atlas.y)) {tex.a = 0.0;}
 
     return dissolve_mask(tex*colour, texture_coords, uv);
 }

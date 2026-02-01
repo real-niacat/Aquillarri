@@ -52,9 +52,9 @@ vec4 effect( vec4 colour, Image texture, vec2 texture_coords, vec2 sc )
 
     bool top = (frac.x + frac.y) > 1.0;
 
-    vec2 tp1 = vec2(0);
-    vec2 tp2 = vec2(0);
-    vec2 tp3 = vec2(0);
+    vec2 tp1 = vec2(0.);
+    vec2 tp2 = vec2(0.);
+    vec2 tp3 = vec2(0.);
 
     // if (!top) {
     //     tp1 = floored;
@@ -67,8 +67,8 @@ vec4 effect( vec4 colour, Image texture, vec2 texture_coords, vec2 sc )
     // }
 
     tp1 = floored;
-    tp2 = floored + vec2(1, 0);
-    tp3 = floored + vec2(0, 1);
+    tp2 = floored + vec2(1., 0.);
+    tp3 = floored + vec2(0., 1.);
 
     vec2 tri_center = (tp1+tp2+tp3)/3.0;
     float dist = distance(triangular, tri_center);

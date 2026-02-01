@@ -38,7 +38,7 @@ vec4 effect(vec4 colour,Image texture,vec2 tc,vec2 screen_coords)
     vec4 tex=Texel(texture,tc);
     
     float t=0.;
-    float c=3;
+    float c=3.;
     float iterated=0.;
     vec2 sc=screen_coords;//alias
     vec2 cep=center_pos;//ditto
@@ -62,7 +62,7 @@ vec4 effect(vec4 colour,Image texture,vec2 tc,vec2 screen_coords)
     }
     
     float cdist=distance(center_pos,screen_coords);
-    float max_mult = 2;
+    float max_mult = 2.;
     float rad = dist / 10.0;
     if (cdist < min_dist) {
         float str = (rad - abs(min_dist-cdist)) / rad;

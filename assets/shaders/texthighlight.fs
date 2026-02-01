@@ -46,7 +46,7 @@ vec2 lerp(vec2 a, vec2 b, float t) {
 }
 
 vec3 square(vec3 i) {
-    return vec3(pow(i.x, 2), pow(i.y, 2), pow(i.z, 2));
+    return vec3(pow(i.x, 2.0), pow(i.y, 2.0), pow(i.z, 2.0));
 }
 
 // This is what actually changes the look of card
