@@ -65,7 +65,7 @@ SMODS.Consumable {
         return {
             vars = {
                 st,
-                card.ability.extra.corruption_mult
+                card.ability.extra.corruption_mult,
                 colours = { G.C["aqu_aquill_" .. (st * 2)] }
             },
             key = desc_key
