@@ -5,7 +5,7 @@ aquill.Upgradable {
         if context.modify_shop_card then
             card.ability.extra.remaining = card.ability.extra.remaining - 1 
             if card.ability.extra.remaining <= 0 then
-                context.card:set_edition(SMODS.poll_edition({ guaranteed = true }))
+                context.card:set_edition(SMODS.poll_edition({ guaranteed = true, no_negative = (context.card.config.center.set == "Joker") }))
                 card:juice_up()
                 card.ability.extra.remaining = card.ability.extra.max
             end
@@ -24,7 +24,7 @@ aquill.Upgradable {
         if context.modify_shop_card then
             card.ability.extra.remaining = card.ability.extra.remaining - (#aquill.get_editioned_cards(card.area) + 1)
             if card.ability.extra.remaining <= 0 then
-                context.card:set_edition(SMODS.poll_edition({ guaranteed = true }))
+                context.card:set_edition(SMODS.poll_edition({ guaranteed = true, no_negative = (context.card.config.center.set == "Joker") }))
                 card:juice_up()
                 card.ability.extra.remaining = card.ability.extra.max
             end
@@ -45,7 +45,7 @@ aquill.Upgradable {
         if context.modify_shop_card then
             card.ability.extra.remaining = card.ability.extra.remaining - (#aquill.get_editioned_cards(card.area) + 1)
             if card.ability.extra.remaining <= 0 then
-                context.card:set_edition(SMODS.poll_edition({ guaranteed = true }))
+                context.card:set_edition(SMODS.poll_edition({ guaranteed = true, no_negative = (context.card.config.center.set == "Joker") }))
                 card:juice_up()
                 card.ability.extra.remaining = card.ability.extra.max
             end
@@ -73,7 +73,7 @@ aquill.Upgradable {
         if context.modify_shop_card then
             card.ability.extra.remaining = card.ability.extra.remaining - (#aquill.get_editioned_cards(card.area) + 1)
             if card.ability.extra.remaining <= 0 then
-                context.card:set_edition(SMODS.poll_edition({ guaranteed = true }))
+                context.card:set_edition(SMODS.poll_edition({ guaranteed = true, no_negative = (context.card.config.center.set == "Joker") }))
                 card:juice_up()
                 card.ability.extra.remaining = card.ability.extra.max
             end

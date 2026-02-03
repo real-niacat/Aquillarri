@@ -141,6 +141,7 @@ return {
                 text = {
                     "After {C:attention}#1#{} {C:inactive}[#2#]{} cards spawned in shop,",
                     "next shop card will recieve a random {C:dark_edition}Edition{}",
+                    "{C:inactive,s:0.8}(Cannot spawn {C:dark_edition,s:0.8}Negative{C:inactive,s:0.8} Jokers)",
                 }
             },
             j_aqu_magicorb2 = {
@@ -148,6 +149,7 @@ return {
                 text = { {
                     "After {C:attention}#1#{} {C:inactive}[#2#]{} cards spawned in shop,",
                     "next shop card will recieve a random {C:dark_edition}Edition{}",
+                    "{C:inactive,s:0.8}(Cannot spawn {C:dark_edition,s:0.8}Negative{C:inactive,s:0.8} Jokers)",
                 }, {
                     "Increases by an extra card for each {C:dark_edition}Editioned{} Joker owned"
                 },
@@ -158,6 +160,7 @@ return {
                 text = { {
                     "After {C:attention}#1#{} {C:inactive}[#2#]{} cards spawned in shop,",
                     "next shop card will recieve a random {C:dark_edition}Edition{}",
+                    "{C:inactive,s:0.8}(Cannot spawn {C:dark_edition,s:0.8}Negative{C:inactive,s:0.8} Jokers)",
                 }, {
                     "Increases by an extra card for each {C:dark_edition}Editioned{} Joker owned",
                 }, {
@@ -171,6 +174,7 @@ return {
                 text = { {
                     "After {C:attention}#1#{} {C:inactive}[#2#]{} cards spawned in shop,",
                     "next shop card will recieve a random {C:dark_edition}Edition{}",
+                    "{C:inactive,s:0.8}(Cannot spawn {C:dark_edition,s:0.8}Negative{C:inactive,s:0.8} Jokers)",
                 }, {
                     "Increases by an extra card for each {C:dark_edition}Editioned{} Joker owned",
                 }, {

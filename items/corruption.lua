@@ -134,7 +134,7 @@ function aquill.corruption.get()
 end
 
 local get_blind_amount_hook = get_blind_amount
-function get_blind_amount(ante)
+function get_blind_amount(ante) -- used for multiplying blind size
     local original_value = get_blind_amount_hook(ante)
 
     if not aquill.corruption.enabled() then
