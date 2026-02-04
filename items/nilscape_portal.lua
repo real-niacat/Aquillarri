@@ -49,15 +49,30 @@ SMODS.Consumable {
     end,
     loc_vars = function(self, info_queue, card)
         info_queue[#info_queue+1] = {set = "Other", key = "enables_corruption"}
-        local desc_key = aquill.corruption.enabled() and self.key .. "_used" or self.key .. "_first"
+        local desc_key = self.key
         local st = card.ability.extra.upgrade_strength
+        local blocked = false
+        local can_corrupt = false
         if G.jokers then
             for _, joker in pairs(G.jokers.cards) do
                 if joker.config.center.tier and joker.config.center.tier >= st then
-                    desc_key = self.key .. "_blocked"
+                    blocked = true
                     info_queue[#info_queue+1] = G.P_CENTERS.c_aqu_closed_portal
                 end
+                if joker.config.center.tier and joker.config.center.tier < st then
+                    can_corrupt = true
+                end
             end
+        end
+
+        if blocked and can_corrupt then
+            desc_key = desc_key .. "_blocked_enabled"
+        elseif blocked then
+            desc_key = desc_key .. "_blocked"
+        elseif can_corrupt then
+            desc_key = desc_key .. "_used"
+        else
+            desc_key = desc_key .. "_first"
         end
 
 
@@ -73,7 +88,7 @@ SMODS.Consumable {
     end,
     config = { extra = { corruption_mult = 1.1, upgrade_strength = 3 } },
     hidden = true,
-    soul_rate = 0.15,
+    soul_rate = 0.10,
     soul_set = "Tarot",
     in_pool = function(self, args)
         for _, joker in pairs(G.jokers.cards) do
@@ -81,6 +96,11 @@ SMODS.Consumable {
                 return true
             end
         end
+
+        if next(SMODS.find_card("c_aqu_closed_portal")) then
+            return false
+        end
+
         return false --need an upgradable joker
     end,
     atlas = "generic_1",

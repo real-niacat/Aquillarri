@@ -357,6 +357,15 @@ return {
                     "{C:inactive}(Cannot go past {V:1}Tier #1#{C:inactive})",
                 }
             },
+            c_aqu_nilscape_portal_blocked_enabled = {
+                name = "Nilscape Portal",
+                text = {
+                    "{C:attention}Upgrade{} a selected eligible Joker",
+                    "Use on a {V:1}Tier #1#{} Joker to create {C:attention}Closed Portal{}",
+                    "{X:attention,C:white}X#2#{} Entropic Corruption gain if upgrading",
+                    "{C:inactive}(Cannot go past {V:1}Tier #1#{C:inactive})",
+                }
+            },
 
 
             c_aqu_closed_portal = {
