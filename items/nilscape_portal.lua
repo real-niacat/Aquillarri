@@ -57,7 +57,7 @@ SMODS.Consumable {
             for _, joker in pairs(G.jokers.cards) do
                 if joker.config.center.tier and joker.config.center.tier >= st then
                     blocked = true
-                    info_queue[#info_queue+1] = G.P_CENTERS.c_aqu_closed_portal
+                    
                 end
                 if joker.config.center.tier and joker.config.center.tier < st then
                     can_corrupt = true
@@ -67,8 +67,10 @@ SMODS.Consumable {
 
         if blocked and can_corrupt then
             desc_key = desc_key .. "_blocked_enabled"
+            info_queue[#info_queue+1] = G.P_CENTERS.c_aqu_closed_portal
         elseif blocked then
             desc_key = desc_key .. "_blocked"
+            info_queue[#info_queue+1] = G.P_CENTERS.c_aqu_closed_portal
         elseif can_corrupt then
             desc_key = desc_key .. "_used"
         else
