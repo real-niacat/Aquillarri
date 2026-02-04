@@ -87,6 +87,7 @@ local aquill_colours = {
         cycle = t
     }, 
 }
+aquill.colours = aquill_colours
 
 loc_colour()
 for i,colour in pairs(aquill_colours) do

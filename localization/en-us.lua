@@ -425,19 +425,19 @@ return {
     misc = {
         labels = {
             aqu_dormant = "Dormant",
-            aqu_hyper = "Hyper",
-            aqu_hyperplus = "Hyper+",
-            aqu_hyperplusplus = "Hyper++",
-            aqu_extreme = "Extreme",
+            aqu_hyper = "Unshackled",
+            aqu_hyperplus = "Unbounded",
+            aqu_hyperplusplus = "Empowered",
+            aqu_extreme = "Quillic",
             aqu_gems = "Gem",
 
         },
         dictionary = {
             k_aqu_dormant = "Dormant",
-            k_aqu_hyper = "Hyper",
-            k_aqu_hyperplus = "Hyper+",
-            k_aqu_hyperplusplus = "Hyper++",
-            k_aqu_extreme = "Extreme",
+            k_aqu_hyper = "Unshackled",
+            k_aqu_hyperplus = "Unbounded",
+            k_aqu_hyperplusplus = "Empowered",
+            k_aqu_extreme = "Quillic",
 
             ph_aqu_visual = "Visual",
             ph_aqu_gameplay = "Gameplay",

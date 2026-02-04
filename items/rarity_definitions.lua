@@ -21,7 +21,7 @@ SMODS.Rarity {
 
 SMODS.Rarity {
     key = "hyper",
-    badge_colour = HEX("32FFAA"),
+    badge_colour = aquill.colours[2],
     default_weight = 0,
     pools = {},
     disable_if_empty = true,
@@ -29,7 +29,7 @@ SMODS.Rarity {
 
 SMODS.Rarity {
     key = "hyperplus",
-    badge_colour = HEX("49DBFF"),
+    badge_colour = aquill.colours[4],
     default_weight = 0,
     pools = {},
     disable_if_empty = true,
@@ -37,7 +37,7 @@ SMODS.Rarity {
 
 SMODS.Rarity {
     key = "hyperplusplus",
-    badge_colour = HEX("2344FF"),
+    badge_colour = aquill.colours[6],
     default_weight = 0,
     pools = {},
     disable_if_empty = true,
@@ -45,7 +45,7 @@ SMODS.Rarity {
 
 SMODS.Rarity {
     key = "extreme",
-    badge_colour = HEX("E523FF"),
+    badge_colour = aquill.colours[8],
     default_weight = 0,
     pools = {},
     disable_if_empty = true, 
