@@ -90,18 +90,6 @@ function aquill.round_to_nearest(n, round)
     return math.round(n / round) * round
 end
 
-function aquill.calc_upgraded_blind_size(original_blind_size)
-    local exponent = G.GAME.upgraded_exponent
-    local base = G.GAME and G.GAME.aqu_hua_base
-    if base then
-        exponent = math.log((base * 0.5) + exponent, base)
-    end
-    local n = to_big(original_blind_size):pow(exponent)
-    local place_value = to_big(10):pow(math.floor(math.log10(n)) - 1)
-    n = aquill.round_to_nearest(n, place_value)
-    return n
-end
-
 -- functions as SMODS.find_card but it applies to all cards with the same group
 function aquill.find_card_group(group_key)
     local found = {}
@@ -267,12 +255,12 @@ function aquill.pythag(a, b)
 end
 
 function aquill.max_diagonal()
-    return aquill.pythag({0, 0}, {love.graphics.getWidth(), love.graphics.getHeight()})
+    return aquill.pythag({ 0, 0 }, { love.graphics.getWidth(), love.graphics.getHeight() })
 end
 
 function aquill.get_index(card)
     local area = card.area
-    for i,c in ipairs(area.cards) do
+    for i, c in ipairs(area.cards) do
         if c == card then
             return i
         end
@@ -281,10 +269,10 @@ function aquill.get_index(card)
 end
 
 function aquill.balance(a, b, percent)
-    local arem = a*percent
-    local brem = b*percent
+    local arem = a * percent
+    local brem = b * percent
 
-    local total = arem+brem
+    local total = arem + brem
     a = a + (total / 2) - arem
     b = b + (total / 2) - brem
 
@@ -296,7 +284,35 @@ function aquill.get_current_profile() --shorthand
 end
 
 function aquill.graph(inc, func)
-    for i=0,5,(inc or 1) do
+    for i = 0, 5, (inc or 1) do
         print(i, func(i))
+    end
+end
+
+-- returns a table with all elements of base_table except those in remove_table
+function aquill.remove_elements(base_table, remove_table)
+    -- how the fuck do i do this without being in O(n^2)
+    local reverse_remove = {} -- oh thats how
+    for k, v in pairs(remove_table) do
+        reverse_remove[v] = k
+    end
+    local new_table = {}
+    for key, value in pairs(base_table) do
+        if not reverse_remove[value] then
+            new_table[key] = value
+        end
+    end
+    return new_table
+end
+
+function aquill.percent_buff(number, perc)
+    return number * (1 + (perc / 100))
+end
+
+function aquill.update_blind_displays()
+    local base = get_blind_amount(G.GAME.round_resets.ante)
+    G.GAME.upgraded_blind_displays = {}
+    for k,mult in pairs(G.GAME.blind_mults) do
+        G.GAME.upgraded_blind_displays[k] = number_format(aquill.calc_upgraded_blind_size(base*mult))
     end
 end

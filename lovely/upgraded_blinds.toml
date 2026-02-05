@@ -13,7 +13,7 @@ position = "after"
 payload = '''
 ,
 (not run_info and {n=G.UIT.R, config={id = 'select_blind_button_harder', align = "cm", ref_table = blind_choice.config, colour = disabled and G.C.UI.BACKGROUND_INACTIVE or G.C.PURPLE, minh = 0.3, minw = 2.7, padding = 0.07, r = 0.1, shadow = true, hover = true, one_press = true, button = 'select_blind_harder', func = 'hover_upgrade_blind'}, nodes={
-    {n=G.UIT.T, config={text = "Upgrade Blind", scale = 0.35, colour = disabled and G.C.UI.TEXT_INACTIVE or G.C.UI.TEXT_LIGHT, shadow = not disabled}}
+    {n=G.UIT.T, config={text = localize("k_aqu_upgrade_blind"), scale = 0.35, colour = disabled and G.C.UI.TEXT_INACTIVE or G.C.UI.TEXT_LIGHT, shadow = not disabled}}
 }} or nil)
 '''
 match_indent = true
@@ -84,6 +84,9 @@ position = "after"
 payload = '''
 local upgraded_blind_amt = aquill.calc_upgraded_blind_size(blind_amt)
 local upgraded_blind_text_scale = score_number_scale(score_number_scale(0.9-(0.05*math.min(#tostring(upgraded_blind_amt)-4, 6)), upgraded_blind_amt), upgraded_blind_amt)
+G.GAME.blind_mults = G.GAME.blind_mults or {}
+G.GAME.blind_mults[type] = blind_choice.config.mult
+aquill.update_blind_displays()
 '''
 match_indent = true
 
@@ -95,7 +98,7 @@ position = "at"
 payload = '''
 {n=G.UIT.T, config={text = number_format(blind_amt), scale = upgraded_blind_text_scale, colour = disabled and G.C.UI.TEXT_INACTIVE or G.C.RED, shadow =  not disabled}},
 {n=G.UIT.T, config={text = "/", scale = upgraded_blind_text_scale, colour = disabled and G.C.UI.TEXT_INACTIVE or G.C.WHITE, shadow = not disabled}},
-{n=G.UIT.T, config={text = ""..number_format(upgraded_blind_amt).."", scale = upgraded_blind_text_scale, colour = disabled and G.C.UI.TEXT_INACTIVE or G.C.PURPLE, shadow =  not disabled}}
+{n=G.UIT.T, config={ref_table = G.GAME.upgraded_blind_displays, ref_value = type, scale = upgraded_blind_text_scale, colour = disabled and G.C.UI.TEXT_INACTIVE or G.C.PURPLE, shadow =  not disabled}}
 '''
 match_indent = true
 

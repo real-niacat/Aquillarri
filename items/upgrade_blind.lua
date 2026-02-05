@@ -183,3 +183,20 @@ function Blind:change_colour(blind_col)
 
     return blind_colour_hook(self,blind_col)
 end
+
+function aquill.calc_upgraded_blind_size(original_blind_size)
+    local exponent = G.GAME.upgraded_exponent
+    local base = G.GAME and G.GAME.aqu_hua_base
+    if base then
+        exponent = math.log((base * 0.5) + exponent, base)
+    end
+
+    if aquill.corruption.enabled() then
+        exponent = exponent + aquill.corruption.get_upgraded_exponent()
+    end
+
+    local n = to_big(original_blind_size):pow(exponent)
+    local place_value = to_big(10):pow(math.floor(math.log10(n)) - 1)
+    n = aquill.round_to_nearest(n, place_value)
+    return n
+end
