@@ -85,7 +85,7 @@ payload = '''
 local upgraded_blind_amt = aquill.calc_upgraded_blind_size(blind_amt)
 local upgraded_blind_text_scale = score_number_scale(score_number_scale(0.9-(0.05*math.min(#tostring(upgraded_blind_amt)-4, 6)), upgraded_blind_amt), upgraded_blind_amt)
 G.GAME.blind_mults = G.GAME.blind_mults or {}
-G.GAME.blind_mults[type] = blind_choice.config.mult
+G.GAME.blind_mults[type] = blind_choice.config.mult*G.GAME.starting_params.ante_scaling
 aquill.update_blind_displays()
 '''
 match_indent = true
