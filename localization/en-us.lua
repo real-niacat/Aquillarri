@@ -84,6 +84,59 @@ return {
                     "for each card receiving the opposite effect"
                 }}
             },
+            j_aqu_scorebound_crystal2 = {
+                name = "Scorebound Crystal",
+                text = {{
+                    "Unscoring cards give {C:mult}+#1#{} Mult",
+                }, {
+                    "Scored cards give {C:chips}+#2#{} Chips",
+                }, {
+                    "Both effects get {C:attention}#3#%{} stronger",
+                    "for each card receiving the opposite effect"
+                }}
+            },
+            j_aqu_scorebound_crystal3 = {
+                name = "Scorebound Crystal",
+                text = {{
+                    "Unscoring cards give {X:mult,C:white}X#1#{} Mult",
+                }, {
+                    "Scored cards give {X:chips,C:white}X#2#{} Chips",
+                }, {
+                    "Both effects get {C:attention}#3#%{} stronger",
+                    "for each card receiving the opposite effect"
+                }}
+            },
+            j_aqu_scorebound_crystal4 = {
+                name = "Scorebound Crystal",
+                text = {{
+                    "Unscoring cards give {X:mult,C:white}X#1#{} Mult",
+                }, {
+                    "Scored cards give {X:chips,C:white}X#2#{} Chips",
+                }, {
+                    "Both effects get {C:attention}#3#%{} stronger",
+                    "for each card receiving the opposite effect"
+                }, {
+                    "Leftmost played card gains a random {C:attention}Enhancement{}",
+                    "{C:attention}Enhanced{} cards give {X:dark_edition,C:white}^#4#{} more {X:mult,C:white}XMult{} and {X:chips,C:white}XChips{}",
+                }}
+            },
+            j_aqu_scorebound_crystal5 = {
+                name = "Scorebound Crystal",
+                text = {{
+                    "Unscoring cards give {X:mult,C:white}X#1#{} Mult",
+                }, {
+                    "Scored cards give {X:chips,C:white}X#2#{} Chips",
+                }, {
+                    "Both effects get {C:attention}#3#%{} stronger",
+                    "for each card receiving the opposite effect"
+                }, {
+                    "Leftmost played card gains a random {C:attention}Enhancement{}",
+                    "{C:attention}Enhanced{} cards give {X:dark_edition,C:white}^#4#{} more {X:mult,C:white}XMult{} and {X:chips,C:white}XChips{}",
+                }, {
+                    "Rightmost played card gains a random {C:dark_edition}Edition{}",
+                    "{C:dark_edition}Editioned{} cards give {X:dark_edition,C:white}^^#5#{} more {X:mult,C:white}XMult{} and {X:chips,C:white}XChips{}",
+                }}
+            },
 
 
             j_aqu_magicorb1 = {
@@ -397,6 +450,8 @@ return {
             k_aqu_hyperplus = "Unbounded",
             k_aqu_hyperplusplus = "Empowered",
             k_aqu_extreme = "Quillic",
+
+            k_tier = "Tier",
 
             k_aqu_upgrade_blind = "Upgrade Blind",
 

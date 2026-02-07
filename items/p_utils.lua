@@ -138,8 +138,7 @@ function aquill.roman_numerals(s)
 end
 
 function aquill.fancy_roman_numerals(n)
-    -- n is 1-10, assume no more
-    return " {C:aqu_aquill_" .. n * 2 .. "}" .. aquill.roman_numerals(n)
+    return " ({C:aqu_aquill_" .. n * 2 .. "}" .. localize("k_tier") .. " " .. aquill.roman_numerals(n) .. "{})"
 end
 
 function aquill.x_screen_perc(percent)
