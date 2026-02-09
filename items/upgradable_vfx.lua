@@ -261,18 +261,3 @@ function aquill.upgrade_joker_fx(card, ability)
         end
     }))
 end
-
-local card_update_hook = Card.update
-function Card:update(dt)
-    if self.states.hover.is then
-        self.ghover_timer = self.ghover_timer and (self.ghover_timer + dt) or dt
-        self.ghover_state = 1
-    else
-        self.ghover_timer = self.ghover_timer and (self.ghover_timer - dt) or -dt
-        self.ghover_state = -1
-    end
-    self.ghover_timer = math.max(self.ghover_timer, 0)
-    self.ghover_timer = math.min(self.ghover_timer, 1)
-
-    return card_update_hook(self, dt)
-end
