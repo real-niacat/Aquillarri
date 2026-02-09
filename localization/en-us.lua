@@ -276,6 +276,74 @@ return {
                     "to the right, and gain {C:attention}quadruple{} their sell value",
                 } }
             },
+            j_aqu_manip1 = {
+                name = "Manipulator",
+                text = {{
+                    "After all other scoring, played cards score",
+                    "as if they were {C:attention}held-in-hand{}"
+                }}
+            },
+            j_aqu_manip2 = {
+                name = "Manipulator",
+                text = {{
+                    "After all other scoring, played cards score",
+                    "as if they were {C:attention}held in hand{}"
+                }, {
+                    "After all other scoring, {C:attention}held in hand{} cards score",
+                    "as if they were played"
+                }}
+            },
+            j_aqu_manip3 = {
+                name = "Manipulator",
+                text = {{
+                    "After scoring, played cards score",
+                    "as if they were {C:attention}held in hand{}"
+                }, {
+                    "After scoring, {C:attention}held in hand{} cards score",
+                    "as if they were played"
+                }, {
+                    "After scoring, cards in the {C:attention}discard pile{} have",
+                    "a {C:green}#1# in #2#{} chance to score as if they were {C:attention}held in hand{}",
+                }}
+            },
+            j_aqu_manip4 = {
+                name = "Manipulator",
+                text = {{
+                    "After scoring, played cards score",
+                    "as if they were {C:attention}held in hand{}"
+                }, {
+                    "After scoring, {C:attention}held in hand{} cards score",
+                    "as if they were played"
+                }, {
+                    "After scoring, cards in the {C:attention}discard pile{} have",
+                    "a {C:green}#1# in #2#{} chance to score as if they were {C:attention}held in hand{}",
+                }, {
+                    "After scoring, cards in the {C:attention}deck{} have",
+                    "a {C:green}#1# in #2#{} chance to score as if they were played",
+                }}
+            },
+            j_aqu_manip5 = {
+                name = "Manipulator",
+                text = {{
+                    "After scoring, played cards score",
+                    "as if they were {C:attention}held in hand{}"
+                }, {
+                    "After scoring, {C:attention}held in hand{} cards score",
+                    "as if they were played"
+                }, {
+                    "After scoring, cards in the {C:attention}discard pile{} have",
+                    "a {C:green}#1# in #2#{} chance to score as if they were {C:attention}held in hand{}",
+                }, {
+                    "After scoring, cards in the {C:attention}deck{} have",
+                    "a {C:green}#1# in #2#{} chance to score as if they were played",
+                }, {
+                    "After scoring, score {C:attention}#3#{} random playing cards as if",
+                    "they were {C:attention}held in hand{}"
+                }, {
+                    "After scoring, score {C:attention}#3#{} random playing cards as if",
+                    "they were played"
+                }}
+            },
         },
 
         Back = {

@@ -39,14 +39,20 @@ function aquill.add_enum(name, enum)
 	end
 end
 
-local nativefs = NFS
+local blacklist = {
+	assets = true,
+	lovely = true,
+	[".github"] = true,
+	[".git"] = true,
+	["localization"] = true
+}
 
 local function load_file_native(path, id)
 	if not path or path == "" then
 		error("No path was provided to load.")
 	end
 	local file_path = path
-	local file_content, err = NFS.read(file_path)
+	local file_content, err = SMODS.NFS.read(file_path)
 	if not file_content then
 		return nil,
 			"Error reading file '" .. path .. "' for mod with ID '" .. SMODS.current_mod.id .. "': " .. err
@@ -58,15 +64,8 @@ local function load_file_native(path, id)
 	end
 	return chunk
 end
-local blacklist = {
-	assets = true,
-	lovely = true,
-	[".github"] = true,
-	[".git"] = true,
-	["localization"] = true
-}
 local function load_files(path, dirs_only, initial)
-	local info = nativefs.getDirectoryItemsInfo(path)
+	local info = SMODS.NFS.getDirectoryItemsInfo(path)
 	local to_load = {}
 	if initial == nil then initial = true end
 	for i, v in pairs(info) do

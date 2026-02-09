@@ -9,7 +9,7 @@
 	"badge_colour": "ff8c8c",
 	"version": "1.0.0~ALPHA", 
 	"dependencies": [ 
-		"Steamodded (>=1.0.0~BETA-0827)",
+		"Steamodded (>=1.0.0~BETA-1408a)",
         "Talisman",
 	]
 }

@@ -63,7 +63,7 @@ vec4 effect(vec4 colour,Image texture,vec2 tc,vec2 screen_coords)
     
     float cdist=distance(center_pos,screen_coords);
     float max_mult = 2.;
-    float rad = dist / 10.0;
+    float rad = dist / 2.0;
     if (cdist < min_dist) {
         float str = (rad - abs(min_dist-cdist)) / rad;
         tex.rgb *= max(str*max_mult,1.0);

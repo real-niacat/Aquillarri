@@ -8,5 +8,4 @@ aquill.calculate = function(self, context)
         trigger.trigger(context)
     end
 
-
 end

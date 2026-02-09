@@ -87,13 +87,11 @@ vec4 effect( vec4 colour, Image texture, vec2 texture_coords, vec2 screen_coords
 	vec2 uv = (((texture_coords)*(image_details)) - texture_details.xy*texture_details.ba)/texture_details.ba;
     // 72 and 13 are arbitrary numbers
     vec2 off = vec2((pNoise(uv + vec2(72.,13.), 32, 2) * 4.5) - 1., (pNoise(uv, 8, 2) * 4.5) - 1.);
-
-    float div = 200.;
-    off /= div;
     
 
     off.x *= sin(dented.y);
     off.y *= cos(dented.y*1.2);
+    off *= 300.;
 
     vec2 atlas = image_details / texture_details.zw;
     atlas.x = 1.0 / atlas.x;
