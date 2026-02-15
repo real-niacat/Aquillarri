@@ -137,7 +137,7 @@ function aquill.corruption.get()
 end
 
 function aquill.corruption.get_upgraded_exponent()
-    if aquill.corruption.get_progress < G.GAME.entropic_corruption_blind_thresh then
+    if aquill.corruption.get_progress() < G.GAME.entropic_corruption_blind_thresh then
         return 0
     end
     return (1 - aquill.corruption.get_progress()) * G.GAME.entropic_corruption_upgraded_max_exponent
