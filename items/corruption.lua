@@ -95,14 +95,6 @@ function aquill.corruption.modify(amount, func)
 
 
     G.entropic_corruption:get_UIE_by_ID("percentage"):juice_up()
-    G.C.aqu_entropic_corruption = mix_colours(G.C.RED, G.C.GREEN, aquill.corruption.get_progress())
-
-    -- ill just set the blind size to effectively naneinf at max
-    -- if new >= max then
-    --     G.STATE = G.STATES.GAME_OVER
-    --     G.STATE_COMPLETE = false
-    --     return
-    -- end
 
     G.GAME.entropic_corruption_percent = new
 end
