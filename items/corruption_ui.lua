@@ -2,19 +2,21 @@ function create_UIBox_corruption() -- base ui def
     local text_scale = 0.4
 
     local e = G.GAME.entropic_corruption_enabled
-    local c = not e and G.C.UI.TEXT_LIGHT or (G.ARGS.LOC_COLOURS.aqu_aquill_6)
+    local c = not e and G.C.UI.TEXT_LIGHT or (G.ARGS.LOC_COLOURS.aqu_aquill_9)
     --we create dynatext here due to the limits of ui text elements
     --as they have no property for suffixes, which we need to display it as a percentage
     local dyna = DynaText {
         scale = text_scale * 0.9,
-        bump = false,
+        bump = true,
+        shadow = true,
+        bump_amount = 0.3,
         string = { {                                                          -- "x and y or z" functions identically do x ? y : z in other langs
             string = not e and localize("ph_aqu_corruption_disabled") or nil, --disabled? say disabled, no fuss
             ref_table = e and G.GAME or nil,                                  --otherwise we use the percentage
             ref_value = e and "entropic_corruption_percent" or nil,
             suffix = e and "%" or nil,                                        --dk if suffix works
             colour = c,
-        }, colour = c },
+        }},
     }
 
     return {
