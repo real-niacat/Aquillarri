@@ -53,7 +53,7 @@ function aquill.corruption.enable()
     G.GAME.entropic_corruption_gain_multiplier = 1
     G.GAME.entropic_corruption_loss_multiplier = 1
     G.GAME.entropic_corruption_blind_thresh = 0.15 --need 15% corruption before it starts affecting blind sizes
-    G.GAME.entropic_corruption_upgraded_max_exponent = 0.2
+    G.GAME.entropic_corruption_upgraded_max_exponent = 0.05
     aquill.corruption.refresh_ui()
     aquill.corruption.modify(0)
     aquill.update_blind_displays()

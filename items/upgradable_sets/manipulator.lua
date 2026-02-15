@@ -29,7 +29,7 @@ aquill.Upgradable {
                 SMODS.score_card(playing_card, { cardarea = G.hand })
             end
             for _, playing_card in pairs(G.hand.cards) do
-                SMODS.score_card(playing_card, { cardarea = G.play })
+                SMODS.score_card(playing_card, { cardarea = G.play, scoring_hand = {playing_card} })
             end
         end
     end,
@@ -53,7 +53,7 @@ aquill.Upgradable {
                 SMODS.score_card(playing_card, { cardarea = G.hand })
             end
             for _, playing_card in pairs(G.hand.cards) do
-                SMODS.score_card(playing_card, { cardarea = G.play })
+                SMODS.score_card(playing_card, { cardarea = G.play, scoring_hand = {playing_card} })
             end
             for _, playing_card in pairs(G.discard.cards) do
                 if SMODS.pseudorandom_probability(card, "manip3", card.ability.extra.numerator, card.ability.extra.denominator) then
@@ -83,7 +83,7 @@ aquill.Upgradable {
                 SMODS.score_card(playing_card, { cardarea = G.hand })
             end
             for _, playing_card in pairs(G.hand.cards) do
-                SMODS.score_card(playing_card, { cardarea = G.play })
+                SMODS.score_card(playing_card, { cardarea = G.play, scoring_hand = {playing_card} })
             end
             for _, playing_card in pairs(G.discard.cards) do
                 if SMODS.pseudorandom_probability(card, "manip3", card.ability.extra.numerator, card.ability.extra.denominator) then
@@ -92,7 +92,7 @@ aquill.Upgradable {
             end
             for _, playing_card in pairs(G.deck.cards) do
                 if SMODS.pseudorandom_probability(card, "manip4", card.ability.extra.numerator, card.ability.extra.denominator) then
-                    SMODS.score_card(playing_card, {cardarea = G.play})
+                    SMODS.score_card(playing_card, {cardarea = G.play, scoring_hand = {playing_card}})
                 end
             end
         end
@@ -118,7 +118,7 @@ aquill.Upgradable {
                 SMODS.score_card(playing_card, { cardarea = G.hand })
             end
             for _, playing_card in pairs(G.hand.cards) do
-                SMODS.score_card(playing_card, { cardarea = G.play })
+                SMODS.score_card(playing_card, { cardarea = G.play, scoring_hand = {playing_card} })
             end
             for _, playing_card in pairs(G.discard.cards) do
                 if SMODS.pseudorandom_probability(card, "manip3", card.ability.extra.numerator, card.ability.extra.denominator) then
@@ -127,14 +127,16 @@ aquill.Upgradable {
             end
             for _, playing_card in pairs(G.deck.cards) do
                 if SMODS.pseudorandom_probability(card, "manip4", card.ability.extra.numerator, card.ability.extra.denominator) then
-                    SMODS.score_card(playing_card, {cardarea = G.play})
+                    SMODS.score_card(playing_card, {cardarea = G.play, scoring_hand = {playing_card}})
                 end
             end
             for i=1,card.ability.extra.cards do
-                SMODS.score_card(pseudorandom_element(G.playing_cards, "rand_hand"), {cardarea = G.hand})
+                local c = pseudorandom_element(G.playing_cards, "rand_hand")
+                SMODS.score_card(c, {cardarea = G.hand})
             end
             for i=1,card.ability.extra.cards do
-                SMODS.score_card(pseudorandom_element(G.playing_cards, "rand_play"), {cardarea = G.play})
+                local c = pseudorandom_element(G.playing_cards, "rand_play")
+                SMODS.score_card(c, {cardarea = G.play, scoring_hand = {c}})
             end
         end
     end,
