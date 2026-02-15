@@ -6,7 +6,10 @@ aquill.triggers = {}
 aquill.enums = {}
 
 SMODS.current_mod.optional_features = {
-	retrigger_joker = true
+	retrigger_joker = true,
+	cardareas = {
+		discard = true
+	}
 }
 
 if not SMODS.ScreenShader then
@@ -107,21 +110,16 @@ local function load_files(path, dirs_only, initial)
 end
 local path = SMODS.current_mod.path
 
+aquill.extra_tabs_table = {}
+aquill.ui = {}
+
 load_files(path, true)
 
-aquill.config.disable_corruption = false
-
-if not G.E_MANAGER then return end
-
-G.E_MANAGER:add_event(Event({
-	trigger = 'after',
-	func = function()
-		if G.FUNCS and G.FUNCS.openModUI_aquillarri and (not aquill.get_current_profile().played_aqu_before) then
-			G.FUNCS.openModUI_aquillarri()
-			aquill.get_current_profile().played_aqu_before = true
-			return true
-		end
-	end,
-	blockable = true,
-	blocking = false,
-}))
+aquill.extra_tabs = function()
+	return {
+		{
+			label = localize("k_aqu_credit"),
+			tab_definition_function = aquill.ui.credit
+		}
+	}
+end

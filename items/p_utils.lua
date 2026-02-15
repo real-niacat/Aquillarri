@@ -240,12 +240,30 @@ function aquill.random_tag(seed)
     local selected_tag = pseudorandom_element(tag_pool, pseudoseed(seed))
     return selected_tag
 end
-
+--returns a movable's pixel position (center)
 function aquill.get_movable_pixel_pos(mov)
     return {
-        (G.ROOM.T.x + mov.T.x + mov.T.w * 0.5) * (G.TILESIZE * G.TILESCALE),
-        (G.ROOM.T.y + mov.T.y + mov.T.h * 0.5) * (G.TILESIZE * G.TILESCALE),
+        (G.ROOM.T.x + mov.VT.x + mov.VT.w * 0.5) * (G.TILESIZE * G.TILESCALE),
+        (G.ROOM.T.y + mov.VT.y + mov.VT.h * 0.5) * (G.TILESIZE * G.TILESCALE),
     }
+end
+
+function aquill.movable_top_left_pos(mov)
+    local center = aquill.get_movable_pixel_pos(mov)
+    center = {
+        center[1] - (mov.VT.w * 0.5 * G.TILESCALE * G.TILESIZE),
+        center[2] - (mov.VT.h * 0.5 * G.TILESCALE * G.TILESIZE)
+    }
+    return center
+end
+
+function aquill.movable_bottom_right_pos(mov)
+    local center = aquill.get_movable_pixel_pos(mov)
+    center = {
+        center[1] + (mov.VT.w * 0.5 * G.TILESCALE * G.TILESIZE),
+        center[2] + (mov.VT.h * 0.5 * G.TILESCALE * G.TILESIZE)
+    }
+    return center
 end
 
 function aquill.pythag(a, b)

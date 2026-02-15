@@ -1,8 +1,4 @@
-aquill.config_ui = {}
-
 aquill.config_tab = function()
-
-    
     return {
         n = G.UIT.ROOT,
         config = { r = 0.1, minw = 8, align = "tm", padding = 0.075, colour = G.C.GREY },
@@ -14,11 +10,11 @@ aquill.config_tab = function()
                     {
                         label = localize("ph_aqu_visual"),
                         chosen = true,
-                        tab_definition_function = aquill.config_ui.visual
+                        tab_definition_function = aquill.ui.visual
                     },
                     {
                         label = localize("ph_aqu_gameplay"),
-                        tab_definition_function = aquill.config_ui.gameplay
+                        tab_definition_function = aquill.ui.gameplay
                     },
                 }
             }),
@@ -27,13 +23,13 @@ aquill.config_tab = function()
 end
 
 
-aquill.config_ui.width = 0.6 --80%
-aquill.config_ui.height = 0.5
+aquill.ui.width = 0.6 --80%
+aquill.ui.height = 0.5
 
-function aquill.config_ui.visual()
+function aquill.ui.visual()
     return {
         n = G.UIT.ROOT,
-        config = { align = "cm", minh = G.ROOM.T.h * aquill.config_ui.height, padding = 0.0, r = 0.1, colour = G.C.GREY },
+        config = { align = "cm", minh = G.ROOM.T.h * aquill.ui.height, padding = 0.0, r = 0.1, colour = G.C.GREY },
         nodes = {
             {
                 n = G.UIT.C,
@@ -41,7 +37,7 @@ function aquill.config_ui.visual()
                 nodes = {
                     {
                         n = G.UIT.R,
-                        config = { minw = G.ROOM.T.w * aquill.config_ui.width, padding = 0.05, align = "tl", },
+                        config = { minw = G.ROOM.T.w * aquill.ui.width, padding = 0.05, align = "tl", },
                         nodes = {
                             create_toggle {
                                 label = localize("ph_aqu_config_alt_upgrade_effect_label"),
@@ -54,7 +50,7 @@ function aquill.config_ui.visual()
                     },
                     {
                         n = G.UIT.R,
-                        config = { minw = G.ROOM.T.w * aquill.config_ui.width, padding = 0.05, align = "tl", },
+                        config = { minw = G.ROOM.T.w * aquill.ui.width, padding = 0.05, align = "tl", },
                         nodes = {
                             create_toggle {
                                 label = localize("ph_aqu_config_upgrade_info_queue_label"),
@@ -67,7 +63,7 @@ function aquill.config_ui.visual()
                     },
                     {
                         n = G.UIT.R,
-                        config = { minw = G.ROOM.T.w * aquill.config_ui.width, padding = 0.05, align = "tl", },
+                        config = { minw = G.ROOM.T.w * aquill.ui.width, padding = 0.05, align = "tl", },
                         nodes = {
                             create_toggle {
                                 label = localize("ph_aqu_config_disable_screenshader_label"),
@@ -85,10 +81,10 @@ function aquill.config_ui.visual()
     }
 end
 
-function aquill.config_ui.gameplay()
+function aquill.ui.gameplay()
     return {
         n = G.UIT.ROOT,
-        config = { align = "cm", minh = G.ROOM.T.h * aquill.config_ui.height, padding = 0.0, r = 0.1, colour = G.C.GREY },
+        config = { align = "cm", minh = G.ROOM.T.h * aquill.ui.height, padding = 0.0, r = 0.1, colour = G.C.GREY },
         nodes = {
             {
                 n = G.UIT.C,
@@ -96,7 +92,7 @@ function aquill.config_ui.gameplay()
                 nodes = {
                     {
                         n = G.UIT.R,
-                        config = { minw = G.ROOM.T.w * aquill.config_ui.width, padding = 0.05, align = "tl", },
+                        config = { minw = G.ROOM.T.w * aquill.ui.width, padding = 0.05, align = "tl", },
                         nodes = {
                         },
                     },

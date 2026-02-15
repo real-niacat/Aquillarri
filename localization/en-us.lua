@@ -344,6 +344,61 @@ return {
                     "they were played"
                 }}
             },
+            j_aqu_perf1 = {
+                name = "Perfection",
+                text = {{
+                    "Adds a random {C:attention}Enhanced{} {C:dark_edition}Ephemeral{} card",
+                    "to played hand before scoring"
+                }}
+            },
+            j_aqu_perf2 = {
+                name = "Perfection",
+                text = {{
+                    "Adds a random {C:attention}Enhanced{} {C:dark_edition}Ephemeral{} card",
+                    "to played hand before scoring"
+                }, {
+                    "Adds a random {C:attention}Enhanced{} {C:dark_edition}Ephemeral{} card",
+                    "to hand before scoring"
+                }}
+            },
+            j_aqu_perf3 = {
+                name = "Perfection",
+                text = {{
+                    "Adds a random {C:attention}Enhanced{} {C:dark_edition}Ephemeral{} card",
+                    "to played hand before scoring"
+                }, {
+                    "Adds a random {C:attention}Enhanced{} {C:dark_edition}Ephemeral{} card",
+                    "to hand before scoring"
+                }, {
+                    "Adds a random {C:attention}Enhancement{} to the rightmost scoring card in hand"
+                }}
+            },
+            j_aqu_perf4 = {
+                name = "Perfection",
+                text = {{
+                    "Adds a random {C:attention}Enhanced{} {C:dark_edition}Ephemeral{} card",
+                    "to played hand before scoring"
+                }, {
+                    "Adds a random {C:attention}Enhanced{} {C:dark_edition}Ephemeral{} card",
+                    "to hand before scoring"
+                }, {
+                    "Adds a random {C:attention}Enhancement{} to all {C:attention}non-Enhanced{} scoring cards"
+                }, {
+                    "Create an {C:dark_edition}Ephemeral{} copy of all played cards before scoring"
+                }}
+            },
+            j_aqu_perf5 = {
+                name = "Perfection",
+                text = {{
+                    "Adds three random {C:attention}Enhanced{} {C:dark_edition}Ephemeral{} cards",
+                    "to played hand before scoring"
+                }, {
+                    "Adds a random {C:attention}Enhancement{} to all {C:attention}non-Enhanced{} scoring cards"
+                }, {
+                    "Create an {C:dark_edition}Ephemeral{} copy of all played cards",
+                    "and all cards held in hand before scoring",
+                }}
+            },
         },
 
         Back = {
@@ -353,6 +408,18 @@ return {
                     "Upgraded blinds are now",
                     "{C:attention}weaker{} than normal blinds",
                     "but give {C:red}negative reward bonus{}",
+                }
+            }
+        },
+
+        Edition = {
+            e_aqu_ephemeral = {
+                name = "Ephemeral",
+                text = {
+                    "{X:mult,C:white}X#1#{} Mult when scored",
+                    "{C:chips}+#2#{} Chips when held in hand",
+                    "{C:red}Destroyed{} at end of round",
+                    "Always scores",
                 }
             }
         },
@@ -373,8 +440,6 @@ return {
                     "{C:attention}Entropic Corruption{} if it is disabled."
                 }
             },
-
-            lily_j_joker = com("i love this guy")
         },
 
         Voucher = {
@@ -510,6 +575,7 @@ return {
             aqu_hyperplusplus = "Empowered",
             aqu_extreme = "Quillic",
             aqu_gems = "Gem",
+            aqu_ephemeral = "Ephemeral"
 
         },
         dictionary = {
@@ -520,6 +586,7 @@ return {
             k_aqu_extreme = "Quillic",
 
             k_tier = "Tier",
+            k_aqu_credit = "Credits",
 
             k_aqu_upgrade_blind = "Upgrade Blind",
 
@@ -574,6 +641,16 @@ return {
 
             ph_aqu_corruption = "Entropic Corruption",
             ph_aqu_corruption_disabled = "Inactive",
+
+            ph_aqu_bio = {
+                "hi, i'm ",
+                "Lily Felli!",
+                "i created all of Aquillarri",
+                "this includes shaders, code, art",
+                "(except this card, which was made by Scraptake)",
+                "i'm a trans girl who's been coding most of my life,",
+                "as well as doing some writing & game designing!"
+            },
         },
         v_dictionary = {
             aqu_dormant_rates = "X#1# Dormant Spawnrate"
