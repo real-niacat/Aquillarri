@@ -149,14 +149,6 @@ function aquill.y_screen_perc(percent)
     return percent * love.graphics.getHeight()
 end
 
-function aquill.to_pixels(balaunits)
-    return balaunits * 100
-end
-
-function aquill.to_balaunits(pixels)
-    return pixels / 100
-end
-
 function aquill.distance_1d(p1, p2)
     return math.abs(p1 - p2)
 end
