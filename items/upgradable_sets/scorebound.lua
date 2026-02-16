@@ -37,6 +37,7 @@ aquill.Upgradable {
                 return {chips = aquill.percent_buff(card.ability.extra.scoring, card.ability.extra.buff*count)}
             end
         end
+        SMODS.poll_rarity("rare")
     end,
     config = { extra = {scoring = 50, unscoring = 10, buff = 20} },
     loc_vars = function(self, info_queue, card)

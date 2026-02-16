@@ -186,10 +186,6 @@ end
 
 function aquill.calc_upgraded_blind_size(original_blind_size)
     local exponent = G.GAME.upgraded_exponent
-    local base = G.GAME and G.GAME.aqu_hua_base
-    if base then
-        exponent = math.log((base * 0.5) + exponent, base)
-    end
 
     if aquill.corruption.enabled() then
         exponent = exponent + aquill.corruption.get_upgraded_exponent()
