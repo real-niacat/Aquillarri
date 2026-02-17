@@ -647,7 +647,7 @@ return {
                 "Lily Felli!",
                 "i created all of Aquillarri",
                 "this includes shaders, code, art",
-                "(except this card, which was made by Scraptake)",
+                "(except this card, which was made by Camostar34)",
                 "i'm a trans girl who's been coding most of my life,",
                 "as well as doing some writing & game designing!"
             },

@@ -8,7 +8,6 @@ SMODS.Atlas {
 SMODS.Joker {
     key = "lily",
     atlas = "lily",
-    soul_pos = { x = 1, y = 0 },
     update = function(self, card, dt)
         if card.area and (not card.area.config.collection) then
             card:remove()
