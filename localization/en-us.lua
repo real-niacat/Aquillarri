@@ -641,16 +641,6 @@ return {
 
             ph_aqu_corruption = "Entropic Corruption",
             ph_aqu_corruption_disabled = "Inactive",
-
-            ph_aqu_bio = {
-                "hi, i'm ",
-                "Lily Felli!",
-                "i created all of Aquillarri",
-                "this includes shaders, code, art",
-                "(except this card, which was made by Camostar34)",
-                "i'm a trans girl who's been coding most of my life,",
-                "as well as doing some writing & game designing!"
-            },
         },
         v_dictionary = {
             aqu_dormant_rates = "X#1# Dormant Spawnrate"
